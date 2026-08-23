@@ -1,0 +1,13 @@
+# Local development and design files
+.superdesign/
+.vercel/
+node_modules/
+
+# Local configuration and logs
+.env
+.env.*
+*.log
+
+# Repository documentation is not required at runtime
+MEDIA-CREDITS.md
+README.md
