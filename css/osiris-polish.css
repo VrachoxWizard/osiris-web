@@ -194,15 +194,6 @@ a {
   animation: fadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 800ms backwards;
 }
 
-.video-toggle {
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.video-toggle:hover {
-  transform: scale(1.1);
-  background: rgba(0, 217, 255, 0.2);
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -319,7 +310,37 @@ a {
 
 @media (min-width: 60.01rem) {
   .cinematic-hero h1 {
-    font-size: clamp(4rem, 8vw, 9rem);
+    font-size: clamp(3.75rem, 6.2vw, 7rem);
+  }
+
+  .cinematic-hero-intro p {
+    font-size: 0.85rem !important;
+  }
+
+  .cinematic-proof strong {
+    font-size: 2rem;
+  }
+
+  .cinematic-hero-video {
+    filter: saturate(0.4) contrast(1.12) brightness(0.72);
+    mix-blend-mode: normal;
+  }
+
+  .cinematic-hero-shade {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 7, 11, 0.78) 0%,
+        rgba(5, 7, 11, 0.58) 42%,
+        rgba(5, 7, 11, 0.18) 74%,
+        rgba(5, 7, 11, 0.26) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(5, 7, 11, 0.18) 0%,
+        rgba(5, 7, 11, 0.04) 52%,
+        rgba(5, 7, 11, 0.44) 100%
+      );
   }
 
   .cinematic-section-head h2,
@@ -391,6 +412,20 @@ a {
   .cinematic-hero h1,
   .inner-v2 .page-hero h1 {
     font-size: clamp(2.75rem, 10vw, 5.5rem);
+  }
+
+  .cinematic-hero-video {
+    filter: saturate(0.3) contrast(1.1) brightness(0.64);
+    mix-blend-mode: normal;
+  }
+
+  .cinematic-hero-shade {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 7, 11, 0.3) 0%,
+      rgba(5, 7, 11, 0.42) 48%,
+      rgba(5, 7, 11, 0.78) 100%
+    );
   }
 
   .cinematic-section-head h2,
@@ -559,15 +594,6 @@ a {
     font-size: 0.9rem;
   }
 
-  .video-toggle {
-    bottom: 1rem;
-    right: 1rem;
-    padding: 0.75rem;
-  }
-
-  .video-toggle span[data-video-label] {
-    display: none;
-  }
 }
 
 /* Small mobile (480px and below) */
@@ -736,7 +762,6 @@ a {
 @media print {
   .site-header,
   .mobile-menu,
-  .video-toggle,
   .button,
   [data-site-footer] {
     display: none !important;

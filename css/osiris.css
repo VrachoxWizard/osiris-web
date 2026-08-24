@@ -3853,40 +3853,6 @@ a {
   font-family: var(--font-mono);
 }
 
-.video-toggle {
-  position: absolute;
-  z-index: 2;
-  top: calc(var(--header-height) + 2rem);
-  right: max(1.5rem, calc((100vw - var(--container)) / 2 + 1.5rem));
-  display: inline-flex;
-  min-height: 3rem;
-  align-items: center;
-  gap: 0.6rem;
-  border: 2px solid var(--electric-blue);
-  background: rgba(0, 0, 0, 0.8);
-  color: var(--electric-blue);
-  padding: 0.75rem 1.25rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  backdrop-filter: blur(12px);
-  transition: all 250ms ease;
-}
-
-.video-toggle:hover {
-  background: var(--electric-blue);
-  color: var(--pure-black);
-  transform: scale(1.05);
-}
-
-.video-toggle svg {
-  width: 1rem;
-  height: 1rem;
-}
-
 .cinematic-section {
   position: relative;
   padding-block: clamp(6rem, 10vw, 9rem);
@@ -4524,19 +4490,6 @@ a {
   .cinematic-proof div + div {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     border-left: 0;
-  }
-
-  .video-toggle {
-    top: calc(var(--header-height) + 1rem);
-    right: 0.75rem;
-  }
-
-  .video-toggle [data-video-label] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
   }
 
   .cinematic-section-head h2,

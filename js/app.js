@@ -321,45 +321,14 @@ function setupContactForm() {
 
 function setupHeroVideo() {
   const video = document.querySelector("[data-hero-video]");
-  const toggle = document.querySelector("[data-video-toggle]");
-  if (!(video instanceof HTMLVideoElement) || !(toggle instanceof HTMLButtonElement)) return;
+  if (!(video instanceof HTMLVideoElement)) return;
 
-  const label = toggle.querySelector("[data-video-label]");
-  const iconTarget = toggle.querySelector("[data-video-icon]");
-  const pauseIcon = '<svg viewBox="0 0 20 20"><path d="M6 5v10M14 5v10"/></svg>';
-  const playIcon = '<svg viewBox="0 0 20 20"><path d="m7 5 8 5-8 5Z"/></svg>';
-
-  const syncControl = () => {
-    const isPaused = video.paused;
-    toggle.setAttribute("aria-pressed", String(isPaused));
-    toggle.setAttribute(
-      "aria-label",
-      isPaused ? "Pokreni pozadinski video" : "Pauziraj pozadinski video",
-    );
-    if (label) label.textContent = isPaused ? "Pokreni video" : "Pauziraj video";
-    if (iconTarget) iconTarget.innerHTML = isPaused ? playIcon : pauseIcon;
-  };
-
-  toggle.addEventListener("click", async () => {
-    if (video.paused) {
-      try {
-        await video.play();
-      } catch {
-        video.pause();
-      }
-    } else {
-      video.pause();
-    }
-    syncControl();
+  video.defaultMuted = true;
+  video.muted = true;
+  video.loop = true;
+  video.play().catch(() => {
+    // The poster remains visible if a browser blocks muted autoplay.
   });
-
-  video.addEventListener("play", syncControl);
-  video.addEventListener("pause", syncControl);
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    video.pause();
-  }
-  syncControl();
 }
 
 function setupReveals() {
