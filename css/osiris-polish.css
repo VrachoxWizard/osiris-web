@@ -151,18 +151,251 @@ a {
   transform: rotate(90deg);
 }
 
-.mobile-menu {
-  animation: slideDown 400ms cubic-bezier(0.16, 1, 0.3, 1);
+.header-inner {
+  position: relative;
+  z-index: 2;
 }
 
-@keyframes slideDown {
+.mobile-menu {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  display: flex;
+  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid rgba(0, 217, 255, 0.36);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(0, 71, 255, 0.16), transparent 30rem),
+    linear-gradient(rgba(0, 217, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.035) 1px, transparent 1px),
+    #05070b;
+  background-size: auto, 44px 44px, 44px 44px, auto;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.72);
+  isolation: isolate;
+  animation: osirisMenuIn 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.site-header .mobile-menu {
+  border-color: rgba(0, 217, 255, 0.36);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(0, 71, 255, 0.16), transparent 30rem),
+    linear-gradient(rgba(0, 217, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.035) 1px, transparent 1px),
+    #05070b;
+  background-size: auto, 44px 44px, 44px 44px, auto;
+  backdrop-filter: none;
+}
+
+body.menu-open main,
+body.menu-open [data-site-footer] {
+  pointer-events: none;
+  user-select: none;
+}
+
+.mobile-menu::after {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--electric-blue) 45%, transparent);
+  box-shadow: 0 0 22px rgba(0, 217, 255, 0.65);
+  content: "";
+  pointer-events: none;
+  animation: osirisMenuScan 4.8s ease-in-out infinite;
+}
+
+.mobile-nav {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 0;
+  padding-block: 1.35rem max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.mobile-nav-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--steel);
+  padding-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mobile-nav-eyebrow strong {
+  color: var(--electric-blue);
+  font-weight: 700;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header .mobile-nav .mobile-nav-link {
+  display: grid;
+  min-height: 4.55rem;
+  grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: white;
+  padding: 0;
+  text-transform: none;
+  animation: osirisMenuLinkIn 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    padding 220ms ease;
+}
+
+.site-header .mobile-nav .mobile-nav-link:nth-child(2) { animation-delay: 45ms; }
+.site-header .mobile-nav .mobile-nav-link:nth-child(3) { animation-delay: 90ms; }
+.site-header .mobile-nav .mobile-nav-link:nth-child(4) { animation-delay: 135ms; }
+.site-header .mobile-nav .mobile-nav-link:nth-child(5) { animation-delay: 180ms; }
+
+.mobile-nav-link::after {
+  display: none;
+}
+
+.mobile-nav-number {
+  color: var(--electric-blue);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.mobile-nav-link strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.18rem, 5vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.mobile-nav-arrow {
+  color: var(--steel);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.site-header .mobile-nav .mobile-nav-link:hover,
+.site-header .mobile-nav .mobile-nav-link:focus-visible,
+.site-header .mobile-nav .mobile-nav-link.is-active {
+  border-left: 0;
+  background: rgba(0, 217, 255, 0.055);
+  color: white;
+  padding-inline: 0.75rem;
+  box-shadow: inset 3px 0 0 var(--electric-blue);
+}
+
+.mobile-nav-link:hover .mobile-nav-arrow,
+.mobile-nav-link:focus-visible .mobile-nav-arrow,
+.mobile-nav-link.is-active .mobile-nav-arrow {
+  color: var(--electric-blue);
+  transform: translate(2px, -2px);
+}
+
+.mobile-nav-footer {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: auto;
+  padding-top: 1.35rem;
+}
+
+.mobile-nav .mobile-nav-cta {
+  display: inline-flex;
+  width: 100%;
+  min-height: 3.65rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  border: 1px solid var(--electric-blue);
+  background: var(--electric-blue);
+  color: #03070a;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 16px 42px rgba(0, 217, 255, 0.18);
+}
+
+.mobile-nav .mobile-nav-cta:hover {
+  background: white;
+  color: #03070a;
+}
+
+.mobile-nav-location {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--steel);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mobile-nav-location span:first-child::before {
+  display: inline-block;
+  width: 0.42rem;
+  height: 0.42rem;
+  margin-right: 0.55rem;
+  background: var(--electric-blue);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.75);
+  content: "";
+}
+
+@keyframes osirisMenuIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-1rem);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes osirisMenuLinkIn {
+  from {
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes osirisMenuScan {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.75;
+    transform: translateY(calc(100dvh - var(--header-height)));
   }
 }
 
@@ -753,6 +986,304 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--deep-blue);
+}
+
+/* ============================================
+   APPROVED LIVE PROJECTS MOSAIC
+   ============================================ */
+
+.cinematic-section.cinematic-projects {
+  overflow: hidden;
+  background: #05070b;
+  padding-block: clamp(5rem, 7.5vw, 7.5rem);
+}
+
+.cinematic-projects::before {
+  display: none;
+}
+
+.osiris-projects-head {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.42fr) minmax(0, 1.3fr) minmax(14rem, 0.42fr);
+  align-items: end;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.osiris-projects-head h2 {
+  max-width: 12ch;
+  margin: 0;
+}
+
+.osiris-projects-aside {
+  align-self: end;
+  max-width: 20rem;
+  border-left: 1px solid var(--electric-blue);
+  padding-left: 1.15rem;
+}
+
+.osiris-projects-aside p {
+  margin: 0;
+  color: var(--steel);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.osiris-projects-aside > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+  color: var(--electric-blue);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.osiris-projects-aside i {
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--electric-blue);
+  box-shadow: 0 0 0 0.25rem rgba(0, 217, 255, 0.12);
+}
+
+.osiris-project-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 13rem));
+  gap: 0.75rem;
+  margin-top: 3rem;
+}
+
+.osiris-project-card {
+  min-width: 0;
+  grid-column: span 3;
+  overflow: hidden;
+}
+
+.osiris-project-card-featured {
+  grid-column: span 6;
+  grid-row: span 2;
+}
+
+.osiris-project-link {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #070a0f;
+  color: white;
+  isolation: isolate;
+  transition:
+    border-color 260ms ease,
+    transform 260ms ease;
+}
+
+.osiris-project-link::before {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: var(--project-accent, var(--electric-blue));
+  opacity: 0.9;
+  content: "";
+  transform: scaleX(0.18);
+  transform-origin: left center;
+  transition:
+    opacity 260ms ease,
+    transform 260ms ease;
+}
+
+.osiris-project-link:hover,
+.osiris-project-link:focus-visible {
+  border-color: var(--project-accent, var(--electric-blue));
+  color: white;
+  transform: translateY(-2px);
+}
+
+.osiris-project-link:hover::before,
+.osiris-project-link:focus-visible::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.osiris-project-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #11161d;
+}
+
+.osiris-project-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(1.06) contrast(1.04) brightness(0.88);
+  transform: scale(1.001);
+  transition:
+    filter 520ms ease,
+    transform 700ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.osiris-project-link:hover .osiris-project-media img,
+.osiris-project-link:focus-visible .osiris-project-media img {
+  filter: saturate(1.2) contrast(1.02) brightness(1.02);
+  transform: scale(1.018);
+}
+
+.osiris-project-meta {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  min-height: 4.25rem;
+  grid-template-columns: 1.65rem minmax(0, 1fr) 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(5, 7, 11, 0.9);
+  padding: 0.6rem 0.75rem;
+}
+
+.osiris-project-card-featured .osiris-project-meta {
+  min-height: 4.75rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.osiris-project-meta > div {
+  min-width: 0;
+}
+
+.osiris-project-index {
+  align-self: start;
+  padding-top: 0.2rem;
+  color: var(--project-accent, var(--electric-blue));
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.cinematic-projects .osiris-project-meta h3 {
+  overflow: hidden;
+  margin: 0;
+  color: white;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.25vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.02;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cinematic-projects .osiris-project-card-featured h3 {
+  font-size: clamp(1.45rem, 2.15vw, 2.15rem);
+}
+
+.osiris-project-meta p {
+  overflow: hidden;
+  margin: 0.28rem 0 0;
+  color: #9ba7b5;
+  font-family: var(--font-mono);
+  font-size: 0.57rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.osiris-project-arrow {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--project-accent, var(--electric-blue));
+  background: rgba(5, 7, 11, 0.48);
+  color: var(--project-accent, var(--electric-blue));
+}
+
+.osiris-project-arrow svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.5;
+  transition: transform 220ms ease;
+}
+
+.osiris-project-link:hover .osiris-project-arrow svg,
+.osiris-project-link:focus-visible .osiris-project-arrow svg {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 70rem) {
+  .osiris-projects-head {
+    grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
+  }
+
+  .osiris-projects-aside {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .osiris-projects-head {
+    grid-template-columns: 1fr;
+  }
+
+  .osiris-projects-aside {
+    grid-column: auto;
+    max-width: 28rem;
+  }
+
+  .osiris-project-mosaic {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    margin-top: 2.4rem;
+  }
+
+  .osiris-project-card,
+  .osiris-project-card-featured {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .osiris-project-link {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .cinematic-projects .osiris-project-meta h3,
+  .cinematic-projects .osiris-project-card-featured h3 {
+    font-size: clamp(1.15rem, 5.2vw, 1.55rem);
+  }
+}
+
+@media (max-width: 30rem) {
+  .osiris-project-meta,
+  .osiris-project-card-featured .osiris-project-meta {
+    min-height: 4.5rem;
+    grid-template-columns: 1.4rem minmax(0, 1fr) 2.75rem;
+    gap: 0.55rem;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .osiris-project-meta p {
+    font-size: 0.53rem;
+  }
 }
 
 /* ============================================

@@ -35,11 +35,13 @@ function renderHeader() {
   const currentPage = document.body.dataset.page ?? "home";
   const mobileNavLinks = routes
     .map(
-      (route) => `
-        <a class="nav-link${route.id === currentPage ? " is-active" : ""}"
+      (route, index) => `
+        <a class="nav-link mobile-nav-link${route.id === currentPage ? " is-active" : ""}"
            href="${route.href}"
            ${route.id === currentPage ? 'aria-current="page"' : ""}>
-          ${route.label}
+          <span class="mobile-nav-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
+          <strong>${route.label}</strong>
+          <span class="mobile-nav-arrow" aria-hidden="true">↗</span>
         </a>`,
     )
     .join("");
@@ -78,8 +80,22 @@ function renderHeader() {
 
       <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
         <nav class="container mobile-nav" aria-label="Mobilna navigacija">
-          ${mobileNavLinks}
-          <a class="button button-primary" href="/kontakt/">Pokrenimo projekt ${icon("arrow")}</a>
+          <div class="mobile-nav-eyebrow">
+            <span>Navigacija / OSIRIS</span>
+            <strong>Menu 01</strong>
+          </div>
+          <div class="mobile-nav-list">
+            ${mobileNavLinks}
+          </div>
+          <div class="mobile-nav-footer">
+            <a class="button button-primary mobile-nav-cta" href="/kontakt/">
+              <span>Pokrenimo projekt</span>${icon("arrow")}
+            </a>
+            <div class="mobile-nav-location" aria-label="Lokacija studija">
+              <span>Zagreb, Hrvatska</span>
+              <span>45.8° N / 16.0° E</span>
+            </div>
+          </div>
         </nav>
       </div>
     </header>
@@ -89,19 +105,40 @@ function renderHeader() {
   const toggle = target.querySelector("[data-menu-toggle]");
   const menu = target.querySelector("[data-mobile-menu]");
   const menuIcon = target.querySelector("[data-menu-icon]");
+  const pageRegions = [
+    document.querySelector("main"),
+    document.querySelector("[data-site-footer]"),
+  ].filter(Boolean);
 
-  const closeMenu = () => {
+  const setPageInert = (isInert) => {
+    pageRegions.forEach((region) => {
+      if (isInert) {
+        region.setAttribute("inert", "");
+      } else {
+        region.removeAttribute("inert");
+      }
+    });
+  };
+
+  const menuFocusables = () => [
+    toggle,
+    ...menu.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+  ];
+
+  const closeMenu = ({ returnFocus = false } = {}) => {
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Otvori izbornik");
     menu.hidden = true;
     menuIcon.innerHTML = icon("menu");
     document.body.classList.remove("menu-open");
+    setPageInert(false);
+    if (returnFocus) toggle.focus();
   };
 
-  toggle.addEventListener("click", () => {
+  toggle.addEventListener("click", (event) => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
     if (isOpen) {
-      closeMenu();
+      closeMenu({ returnFocus: true });
       return;
     }
 
@@ -110,7 +147,12 @@ function renderHeader() {
     menu.hidden = false;
     menuIcon.innerHTML = icon("close");
     document.body.classList.add("menu-open");
-    menu.querySelector("a")?.focus();
+    setPageInert(true);
+    if (event.detail === 0) {
+      menu.querySelector("a")?.focus();
+    } else {
+      toggle.blur();
+    }
   });
 
   menu.addEventListener("click", (event) => {
@@ -118,7 +160,24 @@ function renderHeader() {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
+    if (event.key === "Escape" && !menu.hidden) {
+      closeMenu({ returnFocus: true });
+      return;
+    }
+
+    if (event.key !== "Tab" || menu.hidden) return;
+
+    const focusables = menuFocusables();
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 
   window.addEventListener("resize", () => {
