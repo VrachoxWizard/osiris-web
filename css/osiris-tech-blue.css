@@ -1,0 +1,249 @@
+/* OSIRIS Tech Blue theme
+   The brand color is the page canvas; black is reserved for media and compact panels. */
+
+:root {
+  --tech-blue: #3f5ea2;
+  --tech-blue-deep: #263f73;
+  --tech-blue-panel: #304d86;
+  --tech-blue-soft: #dce8ff;
+  --tech-blue-line: rgba(255, 255, 255, 0.24);
+}
+
+html,
+body,
+body[data-page] {
+  background: var(--tech-blue) !important;
+  color: #fff;
+}
+
+.site-header {
+  border-bottom-color: var(--tech-blue-line) !important;
+  background: rgba(38, 63, 115, 0.94) !important;
+}
+
+.mobile-menu,
+.site-header .mobile-menu {
+  border-color: var(--tech-blue-line) !important;
+  background: var(--tech-blue-deep) !important;
+  background-image: none !important;
+}
+
+.cinematic-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(38, 63, 115, 0.9) 0%, rgba(63, 94, 162, 0.54) 48%, rgba(38, 63, 115, 0.3) 100%),
+    linear-gradient(180deg, rgba(38, 63, 115, 0.22) 0%, rgba(38, 63, 115, 0.72) 100%) !important;
+}
+
+.home-cinematic :is(
+  .cinematic-services,
+  .cinematic-projects,
+  .cinematic-process,
+  .cinematic-about,
+  .cinematic-contact
+),
+.inner-v2 :is(
+  .page-hero,
+  .section,
+  .section-white,
+  .section-dark,
+  .services-showcase,
+  .packages-section
+),
+.site-footer {
+  background-color: var(--tech-blue) !important;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px) !important;
+  background-size: 72px 72px !important;
+  color: #fff !important;
+}
+
+.home-cinematic :is(
+  .cinematic-services,
+  .cinematic-projects,
+  .cinematic-process,
+  .cinematic-about,
+  .cinematic-contact
+)::before,
+.home-cinematic :is(
+  .cinematic-services,
+  .cinematic-projects,
+  .cinematic-process,
+  .cinematic-about,
+  .cinematic-contact
+)::after {
+  border-color: var(--tech-blue-line) !important;
+}
+
+.cinematic-section::before,
+.site-footer::before,
+.services-showcase__label::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent) !important;
+}
+
+:is(.home-cinematic, .inner-v2) :is(h1, h2, h3, h4, strong),
+.site-footer :is(h2, h3, h4, strong) {
+  color: #fff !important;
+}
+
+:is(.home-cinematic, .inner-v2) :is(p, li),
+.site-footer :is(p, li) {
+  color: var(--tech-blue-soft) !important;
+}
+
+:is(
+  .cinematic-kicker,
+  .cinematic-overline,
+  .eyebrow,
+  .section-kicker,
+  .services-showcase__label,
+  .service-capability__top,
+  .project-index,
+  .process-step > span,
+  .delivery-card > span
+) {
+  color: var(--tech-blue-soft) !important;
+}
+
+:is(
+  .cinematic-media-card,
+  .cinematic-project,
+  .cinematic-process-media,
+  .cinematic-about-media,
+  .cinematic-contact-panel,
+  .osiris-project-card,
+  .service-capability,
+  .package-card,
+  .delivery-card,
+  .process-step,
+  .project-card,
+  .audience-panel,
+  .audience-item,
+  .team-card,
+  .value-card,
+  .contact-form-wrap,
+  .contact-detail
+) {
+  border-color: var(--tech-blue-line) !important;
+  background-color: var(--tech-blue-deep) !important;
+  background-image: none !important;
+  color: #fff !important;
+}
+
+:is(
+  .service-capability--soft,
+  .service-capability--paper,
+  .service-capability--cobalt,
+  .project-card-featured
+) {
+  background-color: var(--tech-blue-panel) !important;
+  color: #fff !important;
+}
+
+:is(
+  .service-capability,
+  .package-card,
+  .delivery-card,
+  .process-step,
+  .project-card,
+  .audience-panel,
+  .audience-item,
+  .team-card,
+  .value-card,
+  .contact-form-wrap,
+  .contact-detail
+) :is(p, li, span) {
+  color: var(--tech-blue-soft) !important;
+}
+
+.cinematic-process-media figcaption,
+.project-content,
+.project-meta,
+.osiris-project-meta {
+  border-color: var(--tech-blue-line) !important;
+  background: var(--tech-blue-deep) !important;
+  color: #fff !important;
+}
+
+:is(
+  .cinematic-service-index,
+  .cinematic-process-steps,
+  .cinematic-about-stats,
+  .about-facts,
+  .project-toolbar,
+  .contact-details,
+  .site-footer-inner,
+  .footer-bottom
+) {
+  border-color: var(--tech-blue-line) !important;
+}
+
+.cinematic-service-index > a:not(.cinematic-inline-link),
+.cinematic-process-steps li,
+.filter-button {
+  border-color: var(--tech-blue-line) !important;
+  color: #fff !important;
+}
+
+.cinematic-service-index > a:not(.cinematic-inline-link):hover,
+.cinematic-process-steps li:hover,
+.filter-button:hover,
+.filter-button.is-active {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.pulse-dot,
+.cinematic-kicker::before,
+.cinematic-process-steps li::after,
+.service-capability__top i {
+  background: var(--tech-blue-soft) !important;
+  box-shadow: 0 0 0 0.3rem rgba(255, 255, 255, 0.12) !important;
+}
+
+:is(
+  .button-primary,
+  .header-cta,
+  .mobile-nav-cta,
+  .cinematic-contact-button,
+  .contact-submit
+) {
+  border-color: #fff !important;
+  background: #fff !important;
+  color: var(--tech-blue) !important;
+  box-shadow: 0 14px 34px rgba(25, 42, 78, 0.24) !important;
+}
+
+:is(
+  .button-primary,
+  .header-cta,
+  .mobile-nav-cta,
+  .cinematic-contact-button,
+  .contact-submit
+):hover {
+  border-color: var(--tech-blue-soft) !important;
+  background: var(--tech-blue-soft) !important;
+  color: var(--tech-blue-deep) !important;
+}
+
+:is(.cinematic-inline-link, .cinematic-text-link, .text-link, .site-footer a) {
+  color: #fff !important;
+}
+
+:is(a, button, input, select, textarea):focus-visible {
+  outline-color: #fff !important;
+}
+
+::selection {
+  background: #fff;
+  color: var(--tech-blue);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--tech-blue-deep);
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tech-blue-soft);
+}
