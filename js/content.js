@@ -1,16 +1,64 @@
-const projectBlueprints = [
-  { category: "Web stranica", services: ["UX/UI", "Development", "SEO osnova"] },
-  { category: "Web aplikacija", services: ["UX/UI", "Frontend", "Poslovna logika"] },
-  { category: "Webshop", services: ["UX/UI", "Katalog", "Prodajni tok"] },
-  { category: "Web stranica", services: ["Strategija", "Development", "Responzivnost"] },
-  { category: "Web aplikacija", services: ["Dashboard", "Korisničke uloge", "Podaci"] },
-  { category: "Webshop", services: ["Katalog", "Košarica", "Administracija"] },
-  { category: "Web stranica", services: ["Landing page", "Sadržaj", "Performanse"] },
-  { category: "Web aplikacija", services: ["UX tokovi", "Frontend", "Automatizacija"] },
-  { category: "Webshop", services: ["B2B iskustvo", "Proizvodi", "Upiti"] },
-  { category: "Web stranica", services: ["Redizajn", "Development", "Migracija"] },
-  { category: "Web aplikacija", services: ["Administracija", "Izvještaji", "Podrška"] },
-  { category: "Web stranica", services: ["Prodajni web", "SEO osnova", "Održavanje"] },
+const projects = [
+  {
+    id: "dolce-torte",
+    title: "Dolce Torte",
+    category: "Web stranica",
+    industry: "Slastičarstvo",
+    services: ["UX/UI", "Development", "SEO osnova"],
+    summary:
+      "Web stranica zagrebačke slastičarnice s jasnim pregledom ponude i jednostavnim putem do narudžbe.",
+    preview: "/images/projects/dolce-torte.png",
+    liveUrl: "https://dolcetorte.hr/",
+    status: "Projekt uživo",
+  },
+  {
+    id: "dogan-septem",
+    title: "Dogan Septem",
+    category: "Web stranica",
+    industry: "Interijeri",
+    services: ["Web dizajn", "Development", "Responzivnost"],
+    summary:
+      "Prezentacijska web stranica za studio interijera, oblikovana oko prostora, usluga i izvedenih radova.",
+    preview: "/images/projects/dogan-septem.png",
+    liveUrl: "https://www.doganseptem-interijeri.hr/",
+    status: "Projekt uživo",
+  },
+  {
+    id: "tina-sport-pia",
+    title: "Tina Šport–Pia",
+    category: "Web aplikacija",
+    industry: "Sport",
+    services: ["UX/UI", "Frontend", "Sportski sadržaj"],
+    summary:
+      "Sportska web aplikacija koja okuplja klupske informacije, sadržaj i digitalno iskustvo za korisnike.",
+    preview: "/images/projects/tina-sport-pia.png",
+    liveUrl: "https://stella-final-web.vercel.app/",
+    status: "Projekt uživo",
+  },
+  {
+    id: "atasol",
+    title: "ATASOL",
+    category: "Web stranica",
+    industry: "Psihoterapija",
+    services: ["Web dizajn", "Development", "Responzivnost"],
+    summary:
+      "Smirena i pregledna web stranica za somatsku psihoterapiju, usmjerena na usluge i prvi kontakt.",
+    preview: "/images/projects/atasol.png",
+    liveUrl: "https://www.atasol.hr/",
+    status: "Projekt uživo",
+  },
+  {
+    id: "produkt-auto",
+    title: "Produkt Auto",
+    category: "Web platforma",
+    industry: "Automobili",
+    services: ["UX/UI", "Web platforma", "Katalog vozila"],
+    summary:
+      "Automobilska web platforma s pregledom dostupnih vozila i jasnim putem do informacija i upita.",
+    preview: "/images/projects/produkt-auto.png",
+    liveUrl: "https://produktauto.com/",
+    status: "Projekt uživo",
+  },
 ];
 
 export const siteData = {
@@ -72,19 +120,5 @@ export const siteData = {
       tone: "silver",
     },
   ],
-  projects: projectBlueprints.map((blueprint, index) => {
-    const number = String(index + 1).padStart(2, "0");
-
-    return {
-      id: `project-${number}`,
-      title: `Projekt ${number}`,
-      category: blueprint.category,
-      services: blueprint.services,
-      summary:
-        "Stvarni naziv, poslovni izazov, rezultat i live poveznica unose se nakon potvrde objave portfolija.",
-      preview: "",
-      liveUrl: "",
-      status: "Detalji u pripremi",
-    };
-  }),
+  projects,
 };

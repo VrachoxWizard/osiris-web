@@ -26,7 +26,7 @@ Promjenjivi podaci nalaze se u `js/content.js`:
 
 - `brand` — naziv, lokacija, članovi i statistike
 - `contact` — email, telefon, društvene mreže i endpoint obrasca
-- `projects` — 12 portfolio projekata i njihovi budući live URL-ovi
+- `projects` — pet objavljenih portfolio projekata sa screenshotovima i live URL-ovima
 
 Kontaktni obrazac namjerno ne šalje podatke dok se ne unesu stvarni kontaktni podaci i endpoint. Portfolio kartice također ne vode na izmišljene adrese.
 

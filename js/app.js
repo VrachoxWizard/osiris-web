@@ -241,7 +241,7 @@ function projectCard(project, index) {
   const projectNumber = String(index + 1).padStart(2, "0");
 
   return `
-    <article class="project-card reveal" data-project-category="${project.category}">
+    <article class="project-card${index === 0 ? " project-card-featured" : ""} reveal" data-project-category="${project.category}">
       <div class="project-preview preview-${(index % 4) + 1}">
         ${
           project.preview
@@ -262,7 +262,7 @@ function projectCard(project, index) {
       <div class="project-content">
         <div class="project-meta">
           <span>${project.category}</span>
-          <span>Portfolio mjesto</span>
+          <span>${project.industry}</span>
         </div>
         <h3>${project.title}</h3>
         <div class="project-services" aria-label="Usluge na projektu">

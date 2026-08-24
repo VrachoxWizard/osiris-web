@@ -1228,6 +1228,56 @@ body.menu-open [data-site-footer] {
   transform: translate(2px, -2px);
 }
 
+/* Projects index: one featured case study followed by four live projects. */
+.projects-page-v2 .project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.projects-page-v2 .filter-button {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: #aeb7c3;
+}
+
+.projects-page-v2 .filter-button:hover,
+.projects-page-v2 .filter-button.is-active {
+  border-color: var(--electric-blue);
+  background: var(--electric-blue);
+  color: #05070b;
+}
+
+.projects-page-v2 .project-card-featured {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+}
+
+.projects-page-v2 .project-preview {
+  min-height: 21rem;
+  padding: 0;
+}
+
+.projects-page-v2 .project-card-featured .project-preview {
+  min-height: 30rem;
+}
+
+.projects-page-v2 .project-preview img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.projects-page-v2 .project-card-featured .project-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 4vw, 4rem);
+}
+
 @media (max-width: 70rem) {
   .osiris-projects-head {
     grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
@@ -1270,6 +1320,19 @@ body.menu-open [data-site-footer] {
   .cinematic-projects .osiris-project-card-featured h3 {
     font-size: clamp(1.15rem, 5.2vw, 1.55rem);
   }
+
+  .projects-page-v2 .project-card-featured {
+    display: block;
+    grid-column: auto;
+  }
+
+  .projects-page-v2 .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-page-v2 .project-card-featured .project-preview {
+    min-height: 23rem;
+  }
 }
 
 @media (max-width: 30rem) {
@@ -1283,6 +1346,15 @@ body.menu-open [data-site-footer] {
 
   .osiris-project-meta p {
     font-size: 0.53rem;
+  }
+
+  .projects-page-v2 .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-page-v2 .project-preview,
+  .projects-page-v2 .project-card-featured .project-preview {
+    min-height: 16rem;
   }
 }
 
