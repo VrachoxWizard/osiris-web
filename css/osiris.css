@@ -459,7 +459,7 @@ a {
   width: 7rem;
   max-width: none;
   height: 7rem;
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 
 .brand-name {
