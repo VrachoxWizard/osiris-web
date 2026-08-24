@@ -125,6 +125,7 @@ a {
   position: absolute;
   bottom: 0;
   left: 50%;
+  right: auto;
   width: 0;
   height: 2px;
   background: var(--electric-blue);
@@ -135,6 +136,7 @@ a {
 .nav-link:hover::after,
 .nav-link.is-active::after {
   width: 100%;
+  transform: translateX(-50%);
 }
 
 .menu-toggle {
@@ -312,6 +314,59 @@ a {
 .reveal:nth-child(6) { transition-delay: 600ms; }
 
 /* ============================================
+   REFINED DESKTOP TYPOGRAPHY SCALE
+   ============================================ */
+
+@media (min-width: 60.01rem) {
+  .cinematic-hero h1 {
+    font-size: clamp(4rem, 8vw, 9rem);
+  }
+
+  .cinematic-section-head h2,
+  .cinematic-projects-head h2,
+  .cinematic-about-copy h2,
+  .cinematic-contact h2 {
+    font-size: clamp(2.75rem, 4.4vw, 5rem);
+  }
+
+  .cinematic-project-copy h3 {
+    font-size: clamp(1.75rem, 3vw, 3.5rem);
+  }
+
+  .cinematic-project-light .cinematic-project-copy h3,
+  .cinematic-project-blue .cinematic-project-copy h3 {
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+  }
+
+  .inner-v2 .page-hero h1,
+  .projects-page-v2 .project-toolbar h2 {
+    font-size: clamp(2.8rem, 4.5vw, 5rem);
+  }
+
+  .inner-v2 .section-heading h2,
+  .inner-v2 .section-heading-centered h2,
+  .inner-v2 .final-cta-inner h2,
+  .inner-v2 .cta-band h2,
+  .inner-v2 .story-sticky h2,
+  .inner-v2 .audience-panel h2,
+  .contact-page-v2 .contact-intro h2 {
+    font-size: clamp(2.25rem, 3.8vw, 4rem);
+  }
+
+  .inner-v2 .project-card h3,
+  .inner-v2 .team-card h3,
+  .inner-v2 .value-card h3,
+  .inner-v2 .process-step h3,
+  .inner-v2 .delivery-card h3 {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+  }
+
+  .inner-v2 .page-hero-copy p {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ============================================
    ENHANCED RESPONSIVE DESIGN
    ============================================ */
 
@@ -331,6 +386,34 @@ a {
 
   h2 {
     font-size: clamp(2rem, 7vw, 5rem);
+  }
+
+  .cinematic-hero h1,
+  .inner-v2 .page-hero h1 {
+    font-size: clamp(2.75rem, 10vw, 5.5rem);
+  }
+
+  .cinematic-section-head h2,
+  .cinematic-projects-head h2,
+  .cinematic-about-copy h2,
+  .cinematic-contact h2,
+  .projects-page-v2 .project-toolbar h2,
+  .inner-v2 .section-heading h2,
+  .inner-v2 .section-heading-centered h2,
+  .inner-v2 .final-cta-inner h2,
+  .inner-v2 .cta-band h2,
+  .inner-v2 .story-sticky h2,
+  .inner-v2 .audience-panel h2,
+  .contact-page-v2 .contact-intro h2 {
+    font-size: clamp(2.2rem, 9vw, 3.75rem);
+  }
+
+  .inner-v2 .project-card h3,
+  .inner-v2 .team-card h3,
+  .inner-v2 .value-card h3,
+  .inner-v2 .process-step h3,
+  .inner-v2 .delivery-card h3 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem);
   }
 
   .cinematic-hero-inner {
