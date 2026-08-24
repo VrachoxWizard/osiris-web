@@ -21,9 +21,6 @@ const icon = (name) => {
 
 function logoMarkup() {
   return `
-    <span class="brand-mark" aria-hidden="true">
-      <img src="/images/osiris-logo.png" alt="" width="1254" height="1254" decoding="async" fetchpriority="high">
-    </span>
     <span class="brand-name">OSIRIS</span>
   `;
 }
@@ -381,12 +378,28 @@ function setupContactForm() {
 function setupHeroVideo() {
   const video = document.querySelector("[data-hero-video]");
   if (!(video instanceof HTMLVideoElement)) return;
+  let resumeTimer;
 
-  video.defaultMuted = true;
-  video.muted = true;
-  video.loop = true;
-  video.play().catch(() => {
-    // The poster remains visible if a browser blocks muted autoplay.
+  const ensurePlayback = () => {
+    video.defaultMuted = true;
+    video.muted = true;
+    video.loop = true;
+    video.play().catch(() => {
+      // The poster remains visible if a browser blocks muted autoplay.
+    });
+  };
+
+  ensurePlayback();
+  video.addEventListener("canplay", ensurePlayback, { once: true });
+  window.addEventListener("pageshow", ensurePlayback);
+  window.addEventListener("focus", ensurePlayback);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") ensurePlayback();
+  });
+  video.addEventListener("pause", () => {
+    if (document.visibilityState !== "visible" || video.ended) return;
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(ensurePlayback, 150);
   });
 }
 
