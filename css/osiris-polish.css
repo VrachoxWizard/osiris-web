@@ -61,20 +61,20 @@ a:not(.button):hover {
 }
 
 .button-primary {
-  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.25),
-              0 2px 8px rgba(0, 217, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(63, 94, 162, 0.25),
+              0 2px 8px rgba(63, 94, 162, 0.15);
   transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button-primary:hover {
-  box-shadow: 0 12px 32px rgba(0, 217, 255, 0.35),
-              0 4px 12px rgba(0, 217, 255, 0.25);
+  box-shadow: 0 12px 32px rgba(63, 94, 162, 0.35),
+              0 4px 12px rgba(63, 94, 162, 0.25);
   transform: translateY(-3px);
 }
 
 .button-primary:active {
-  box-shadow: 0 4px 16px rgba(0, 217, 255, 0.2),
-              0 1px 4px rgba(0, 217, 255, 0.15);
+  box-shadow: 0 4px 16px rgba(63, 94, 162, 0.2),
+              0 1px 4px rgba(63, 94, 162, 0.15);
   transform: translateY(-1px) scale(0.98);
 }
 
@@ -149,8 +149,8 @@ a:not(.button):hover {
 }
 
 .brand:hover .brand-mark {
-  box-shadow: 0 0 32px rgba(0, 217, 255, 0.55),
-              0 0 12px rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 32px rgba(63, 94, 162, 0.55),
+              0 0 12px rgba(63, 94, 162, 0.3);
   transform: rotate(8deg);
 }
 
@@ -204,14 +204,14 @@ a:not(.button):hover {
   border-radius: 2px;
   background: var(--electric-blue);
   color: #03070a;
-  box-shadow: 0 8px 22px rgba(0, 217, 255, 0.14);
+  box-shadow: 0 8px 22px rgba(63, 94, 162, 0.14);
 }
 
 .site-header .header-cta:hover {
   border-color: white;
   background: white;
   color: #03070a;
-  box-shadow: 0 10px 26px rgba(0, 217, 255, 0.18);
+  box-shadow: 0 10px 26px rgba(63, 94, 162, 0.18);
   transform: translateY(-1px);
 }
 
@@ -256,11 +256,11 @@ a:not(.button):hover {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  border-top: 1px solid rgba(0, 217, 255, 0.36);
+  border-top: 1px solid rgba(63, 94, 162, 0.36);
   background:
-    radial-gradient(circle at 88% 8%, rgba(0, 71, 255, 0.16), transparent 30rem),
-    linear-gradient(rgba(0, 217, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 217, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 88% 8%, rgba(63, 94, 162, 0.16), transparent 30rem),
+    linear-gradient(rgba(63, 94, 162, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 94, 162, 0.035) 1px, transparent 1px),
     #05070b;
   background-size: auto, 44px 44px, 44px 44px, auto;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.72);
@@ -269,11 +269,11 @@ a:not(.button):hover {
 }
 
 .site-header .mobile-menu {
-  border-color: rgba(0, 217, 255, 0.36);
+  border-color: rgba(63, 94, 162, 0.36);
   background:
-    radial-gradient(circle at 88% 8%, rgba(0, 71, 255, 0.16), transparent 30rem),
-    linear-gradient(rgba(0, 217, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 217, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 88% 8%, rgba(63, 94, 162, 0.16), transparent 30rem),
+    linear-gradient(rgba(63, 94, 162, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 94, 162, 0.035) 1px, transparent 1px),
     #05070b;
   background-size: auto, 44px 44px, 44px 44px, auto;
   backdrop-filter: none;
@@ -293,7 +293,7 @@ body.menu-open [data-site-footer] {
   left: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--electric-blue) 45%, transparent);
-  box-shadow: 0 0 22px rgba(0, 217, 255, 0.65);
+  box-shadow: 0 0 22px rgba(63, 94, 162, 0.65);
   content: "";
   pointer-events: none;
   animation: osirisMenuScan 4.8s ease-in-out infinite;
@@ -391,7 +391,7 @@ body.menu-open [data-site-footer] {
 .site-header .mobile-nav .mobile-nav-link:focus-visible,
 .site-header .mobile-nav .mobile-nav-link.is-active {
   border-left: 0;
-  background: rgba(0, 217, 255, 0.055);
+  background: rgba(63, 94, 162, 0.055);
   color: white;
   padding-inline: 0.75rem;
   box-shadow: inset 3px 0 0 var(--electric-blue);
@@ -422,7 +422,7 @@ body.menu-open [data-site-footer] {
   background: var(--electric-blue);
   color: #03070a;
   padding: 1rem 1.15rem;
-  box-shadow: 0 16px 42px rgba(0, 217, 255, 0.18);
+  box-shadow: 0 16px 42px rgba(63, 94, 162, 0.18);
 }
 
 .mobile-nav .mobile-nav-cta:hover {
@@ -448,7 +448,7 @@ body.menu-open [data-site-footer] {
   height: 0.42rem;
   margin-right: 0.55rem;
   background: var(--electric-blue);
-  box-shadow: 0 0 12px rgba(0, 217, 255, 0.75);
+  box-shadow: 0 0 12px rgba(63, 94, 162, 0.75);
   content: "";
 }
 
@@ -543,7 +543,7 @@ body.menu-open [data-site-footer] {
 
 .cinematic-proof > div:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(63, 94, 162, 0.15);
 }
 
 @keyframes fadeInUp {
@@ -574,7 +574,7 @@ body.menu-open [data-site-footer] {
   transform: translateY(-6px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3),
               0 8px 16px rgba(0, 0, 0, 0.2),
-              0 0 0 1px rgba(0, 217, 255, 0.1);
+              0 0 0 1px rgba(63, 94, 162, 0.1);
 }
 
 .project-preview img {
@@ -593,7 +593,7 @@ body.menu-open [data-site-footer] {
 .project-card:hover .project-index {
   transform: scale(1.15);
   color: var(--electric-blue);
-  text-shadow: 0 0 16px rgba(0, 217, 255, 0.6);
+  text-shadow: 0 0 16px rgba(63, 94, 162, 0.6);
 }
 
 .project-status {
@@ -604,7 +604,7 @@ body.menu-open [data-site-footer] {
   transform: translateX(-3px);
   background: var(--electric-blue);
   color: var(--pure-black);
-  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(63, 94, 162, 0.4);
 }
 
 /* ============================================
@@ -620,17 +620,17 @@ body.menu-open [data-site-footer] {
 .field input:hover,
 .field select:hover,
 .field textarea:hover {
-  border-color: rgba(0, 217, 255, 0.4);
+  border-color: rgba(63, 94, 162, 0.4);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(63, 94, 162, 0.08);
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15),
-              0 0 0 3px rgba(0, 217, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(63, 94, 162, 0.15),
+              0 0 0 3px rgba(63, 94, 162, 0.1);
 }
 
 .field label {
@@ -1170,7 +1170,7 @@ body.menu-open [data-site-footer] {
   width: 0.45rem;
   height: 0.45rem;
   background: var(--electric-blue);
-  box-shadow: 0 0 0 0.25rem rgba(0, 217, 255, 0.12);
+  box-shadow: 0 0 0 0.25rem rgba(63, 94, 162, 0.12);
 }
 
 .osiris-project-mosaic {

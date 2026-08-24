@@ -30,7 +30,7 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--electric-blue);
-  box-shadow: 0 0 12px rgba(0, 217, 255, 0.4);
+  box-shadow: 0 0 12px rgba(63, 94, 162, 0.4);
 }
 
 /* ============================================
@@ -55,7 +55,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 217, 255, 0.3) 50%,
+    rgba(63, 94, 162, 0.3) 50%,
     transparent
   );
   opacity: 0.5;
@@ -75,8 +75,8 @@
   gap: 0.75rem;
   margin-bottom: 2rem;
   padding: 0.6rem 1rem;
-  border: 1px solid rgba(0, 217, 255, 0.25);
-  background: rgba(0, 217, 255, 0.04);
+  border: 1px solid rgba(63, 94, 162, 0.25);
+  background: rgba(63, 94, 162, 0.04);
   color: var(--electric-blue);
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -93,7 +93,7 @@
   width: 0.5rem;
   height: 0.5rem;
   background: var(--electric-blue);
-  box-shadow: 0 0 12px rgba(0, 217, 255, 0.6);
+  box-shadow: 0 0 12px rgba(63, 94, 162, 0.6);
   animation: pulse 2.5s ease-in-out infinite;
 }
 
@@ -125,7 +125,7 @@
 .cinematic-process-media:hover,
 .cinematic-about-media:hover {
   box-shadow: 0 24px 72px rgba(0, 0, 0, 0.4),
-              0 0 0 1px rgba(0, 217, 255, 0.15);
+              0 0 0 1px rgba(63, 94, 162, 0.15);
 }
 
 .cinematic-media-card figcaption,
@@ -166,7 +166,7 @@
 
 .cinematic-service-index > a:not(.cinematic-inline-link):hover {
   padding-left: 0.75rem;
-  background: rgba(0, 217, 255, 0.03);
+  background: rgba(63, 94, 162, 0.03);
 }
 
 /* ============================================
@@ -220,7 +220,7 @@
 }
 
 .cinematic-process-steps li:hover {
-  background: rgba(0, 217, 255, 0.02);
+  background: rgba(63, 94, 162, 0.02);
 }
 
 .cinematic-process-steps li:hover::after {
@@ -291,7 +291,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 217, 255, 0.25) 50%,
+    rgba(63, 94, 162, 0.25) 50%,
     transparent
   );
 }
@@ -357,8 +357,8 @@ body.page-loaded .cinematic-hero {
 
 .button:focus-visible {
   outline-offset: 6px;
-  box-shadow: 0 0 0 6px rgba(0, 217, 255, 0.15),
-              0 8px 24px rgba(0, 217, 255, 0.25);
+  box-shadow: 0 0 0 6px rgba(63, 94, 162, 0.15),
+              0 8px 24px rgba(63, 94, 162, 0.25);
 }
 
 /* ============================================

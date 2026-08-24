@@ -96,7 +96,7 @@ p {
   right: -20%;
   width: 60%;
   height: 60%;
-  background: radial-gradient(circle, rgba(0, 217, 255, 0.08), transparent 70%);
+  background: radial-gradient(circle, rgba(63, 94, 162, 0.08), transparent 70%);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -144,7 +144,7 @@ p {
 .cinematic-service-index > a:not(.cinematic-inline-link):hover {
   color: var(--electric-blue);
   padding-left: 1rem;
-  background: rgba(0, 217, 255, 0.03);
+  background: rgba(63, 94, 162, 0.03);
 }
 
 .cinematic-service-index span {
@@ -201,7 +201,7 @@ p {
 
 .cinematic-media-card:hover {
   border-color: var(--electric-blue);
-  box-shadow: 0 0 40px rgba(0, 217, 255, 0.2);
+  box-shadow: 0 0 40px rgba(63, 94, 162, 0.2);
 }
 
 .cinematic-media-card img {
@@ -250,7 +250,7 @@ p {
   left: 50%;
   width: 1px;
   height: 100%;
-  background: linear-gradient(180deg, transparent, rgba(0, 217, 255, 0.2) 50%, transparent);
+  background: linear-gradient(180deg, transparent, rgba(63, 94, 162, 0.2) 50%, transparent);
   transform: translateX(-50%);
 }
 
@@ -364,7 +364,7 @@ p {
 .cinematic-process-steps {
   border-top: 2px solid var(--electric-blue);
   border-bottom: 2px solid var(--electric-blue);
-  background: rgba(0, 217, 255, 0.02);
+  background: rgba(63, 94, 162, 0.02);
 }
 
 .cinematic-process-steps li {
@@ -374,7 +374,7 @@ p {
 }
 
 .cinematic-process-steps li:hover {
-  background: rgba(0, 217, 255, 0.05);
+  background: rgba(63, 94, 162, 0.05);
 }
 
 .cinematic-process-steps span {
@@ -399,7 +399,7 @@ p {
   left: -20%;
   width: 60%;
   height: 60%;
-  background: radial-gradient(circle, rgba(0, 71, 255, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(63, 94, 162, 0.1), transparent 70%);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -434,7 +434,7 @@ p {
 .cinematic-about-stats {
   border-top: 2px solid var(--electric-blue);
   border-bottom: 2px solid var(--electric-blue);
-  background: rgba(0, 217, 255, 0.02);
+  background: rgba(63, 94, 162, 0.02);
 }
 
 .cinematic-about-stats strong {
@@ -465,7 +465,7 @@ p {
   right: -30%;
   width: 70%;
   height: 70%;
-  background: radial-gradient(circle, rgba(0, 217, 255, 0.1), transparent 60%);
+  background: radial-gradient(circle, rgba(63, 94, 162, 0.1), transparent 60%);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -508,7 +508,7 @@ p {
 
 .brand-on-dark .brand-mark {
   border-color: var(--electric-blue);
-  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+  box-shadow: 0 0 20px rgba(63, 94, 162, 0.3);
 }
 
 .brand-on-dark .brand-name {
@@ -531,7 +531,7 @@ p {
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(0, 217, 255, 0.2);
+  border-top: 1px solid rgba(63, 94, 162, 0.2);
   font-family: var(--font-mono);
   font-size: 0.75rem;
 }
@@ -664,12 +664,12 @@ body::after {
 
 .service-card:hover {
   border-color: var(--electric-blue) !important;
-  box-shadow: 0 0 40px rgba(0, 217, 255, 0.2);
+  box-shadow: 0 0 40px rgba(63, 94, 162, 0.2);
   transform: translateY(-6px);
 }
 
 .service-number {
-  background: rgba(0, 217, 255, 0.1) !important;
+  background: rgba(63, 94, 162, 0.1) !important;
   color: var(--electric-blue) !important;
   border: 1px solid var(--electric-blue);
 }
@@ -679,7 +679,7 @@ body::after {
 }
 
 .project-status {
-  background: rgba(0, 217, 255, 0.15) !important;
+  background: rgba(63, 94, 162, 0.15) !important;
   border-color: var(--electric-blue) !important;
   color: var(--electric-blue) !important;
 }
@@ -720,7 +720,7 @@ body::after {
 .field select:focus,
 .field textarea:focus {
   border-color: var(--electric-blue) !important;
-  box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.2) !important;
+  box-shadow: 0 0 0 4px rgba(63, 94, 162, 0.2) !important;
   background: var(--charcoal) !important;
 }
 
@@ -745,8 +745,8 @@ body::after {
 }
 
 .audience-item {
-  background: rgba(0, 217, 255, 0.05) !important;
-  border-color: rgba(0, 217, 255, 0.3) !important;
+  background: rgba(63, 94, 162, 0.05) !important;
+  border-color: rgba(63, 94, 162, 0.3) !important;
 }
 
 .cta-band {
@@ -790,7 +790,7 @@ body::after {
 }
 
 .portfolio-note {
-  background: rgba(0, 217, 255, 0.05) !important;
+  background: rgba(63, 94, 162, 0.05) !important;
   border-color: var(--electric-blue) !important;
 }
 
@@ -816,8 +816,8 @@ body::after {
 }
 
 .collaboration-card {
-  background: rgba(0, 217, 255, 0.05) !important;
-  border-color: rgba(0, 217, 255, 0.2) !important;
+  background: rgba(63, 94, 162, 0.05) !important;
+  border-color: rgba(63, 94, 162, 0.2) !important;
 }
 
 .final-cta-v2 {
