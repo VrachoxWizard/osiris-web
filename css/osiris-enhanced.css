@@ -1,0 +1,448 @@
+/* OSIRIS ENHANCED POLISH - Additional Refinements */
+
+/* ============================================
+   REFINED SCROLLBAR STYLING
+   ============================================ */
+
+@supports (scrollbar-width: thin) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--electric-blue) rgba(10, 10, 10, 0.95);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 10, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--electric-blue), var(--deep-blue));
+  border-radius: 6px;
+  border: 2px solid rgba(10, 10, 10, 0.95);
+  transition: background 280ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--electric-blue);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.4);
+}
+
+/* ============================================
+   ENHANCED SECTION TRANSITIONS
+   ============================================ */
+
+.cinematic-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle section dividers with glow effect */
+.cinematic-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 60rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 217, 255, 0.3) 50%,
+    transparent
+  );
+  opacity: 0.5;
+}
+
+.cinematic-section:first-of-type::before {
+  display: none;
+}
+
+/* ============================================
+   ENHANCED KICKER/EYEBROW STYLING
+   ============================================ */
+
+.cinematic-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  background: rgba(0, 217, 255, 0.04);
+  color: var(--electric-blue);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinematic-kicker::before {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--electric-blue);
+  box-shadow: 0 0 12px rgba(0, 217, 255, 0.6);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+}
+
+/* ============================================
+   REFINED MEDIA CARD ENHANCEMENTS
+   ============================================ */
+
+.cinematic-media-card,
+.cinematic-process-media,
+.cinematic-about-media {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 450ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinematic-media-card:hover,
+.cinematic-process-media:hover,
+.cinematic-about-media:hover {
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(0, 217, 255, 0.15);
+}
+
+.cinematic-media-card figcaption,
+.cinematic-process-media figcaption {
+  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 350ms ease;
+}
+
+.cinematic-media-card:hover figcaption,
+.cinematic-process-media:hover figcaption {
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   ENHANCED SERVICE INDEX INTERACTIONS
+   ============================================ */
+
+.cinematic-service-index > a:not(.cinematic-inline-link) {
+  position: relative;
+  transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinematic-service-index > a:not(.cinematic-inline-link)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--electric-blue);
+  transform: scaleY(0);
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinematic-service-index > a:not(.cinematic-inline-link):hover::before {
+  transform: scaleY(1);
+}
+
+.cinematic-service-index > a:not(.cinematic-inline-link):hover {
+  padding-left: 0.75rem;
+  background: rgba(0, 217, 255, 0.03);
+}
+
+/* ============================================
+   REFINED PROOF/STATS ELEMENTS
+   ============================================ */
+
+.cinematic-proof strong,
+.cinematic-about-stats strong {
+  position: relative;
+  display: inline-block;
+}
+
+.cinematic-proof strong::after,
+.cinematic-about-stats strong::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--electric-blue), transparent);
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+.cinematic-proof > div:hover strong::after,
+.cinematic-about-stats > div:hover strong::after {
+  opacity: 0.5;
+}
+
+/* ============================================
+   ENHANCED PROCESS STEPS
+   ============================================ */
+
+.cinematic-process-steps li {
+  position: relative;
+  transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinematic-process-steps li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--electric-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 380ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinematic-process-steps li:hover {
+  background: rgba(0, 217, 255, 0.02);
+}
+
+.cinematic-process-steps li:hover::after {
+  transform: scaleX(1);
+}
+
+.cinematic-process-steps span {
+  transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinematic-process-steps li:hover span {
+  color: var(--electric-blue);
+  transform: scale(1.1);
+}
+
+/* ============================================
+   ENHANCED CONTACT SECTION
+   ============================================ */
+
+.cinematic-contact-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.cinematic-contact-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--electric-blue),
+    transparent
+  );
+  animation: shimmerScan 3s ease-in-out infinite;
+}
+
+@keyframes shimmerScan {
+  0%, 100% {
+    opacity: 0.2;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(100%);
+  }
+}
+
+/* ============================================
+   REFINED FOOTER ENHANCEMENTS
+   ============================================ */
+
+.site-footer {
+  position: relative;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 217, 255, 0.25) 50%,
+    transparent
+  );
+}
+
+.footer-links a {
+  position: relative;
+  transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-links a::before {
+  content: "→";
+  position: absolute;
+  left: -1.2rem;
+  color: var(--electric-blue);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-links a:hover {
+  padding-left: 1.2rem;
+  color: var(--electric-blue);
+}
+
+.footer-links a:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================
+   LOADING STATE REFINEMENTS
+   ============================================ */
+
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.page-loaded .cinematic-hero {
+  animation: pageLoad 800ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* ============================================
+   ENHANCED FOCUS STATES FOR ACCESSIBILITY
+   ============================================ */
+
+:focus-visible {
+  outline: 3px solid var(--electric-blue);
+  outline-offset: 5px;
+  transition: outline-offset 220ms ease;
+  border-radius: 2px;
+}
+
+:focus-visible:active {
+  outline-offset: 3px;
+}
+
+.button:focus-visible {
+  outline-offset: 6px;
+  box-shadow: 0 0 0 6px rgba(0, 217, 255, 0.15),
+              0 8px 24px rgba(0, 217, 255, 0.25);
+}
+
+/* ============================================
+   REFINED MOBILE NAVIGATION ENHANCEMENTS
+   ============================================ */
+
+.mobile-nav-link strong {
+  transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-link:hover strong,
+.mobile-nav-link:focus-visible strong {
+  color: var(--electric-blue);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cinematic-overline,
+  .cinematic-hero h1,
+  .cinematic-hero-intro,
+  .cinematic-proof {
+    animation: none !important;
+  }
+}
+
+/* GPU acceleration for frequently animated elements */
+.button,
+.nav-link,
+.project-card,
+.service-card,
+.brand-mark,
+.reveal,
+.osiris-project-link,
+.cinematic-hero-video {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .site-header,
+  .mobile-menu,
+  .button,
+  [data-site-footer],
+  .cinematic-hero-video {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  h1, h2, h3 {
+    color: black !important;
+    page-break-after: avoid;
+  }
+
+  p {
+    color: #333 !important;
+  }
+
+  .cinematic-section {
+    page-break-inside: avoid;
+  }
+}

@@ -1,30 +1,46 @@
 /* OSIRIS DESIGN POLISH - Enhanced UX, Responsiveness & Animations */
 
 /* ============================================
-   ENHANCED MICRO-INTERACTIONS
+   REFINED GLOBAL ENHANCEMENTS
    ============================================ */
 
-/* Smooth link interactions */
-a {
-  position: relative;
-  transition: color 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+/* Smooth page-level transitions */
+body {
+  transition: opacity 300ms ease;
 }
 
-/* Enhanced button interactions */
+body.page-loaded {
+  opacity: 1;
+}
+
+/* Smooth link interactions with refined easing */
+a {
+  position: relative;
+  transition: color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:not(.button):hover {
+  opacity: 0.85;
+}
+
+/* Enhanced button interactions with refined depth */
 .button {
   position: relative;
   overflow: hidden;
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .button::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
   opacity: 0;
-  transition: opacity 400ms ease;
+  transition: opacity 320ms ease;
+  pointer-events: none;
 }
 
 .button:hover::before {
@@ -32,36 +48,44 @@ a {
 }
 
 .button:active {
-  transform: scale(0.98);
+  transform: scale(0.97) translateY(1px);
+  transition-duration: 100ms;
 }
 
 .button svg {
-  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button:hover svg {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
 .button-primary {
-  box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.4);
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.25),
+              0 2px 8px rgba(0, 217, 255, 0.15);
+  transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button-primary:hover {
-  box-shadow: 0 0 0 8px rgba(0, 217, 255, 0.2),
-              0 12px 32px rgba(0, 217, 255, 0.3);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 217, 255, 0.35),
+              0 4px 12px rgba(0, 217, 255, 0.25);
+  transform: translateY(-3px);
 }
 
-/* Enhanced text link interactions */
+.button-primary:active {
+  box-shadow: 0 4px 16px rgba(0, 217, 255, 0.2),
+              0 1px 4px rgba(0, 217, 255, 0.15);
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Enhanced text link interactions with refined animation */
 .text-link {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: gap 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: gap 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 280ms ease;
 }
 
 .text-link::after {
@@ -72,15 +96,26 @@ a {
   width: 0;
   height: 2px;
   background: currentColor;
-  transition: width 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: width 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.6;
 }
 
 .text-link:hover {
-  gap: 0.75rem;
+  gap: 0.8rem;
+  opacity: 1;
 }
 
 .text-link:hover::after {
-  width: calc(100% - 2rem);
+  width: calc(100% - 2.2rem);
+  opacity: 1;
+}
+
+.text-link svg {
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-link:hover svg {
+  transform: translateX(2px) rotate(-5deg);
 }
 
 /* ============================================
@@ -88,31 +123,41 @@ a {
    ============================================ */
 
 .site-header {
-  backdrop-filter: blur(12px);
-  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(16px) saturate(180%);
+  transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .site-header.is-scrolled {
-  background: rgba(0, 0, 0, 0.85);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5),
-              0 1px 0 rgba(0, 217, 255, 0.1);
+  background: rgba(5, 7, 11, 0.92);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 2px 8px rgba(0, 0, 0, 0.2),
+              0 1px 0 rgba(0, 217, 255, 0.15);
 }
 
 .brand {
-  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .brand:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .brand-mark {
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .brand:hover .brand-mark {
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.5);
-  transform: rotate(5deg);
+  box-shadow: 0 0 32px rgba(0, 217, 255, 0.55),
+              0 0 12px rgba(0, 217, 255, 0.3);
+  transform: rotate(8deg);
+}
+
+.brand-name {
+  transition: letter-spacing 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brand:hover .brand-name {
+  letter-spacing: 0.38em;
 }
 
 .nav-link {
@@ -400,142 +445,181 @@ body.menu-open [data-site-footer] {
 }
 
 /* ============================================
-   ENHANCED HERO SECTION
+   ENHANCED HERO SECTION WITH REFINED POLISH
    ============================================ */
 
 .cinematic-hero-video {
-  transition: transform 8000ms ease-in-out;
+  transition: transform 12000ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
 }
 
 .cinematic-hero:hover .cinematic-hero-video {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
+/* Add subtle vignette overlay for depth */
+.cinematic-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+/* Refined hero content animations with stagger */
 .cinematic-overline {
-  animation: fadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 200ms backwards;
+  animation: fadeInUp 900ms cubic-bezier(0.16, 1, 0.3, 1) 150ms backwards;
 }
 
 .cinematic-hero h1 {
-  animation: fadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 400ms backwards;
+  animation: fadeInUp 950ms cubic-bezier(0.16, 1, 0.3, 1) 350ms backwards;
 }
 
 .cinematic-hero-intro {
-  animation: fadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 600ms backwards;
+  animation: fadeInUp 950ms cubic-bezier(0.16, 1, 0.3, 1) 550ms backwards;
 }
 
 .cinematic-proof {
-  animation: fadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 800ms backwards;
+  animation: fadeInUp 950ms cubic-bezier(0.16, 1, 0.3, 1) 750ms backwards;
+}
+
+.cinematic-proof > div {
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 320ms ease;
+}
+
+.cinematic-proof > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px) scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 /* ============================================
-   ENHANCED CARDS & PROJECT ELEMENTS
+   ENHANCED CARDS & PROJECT ELEMENTS WITH DEPTH
    ============================================ */
 
 .service-card,
 .project-card,
 .package-card {
-  transition: all 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 380ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
 .service-card:hover,
 .project-card:hover,
 .package-card:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3),
+              0 8px 16px rgba(0, 0, 0, 0.2),
+              0 0 0 1px rgba(0, 217, 255, 0.1);
 }
 
 .project-preview img {
-  transition: all 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 700ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .project-card:hover .project-preview img {
-  transform: scale(1.1) rotate(2deg);
+  transform: scale(1.08);
+  filter: brightness(1.05) saturate(1.1);
 }
 
 .project-index {
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover .project-index {
-  transform: scale(1.2);
+  transform: scale(1.15);
   color: var(--electric-blue);
+  text-shadow: 0 0 16px rgba(0, 217, 255, 0.6);
 }
 
 .project-status {
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover .project-status {
-  transform: translateX(-4px);
+  transform: translateX(-3px);
   background: var(--electric-blue);
   color: var(--pure-black);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
 }
 
 /* ============================================
-   ENHANCED FORM INTERACTIONS
+   ENHANCED FORM INTERACTIONS WITH REFINED POLISH
    ============================================ */
 
 .field input,
 .field select,
 .field textarea {
-  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .field input:hover,
 .field select:hover,
 .field textarea:hover {
-  border-color: rgba(0, 217, 255, 0.5);
+  border-color: rgba(0, 217, 255, 0.4);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.08);
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15),
+              0 0 0 3px rgba(0, 217, 255, 0.1);
 }
 
 .field label {
-  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .field:focus-within label {
   color: var(--electric-blue);
-  transform: translateX(4px);
+  transform: translateX(3px);
+  font-weight: 750;
 }
 
 /* ============================================
-   ENHANCED REVEAL ANIMATIONS
+   ENHANCED REVEAL ANIMATIONS WITH REFINED TIMING
    ============================================ */
 
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(50px) scale(0.98);
+  transition: opacity 850ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-.reveal:nth-child(1) { transition-delay: 100ms; }
-.reveal:nth-child(2) { transition-delay: 200ms; }
-.reveal:nth-child(3) { transition-delay: 300ms; }
-.reveal:nth-child(4) { transition-delay: 400ms; }
-.reveal:nth-child(5) { transition-delay: 500ms; }
-.reveal:nth-child(6) { transition-delay: 600ms; }
+.reveal:nth-child(1) { transition-delay: 80ms; }
+.reveal:nth-child(2) { transition-delay: 160ms; }
+.reveal:nth-child(3) { transition-delay: 240ms; }
+.reveal:nth-child(4) { transition-delay: 320ms; }
+.reveal:nth-child(5) { transition-delay: 400ms; }
+.reveal:nth-child(6) { transition-delay: 480ms; }
+.reveal:nth-child(7) { transition-delay: 560ms; }
+.reveal:nth-child(8) { transition-delay: 640ms; }
 
 /* ============================================
    REFINED DESKTOP TYPOGRAPHY SCALE
@@ -1132,8 +1216,31 @@ body.menu-open [data-site-footer] {
 
 .osiris-project-link:hover .osiris-project-media img,
 .osiris-project-link:focus-visible .osiris-project-media img {
-  filter: saturate(1.2) contrast(1.02) brightness(1.02);
-  transform: scale(1.018);
+  filter: saturate(1.15) contrast(1.03) brightness(1.05);
+  transform: scale(1.025);
+}
+
+/* Add subtle shine effect on project cards */
+.osiris-project-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transition: left 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.osiris-project-link:hover::after {
+  left: 150%;
 }
 
 .osiris-project-meta {
