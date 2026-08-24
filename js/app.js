@@ -382,10 +382,120 @@ function setupReveals() {
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px" },
+    { threshold: 0.1, rootMargin: "0px 0px -60px" },
   );
 
   elements.forEach((element) => observer.observe(element));
+}
+
+function setupSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (event) {
+      const href = this.getAttribute("href");
+      if (href === "#" || !href) return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      event.preventDefault();
+
+      const headerOffset = 100;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    });
+  });
+}
+
+function setupParallax() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const heroVideo = document.querySelector(".cinematic-hero-video");
+  if (!heroVideo) return;
+
+  let ticking = false;
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrolled = window.scrollY;
+        const parallaxSpeed = 0.5;
+        heroVideo.style.transform = `translateY(${scrolled * parallaxSpeed}px) scale(1.1)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+function setupLoadingState() {
+  window.addEventListener("load", () => {
+    document.body.classList.add("page-loaded");
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img[loading='lazy']");
+
+    if ("IntersectionObserver" in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.classList.add("loaded");
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      lazyImages.forEach((img) => imageObserver.observe(img));
+    }
+  });
+}
+
+function setupCardInteractions() {
+  const cards = document.querySelectorAll(".project-card, .service-card, .package-card");
+
+  cards.forEach((card) => {
+    card.addEventListener("mouseenter", function() {
+      this.style.zIndex = "10";
+    });
+
+    card.addEventListener("mouseleave", function() {
+      this.style.zIndex = "";
+    });
+  });
+}
+
+function setupAccessibilityEnhancements() {
+  let lastFocusedElement = null;
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      document.body.classList.add("keyboard-nav");
+    }
+  });
+
+  document.addEventListener("mousedown", () => {
+    document.body.classList.remove("keyboard-nav");
+  });
+
+  const focusableElements = document.querySelectorAll(
+    'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+  );
+
+  focusableElements.forEach((element) => {
+    element.addEventListener("focus", function() {
+      if (lastFocusedElement) {
+        lastFocusedElement.classList.remove("was-focused");
+      }
+      this.classList.add("was-focused");
+      lastFocusedElement = this;
+    });
+  });
 }
 
 renderHeader();
@@ -396,3 +506,8 @@ renderBrandData();
 setupContactForm();
 setupHeroVideo();
 setupReveals();
+setupSmoothScroll();
+setupParallax();
+setupLoadingState();
+setupCardInteractions();
+setupAccessibilityEnhancements();
