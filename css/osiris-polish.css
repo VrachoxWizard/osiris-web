@@ -520,6 +520,7 @@ body.menu-open [data-site-footer] {
 }
 
 .cinematic-hero h1 {
+  line-height: 1.04;
   animation: fadeInUp 950ms cubic-bezier(0.16, 1, 0.3, 1) 350ms backwards;
 }
 
@@ -675,7 +676,7 @@ body.menu-open [data-site-footer] {
   .cinematic-hero h1 {
     max-width: 16ch;
     font-size: clamp(3.25rem, 5.2vw, 5.75rem);
-    line-height: 0.9;
+    line-height: 1.04;
   }
 
   .cinematic-hero-video {
