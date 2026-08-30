@@ -69,8 +69,8 @@ function renderHeader() {
           ${desktopNavLinks}
         </nav>
 
-        <a class="button button-small button-dark header-cta" href="/web-stranice-za-poduzeca/#analiza">
-          Besplatna analiza ${icon("arrow")}
+        <a class="button button-small button-primary header-cta" href="/web-stranice-za-poduzeca/#analiza">
+          Analiza ${icon("arrow")}
         </a>
 
         <button class="menu-toggle" type="button" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
@@ -422,29 +422,39 @@ function setupContactForms() {
 function setupHeroVideo() {
   const video = document.querySelector("[data-hero-video]");
   if (!(video instanceof HTMLVideoElement)) return;
-  let resumeTimer;
 
-  const ensurePlayback = () => {
-    video.defaultMuted = true;
-    video.muted = true;
-    video.loop = true;
-    video.play().catch(() => {
-      // The poster remains visible if a browser blocks muted autoplay.
-    });
+  video.defaultMuted = true;
+  video.muted = true;
+  video.playsInline = true;
+  video.setAttribute("playsinline", "");
+  video.setAttribute("webkit-playsinline", "");
+
+  const play = () => {
+    if (document.visibilityState !== "visible") return;
+    const attempt = video.play();
+    if (attempt?.catch) {
+      attempt.catch(() => {
+        // Poster stays visible if autoplay is blocked.
+      });
+    }
   };
 
-  ensurePlayback();
-  video.addEventListener("canplay", ensurePlayback, { once: true });
-  window.addEventListener("pageshow", ensurePlayback);
-  window.addEventListener("focus", ensurePlayback);
+  if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+    play();
+  } else {
+    video.addEventListener("loadeddata", play, { once: true });
+  }
+
+  video.addEventListener("canplay", play, { once: true });
+  window.addEventListener("pageshow", play);
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") ensurePlayback();
+    if (document.visibilityState === "visible") play();
   });
-  video.addEventListener("pause", () => {
-    if (document.visibilityState !== "visible" || video.ended) return;
-    window.clearTimeout(resumeTimer);
-    resumeTimer = window.setTimeout(ensurePlayback, 150);
-  });
+}
+
+function setupParallax() {
+  // Parallax transform on <video> causes dropped frames during playback.
+  // Visual depth is handled via CSS overlays instead.
 }
 
 function setupReveals() {
@@ -494,27 +504,6 @@ function setupSmoothScroll() {
       });
     });
   });
-}
-
-function setupParallax() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const heroVideo = document.querySelector(".cinematic-hero-video");
-  if (!heroVideo) return;
-
-  let ticking = false;
-
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        const scrolled = window.scrollY;
-        const parallaxSpeed = 0.5;
-        heroVideo.style.transform = `translateY(${scrolled * parallaxSpeed}px) scale(1.1)`;
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
 }
 
 function setupLoadingState() {

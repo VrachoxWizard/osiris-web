@@ -4,9 +4,10 @@ Lokalne kopije fotografija i videa korištene su u OSIRIS web stranici. Materija
 
 | Lokalna datoteka | Autor | Izvor |
 | --- | --- | --- |
-| `media/osiris-coding-hero.mp4` i poster | Jakub Zerdzicki | [Close-up Coding on Laptop in Modern Office](https://www.pexels.com/video/close-up-coding-on-laptop-in-modern-office-30991071/) |
-| `media/osiris-team-process.jpg` | Mizuno K. | [Back View of People Working in a Team on a Code](https://www.pexels.com/photo/back-view-of-people-working-in-a-team-on-a-code-12899153/) |
-| `media/osiris-planning-workspace.jpg` | Tatiana Syrikova | [Laptop with Blank Notebook Before Working Day](https://www.pexels.com/photo/from-above-laptop-with-blank-notebook-before-working-day-in-office-3975574/) |
-| `media/osiris-modern-workspace.jpg` | Jakub Zerdzicki | [Computer on the Table in the Office](https://www.pexels.com/photo/computer-on-the-table-in-the-office-16155281/) |
+| `media/osiris-coding-hero.mp4` | Pexels | [Hands typing on a keyboard](https://www.pexels.com/video/hands-typing-on-a-keyboard-3195394/) (HD 1920×1080, 25 fps) |
+| `media/osiris-coding-hero-poster.jpg` | Christina Morillo | [Person using MacBook Pro](https://www.pexels.com/photo/person-using-macbook-pro-1181677/) |
+| `media/osiris-modern-workspace.jpg` | ThisIsEngineering | [Person using computer](https://www.pexels.com/photo/person-using-computer-3861969/) |
+| `media/osiris-planning-workspace.jpg` | Startup Stock Photos | [Laptop and notebook on desk](https://www.pexels.com/photo/startup-photos-7376/) |
+| `media/osiris-team-process.jpg` | fauxels | [People working together](https://www.pexels.com/photo/photo-of-people-having-discussion-3183150/) |
 
 OSIRIS logo i vizualni identitet pripadaju vlasnicima projekta.

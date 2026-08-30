@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b1120">
-    <meta name="description" content="Upoznajte OSIRIS — Tin i Mate, mali i iskusan web tim iz Zagreba s pet živih projekata.">
+    <meta name="description" content="Upoznajte OSIRIS — mali i iskusan web tim iz Zagreba s pet živih projekata.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="O nama — OSIRIS">
     <meta property="og:description" content="Izravna suradnja s ljudima koji osobno vode strukturu, dizajn, razvoj i objavu vaše web stranice.">
     <meta property="og:image" content="/images/osiris-logo.png">
     <title>O nama — OSIRIS</title>
     <link rel="icon" href="/images/osiris-logo.png" type="image/png">
+    <link rel="preload" href="/media/osiris-team-process.jpg" as="image">
     <link rel="stylesheet" href="/css/osiris.css">
     <link rel="stylesheet" href="/css/osiris-brutal.css">
     <link rel="stylesheet" href="/css/osiris-polish.css">
+    <link rel="stylesheet" href="/css/osiris-enhanced.css">
+    <link rel="stylesheet" href="/css/osiris-media.css">
+    <link rel="stylesheet" href="/css/osiris-about.css">
     <script type="module" src="/js/app.js"></script>
   </head>
   <body class="inner-v2 about-page-v2" data-page="about">
@@ -21,96 +25,178 @@
     <div data-site-header></div>
 
     <main id="main-content">
-      <section class="page-hero">
-        <div class="container page-hero-inner">
-          <div>
-            <nav class="breadcrumb" aria-label="Putanja"><a href="/">Početna</a><span>/</span><span>O nama</span></nav>
-            <span class="section-label">O nama</span>
-            <h1>Mali tim koji preuzima punu odgovornost za vaš web.</h1>
+      <section class="abt-hero" aria-labelledby="abt-hero-title">
+        <div class="abt-hero__media" aria-hidden="true">
+          <img
+            src="/media/osiris-team-process.jpg"
+            alt=""
+            width="1600"
+            height="1067"
+            decoding="async"
+          >
+        </div>
+        <div class="abt-hero__shade" aria-hidden="true"></div>
+        <div class="abt-hero__grid" aria-hidden="true"></div>
+
+        <div class="container abt-hero__inner">
+          <nav class="abt-hero__breadcrumb" aria-label="Putanja">
+            <a href="/">Početna</a><span>/</span><span>O nama</span>
+          </nav>
+
+          <div class="abt-hero__layout">
+            <div>
+              <span class="abt-hero__label">O nama</span>
+              <h1 id="abt-hero-title">Mali tim koji preuzima punu odgovornost za vaš web.</h1>
+            </div>
+            <div class="abt-hero__aside">
+              <p>
+                Iz Zagreba gradimo web stranice po mjeri koje malim i srednjim
+                poduzećima pomažu jasnije predstaviti ponudu i doći do kvalitetnijih upita.
+              </p>
+              <a class="abt-hero__cta" href="/web-stranice-za-poduzeca/#analiza">
+                Zatražite besplatnu analizu
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path fill="currentColor" d="M4 10h12M11 5l5 5-5 5"></path></svg>
+              </a>
+              <div class="abt-hero__stats" aria-label="Sažetak iskustva">
+                <span><strong>5</strong> živih projekata</span>
+                <span><strong>Zagreb</strong> · Hrvatska</span>
+                <span><strong>1</strong> izravan razgovor</span>
+              </div>
+            </div>
           </div>
-          <div class="page-hero-copy">
-            <p>
-              Iz Zagreba gradimo web stranice po mjeri koje malim i srednjim
-              poduzećima pomažu jasnije predstaviti ponudu i doći do kvalitetnijih upita.
+        </div>
+        <span class="abt-hero__caption">Ilustrativna fotografija radnog procesa</span>
+      </section>
+
+      <section class="abt-proof" aria-label="Dokaz iskustva">
+        <div class="container abt-proof__inner">
+          <span><strong>Po mjeri</strong> bez gotovih predložaka</span>
+          <span><strong>Izravno</strong> s ljudima koji rade projekt</span>
+          <span><strong>Od ideje</strong> do objave i podrške</span>
+        </div>
+      </section>
+
+      <section class="abt-section" aria-labelledby="story-title">
+        <div class="container">
+          <header class="abt-section__head">
+            <div>
+              <span class="abt-section__label">Naša priča</span>
+              <h2 id="story-title">Iskustvo pretvaramo u jednostavnija rješenja.</h2>
+            </div>
+            <p class="abt-section__intro">
+              Tehnologija je alat, a ne cilj. Najprije razumijemo što korisnik i poslovanje
+              trebaju, zatim gradimo najjednostavnije kvalitetno rješenje koje to može ostvariti.
             </p>
-            <a class="button button-dark" href="/web-stranice-za-poduzeca/#analiza">Zatražite besplatnu analizu</a>
-          </div>
-        </div>
-        <span class="page-hero-media-caption">Ilustrativna fotografija radnog procesa</span>
-      </section>
+          </header>
 
-      <section class="section section-white" aria-labelledby="story-title">
-        <div class="container story-grid">
-          <div class="story-sticky">
-            <span class="section-label">Naša priča</span>
-            <h2 id="story-title">Iskustvo pretvaramo u jednostavnija rješenja.</h2>
-          </div>
-          <div class="story-content">
-            <article class="story-block reveal">
-              <h3>Tko smo</h3>
+          <div class="abt-story__grid">
+            <article class="abt-story__block reveal">
+              <span>01 / Tko smo</span>
+              <h3>Mali tim s velikim iskustvom</h3>
               <p>
-                OSIRIS čine Tin i Mate, iskusni web developeri iz Zagreba. Iza nas je
-                pet javno dostupnih projekata kroz koje smo razvili praktičan pristup
-                strukturi, sadržaju, dizajnu i razvoju web stranica.
+                OSIRIS je web tim iz Zagreba s pet javno dostupnih projekata. Kroz njih smo
+                razvili praktičan pristup strukturi, sadržaju, dizajnu i razvoju web stranica.
               </p>
             </article>
-            <article class="story-block reveal">
-              <h3>Za koga radimo</h3>
+            <article class="abt-story__block reveal">
+              <span>02 / Za koga radimo</span>
+              <h3>Poduzetnici koji trebaju jasan partner</h3>
               <p>
-                Danas smo prvenstveno usmjereni na male i srednje poduzetnike kojima treba
-                brz, osoban i razumljiv razvojni partner. Naš je cilj dugoročno preuzimati
-                i složenije projekte za veće tvrtke, bez gubitka kvalitete i jasnoće rada.
+                Prvenstveno radimo s malim i srednjim poduzetnicima kojima treba brz, osoban
+                i razumljiv razvojni partner — bez nepotrebne kompleksnosti.
               </p>
             </article>
-            <article class="story-block reveal">
-              <h3>Kako razmišljamo</h3>
+            <article class="abt-story__block reveal">
+              <span>03 / Kako razmišljamo</span>
+              <h3>Jednostavnost prije svega</h3>
               <p>
-                Tehnologija je alat, a ne cilj. Najprije razumijemo što korisnik i poslovanje
-                trebaju, zatim gradimo najjednostavnije kvalitetno rješenje koje to može ostvariti.
+                Svaki projekt započinjemo od poslovnog cilja. Tek kad razumijemo što treba
+                postići, biramo strukturu, dizajn i tehnologiju.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="team-title">
+      <section class="abt-section abt-section--alt" aria-labelledby="approach-title">
         <div class="container">
-          <div class="section-heading">
-            <div><span class="section-label">Tim</span><h2 id="team-title">Ljudi koji dizajniraju i razvijaju.</h2></div>
-            <p>Direktan razgovor, zajedničko donošenje odluka i odgovornost za završnu kvalitetu proizvoda.</p>
-          </div>
-          <div class="team-grid">
-            <article class="team-card reveal">
-              <div class="team-avatar" aria-hidden="true">T</div>
-              <div><h3>Tin</h3><span class="team-role">Web developer · suosnivač</span><p>Izravno sudjeluje u definiranju, dizajnu, razvoju i završnoj provjeri svakog OSIRIS projekta.</p></div>
+          <header class="abt-section__head">
+            <div>
+              <span class="abt-section__label">Suradnja</span>
+              <h2 id="approach-title">Što znači raditi s nama.</h2>
+            </div>
+            <p class="abt-section__intro">
+              Direktan razgovor, zajedničko donošenje odluka i odgovornost za završnu
+              kvalitetu proizvoda — bez posrednika i bez gubitka konteksta.
+            </p>
+          </header>
+
+          <div class="abt-approach__grid">
+            <article class="abt-approach__card reveal">
+              <div class="abt-approach__icon" aria-hidden="true">01</div>
+              <h3>Izravna komunikacija</h3>
+              <p>
+                Uvijek razgovarate s ljudima koji rade na projektu. Odluke, pitanja i
+                povratne informacije idu izravno, bez posrednika.
+              </p>
             </article>
-            <article class="team-card reveal">
-              <div class="team-avatar" aria-hidden="true">M</div>
-              <div><h3>Mate</h3><span class="team-role">Web developer · suosnivač</span><p>Izravno sudjeluje u planiranju, razvoju, objavi i daljnjoj nadogradnji svakog OSIRIS projekta.</p></div>
+            <article class="abt-approach__card reveal">
+              <div class="abt-approach__icon" aria-hidden="true">02</div>
+              <h3>Jedan tim, cijeli proces</h3>
+              <p>
+                Isti ljudi vode strukturu, sadržaj, dizajn, razvoj i objavu. Nema
+                prebacivanja između odjela niti gubitka konteksta.
+              </p>
+            </article>
+            <article class="abt-approach__card reveal">
+              <div class="abt-approach__icon" aria-hidden="true">03</div>
+              <h3>Odgovornost do kraja</h3>
+              <p>
+                Provjeravamo kvalitetu prije objave i ostajemo dostupni za podršku,
+                nadogradnje i daljnji razvoj stranice.
+              </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section section-white" aria-labelledby="values-title">
+      <section class="abt-section" aria-labelledby="values-title">
         <div class="container">
-          <div class="section-heading section-heading-centered">
-            <span class="section-label">Načela rada</span>
-            <h2 id="values-title">Vrijednosti koje se vide u rezultatu.</h2>
-          </div>
-          <div class="values-grid">
-            <article class="value-card reveal"><h3>Jasnoća</h3><p>Projekt, odluke i sljedeći koraci moraju biti razumljivi i bez tehničkog žargona.</p></article>
-            <article class="value-card reveal"><h3>Kvaliteta</h3><p>Pažnju posvećujemo iskustvu korisnika, izvedbi i temeljima za budući razvoj.</p></article>
-            <article class="value-card reveal"><h3>Odgovornost</h3><p>Ne obećavamo neprovjerene rezultate; dogovaramo realan cilj i radimo prema njemu.</p></article>
+          <header class="abt-section__head abt-section__head--center">
+            <div>
+              <span class="abt-section__label">Načela rada</span>
+              <h2 id="values-title">Vrijednosti koje se vide u rezultatu.</h2>
+            </div>
+          </header>
+
+          <div class="abt-values__grid">
+            <article class="abt-value reveal">
+              <span>Princip 01</span>
+              <h3>Jasnoća</h3>
+              <p>Projekt, odluke i sljedeći koraci moraju biti razumljivi i bez tehničkog žargona.</p>
+            </article>
+            <article class="abt-value reveal">
+              <span>Princip 02</span>
+              <h3>Kvaliteta</h3>
+              <p>Pažnju posvećujemo iskustvu korisnika, izvedbi i temeljima za budući razvoj.</p>
+            </article>
+            <article class="abt-value reveal">
+              <span>Princip 03</span>
+              <h3>Odgovornost</h3>
+              <p>Ne obećavamo neprovjerene rezultate; dogovaramo realan cilj i radimo prema njemu.</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="section section-compact section-white">
+      <section class="abt-cta">
         <div class="container">
-          <div class="cta-band reveal">
+          <div class="abt-cta__inner reveal">
             <h2>Tražite mali, iskusan tim koji će osobno voditi vaš web?</h2>
-            <a class="button" href="/web-stranice-za-poduzeca/#analiza">Zatražite analizu <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h12M11 5l5 5-5 5"></path></svg></a>
+            <a class="button" href="/web-stranice-za-poduzeca/#analiza">
+              Zatražite analizu
+              <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h12M11 5l5 5-5 5"></path></svg>
+            </a>
           </div>
         </div>
       </section>

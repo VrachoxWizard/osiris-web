@@ -446,3 +446,433 @@ body.page-loaded .cinematic-hero {
     page-break-inside: avoid;
   }
 }
+
+/* ============================================
+   FINAL VISUAL POLISH — layout, rhythm, responsive
+   ============================================ */
+
+:root {
+  --section-gap: clamp(4.5rem, 8vw, 7.5rem);
+  --surface-elevated: rgba(11, 17, 32, 0.72);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(63, 94, 162, 0.35);
+}
+
+/* Header — prevent CTA clipping, balanced nav */
+.site-header .header-inner {
+  gap: clamp(0.65rem, 1.8vw, 1.75rem);
+}
+
+.desktop-nav {
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
+}
+
+.button-small {
+  min-height: 2.75rem;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.site-header .header-cta {
+  flex-shrink: 0;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.brand-name {
+  letter-spacing: clamp(0.16em, 0.4vw, 0.28em);
+}
+
+@media (min-width: 60.01rem) and (max-width: 78rem) {
+  .desktop-nav {
+    gap: 0.15rem;
+  }
+
+  .desktop-nav .nav-link {
+    padding-inline: 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+
+  .button-small {
+    padding-inline: 0.9rem;
+    font-size: 0.68rem;
+  }
+}
+
+/* Hero — readability, rhythm, CTA grouping */
+.cinematic-hero-inner {
+  padding-block: calc(var(--header-height) + 4rem) clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.cinematic-hero-copy {
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.cinematic-hero-lead {
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
+  max-width: 42rem;
+  animation: fadeInUp 900ms cubic-bezier(0.16, 1, 0.3, 1) 450ms backwards;
+}
+
+.cinematic-actions-centered {
+  justify-content: flex-start;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  width: 100%;
+  max-width: 52rem;
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.cinematic-primary-action {
+  flex: 0 1 auto;
+  width: auto;
+  max-width: 100%;
+}
+
+.cinematic-hero h1::after {
+  width: 2.5rem;
+  height: 3px;
+  bottom: -0.35em;
+}
+
+/* Proof rail — refined stats bar */
+.proof-rail {
+  background: linear-gradient(180deg, #0b1120, #080d18);
+  border-block-color: var(--border-subtle);
+}
+
+.proof-rail-inner span {
+  display: flex;
+  min-height: 4.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 1.1rem clamp(1rem, 2.5vw, 1.6rem);
+  text-align: center;
+  line-height: 1.35;
+}
+
+.proof-rail-inner strong {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  letter-spacing: -0.02em;
+}
+
+/* Section heads — single-column flow, no empty side columns */
+.cinematic-section-head,
+.cinematic-projects-head.osiris-projects-head {
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.cinematic-section-head .cinematic-kicker,
+.cinematic-projects-head .cinematic-kicker {
+  margin-bottom: 0;
+}
+
+.cinematic-section-head h2,
+.cinematic-projects-head h2 {
+  max-width: 14ch;
+}
+
+.cinematic-section-head p {
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
+  max-width: 40rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.osiris-projects-aside {
+  max-width: 28rem;
+  margin-top: 0.25rem;
+}
+
+/* Services layout */
+.cinematic-services-layout {
+  padding-top: clamp(2rem, 4vw, 3rem);
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.cinematic-service-index > a:not(.cinematic-inline-link) {
+  min-height: 3.75rem;
+}
+
+/* Media cards — always-visible caption overlay */
+.cinematic-media-card figcaption,
+.cinematic-process-media figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  transform: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 11, 0.55) 35%, rgba(5, 7, 11, 0.94) 100%);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.cinematic-media-card figcaption {
+  max-width: none;
+}
+
+/* Projects mosaic — tighter rhythm */
+.cinematic-section.cinematic-projects {
+  padding-block: var(--section-gap);
+}
+
+.osiris-project-mosaic {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+/* Process + about */
+.cinematic-process-steps {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.cinematic-about-copy h2 {
+  margin-top: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.cinematic-about-stats strong {
+  font-family: var(--font-mono);
+  color: var(--electric-blue);
+}
+
+/* Contact CTA band */
+.cinematic-contact {
+  background: linear-gradient(135deg, #263f73 0%, #1a2d52 48%, #0b1120 100%);
+}
+
+.cinematic-contact-grid {
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+}
+
+.cinematic-contact-panel {
+  border: 1px solid var(--border-accent);
+  border-radius: 2px;
+  background: rgba(5, 7, 11, 0.55);
+  backdrop-filter: blur(12px);
+}
+
+.cinematic-contact-button {
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Inner pages — consistent dark editorial */
+.inner-v2 .page-hero {
+  min-height: auto;
+  padding-block: calc(var(--header-height) + 3.5rem) clamp(3rem, 6vw, 4.5rem);
+}
+
+.inner-v2 .page-hero-inner {
+  gap: clamp(2rem, 4vw, 3rem);
+}
+
+.inner-v2 .page-hero-copy {
+  max-width: 36rem;
+}
+
+.inner-v2 .page-hero .button-dark,
+.inner-v2 .page-hero .button-primary {
+  border-color: var(--electric-blue);
+  background: var(--electric-blue);
+  color: #03070a;
+  box-shadow: var(--shadow-blue);
+}
+
+.inner-v2 .page-hero .button-dark:hover,
+.inner-v2 .page-hero .button-primary:hover {
+  border-color: white;
+  background: white;
+  color: #03070a;
+}
+
+.inner-v2 .page-hero-copy p {
+  font-size: clamp(0.92rem, 1.5vw, 1.05rem) !important;
+  line-height: 1.7 !important;
+}
+
+.inner-v2 .breadcrumb {
+  margin-bottom: 1.25rem;
+}
+
+.inner-v2 .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  color: var(--electric-blue);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.inner-v2 .section-label::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--electric-blue);
+  box-shadow: 0 0 10px rgba(63, 94, 162, 0.55);
+  content: "";
+}
+
+.inner-v2 .section {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.inner-v2 .contact-form-wrap,
+.inner-v2 .contact-intro {
+  border: 1px solid var(--border-subtle);
+  background: rgba(11, 17, 32, 0.45);
+}
+
+.inner-v2 .field input,
+.inner-v2 .field select,
+.inner-v2 .field textarea {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(5, 7, 11, 0.65);
+  color: white;
+}
+
+.inner-v2 .field input::placeholder,
+.inner-v2 .field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Footer polish */
+.site-footer {
+  padding-block: clamp(3.5rem, 7vw, 5rem) 1.5rem;
+}
+
+.footer-grid {
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.footer-bottom {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.78rem;
+}
+
+/* Grain overlay — sit behind UI */
+body::after {
+  z-index: 9990;
+  opacity: 0.28;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive refinements */
+@media (max-width: 60rem) {
+  .cinematic-hero-inner {
+    padding-top: calc(var(--header-height) + 5rem);
+  }
+
+  .cinematic-actions-centered {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cinematic-actions-centered .button,
+  .cinematic-actions-centered .cinematic-text-link {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cinematic-contact-button {
+    width: 100%;
+  }
+
+  .proof-rail-inner span {
+    min-height: 3.75rem;
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 46rem) {
+  .container {
+    width: min(calc(100% - 1.75rem), var(--container));
+  }
+
+  .cinematic-hero h1 {
+    max-width: 11ch;
+    line-height: 1.02;
+  }
+
+  .cinematic-section-head h2,
+  .cinematic-projects-head h2,
+  .cinematic-about-copy h2,
+  .cinematic-contact h2 {
+    max-width: none;
+  }
+
+  .osiris-projects-aside {
+    border-left-width: 2px;
+    padding-left: 0.9rem;
+  }
+
+  .cinematic-process-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .cinematic-process-steps li + li {
+    border-left: 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .inner-v2 .page-hero h1 {
+    font-size: clamp(2.35rem, 11vw, 3.5rem) !important;
+    line-height: 1.02;
+  }
+
+  .services-showcase__header h2 {
+    max-width: none;
+    font-size: clamp(2.35rem, 11vw, 3.5rem) !important;
+  }
+}
+
+@media (max-width: 30rem) {
+  .brand-name {
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+  }
+
+  .brand-mark {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-basis: 2.5rem;
+  }
+
+  .proof-rail-inner span {
+    font-size: 0.68rem;
+    padding-inline: 1rem;
+  }
+}
+
+@media (hover: none) {
+  .cinematic-media-card figcaption,
+  .cinematic-process-media figcaption {
+    background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 11, 0.88) 100%);
+  }
+}

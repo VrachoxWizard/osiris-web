@@ -525,10 +525,12 @@ body.menu-open [data-site-footer] {
 }
 
 .cinematic-actions-centered {
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
-  padding-top: 1.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  max-width: 52rem;
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   animation: fadeInUp 950ms cubic-bezier(0.16, 1, 0.3, 1) 550ms backwards;
 }
 

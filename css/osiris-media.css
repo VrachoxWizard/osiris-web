@@ -1,0 +1,178 @@
+/* OSIRIS — Media visibility & smooth video playback */
+
+/* ─── Hero video: visible, GPU-friendly, no blend-mode crush ─── */
+
+.cinematic-hero-video {
+  z-index: -3;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: saturate(1.08) contrast(1.04) brightness(0.78);
+  mix-blend-mode: normal;
+  transform: none !important;
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.cinematic-hero-shade {
+  background:
+    linear-gradient(
+      105deg,
+      rgba(5, 7, 11, 0.72) 0%,
+      rgba(5, 7, 11, 0.42) 42%,
+      rgba(5, 7, 11, 0.28) 68%,
+      rgba(5, 7, 11, 0.62) 100%
+    ),
+    radial-gradient(ellipse 55% 45% at 78% 22%, rgba(63, 94, 162, 0.18), transparent 58%);
+}
+
+.cinematic-hero:hover .cinematic-hero-video {
+  transform: none !important;
+}
+
+/* ─── Section & editorial images ─── */
+
+.cinematic-media-card img,
+.cinematic-process-media img,
+.cinematic-about-media img {
+  filter: saturate(1.02) contrast(1.04) brightness(0.96);
+  object-position: center center;
+}
+
+.cinematic-media-card:hover img,
+.cinematic-process-media:hover img,
+.cinematic-about-media:hover img {
+  filter: saturate(1.1) contrast(1.03) brightness(1);
+  transform: scale(1.02);
+}
+
+.cinematic-media-card figcaption,
+.cinematic-process-media figcaption {
+  background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 11, 0.55) 38%, rgba(5, 7, 11, 0.94) 100%);
+}
+
+/* ─── Process media — full-bleed image, caption overlay (no empty column) ─── */
+
+.cinematic-process-media {
+  display: block;
+  grid-template-columns: unset;
+  aspect-ratio: 16 / 7;
+  min-height: clamp(20rem, 38vw, 32rem);
+}
+
+.cinematic-process-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 38% center;
+}
+
+.cinematic-process-media figcaption {
+  border-left: 0;
+  min-height: auto;
+  gap: 0.65rem;
+  padding-top: clamp(3rem, 14vw, 5.5rem);
+}
+
+.cinematic-process-media figcaption::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  background: var(--electric-blue, #3f5ea2);
+}
+
+/* ─── Services page hero image ─── */
+
+.svc-hero__media img {
+  filter: saturate(1.05) contrast(1.05) brightness(0.72);
+  object-position: center 40%;
+  transform: scale(1.03);
+}
+
+.svc-hero__shade {
+  background:
+    radial-gradient(ellipse 80% 60% at 12% 88%, rgba(63, 94, 162, 0.22), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 92% 12%, rgba(63, 94, 162, 0.12), transparent 50%),
+    linear-gradient(105deg, rgba(5, 7, 11, 0.78) 0%, rgba(5, 7, 11, 0.48) 48%, rgba(5, 7, 11, 0.72) 100%);
+}
+
+/* ─── Inner page hero backgrounds (CSS background-image) ─── */
+
+.services-page-v2 .page-hero::before,
+.projects-page-v2 .page-hero::before,
+.about-page-v2 .page-hero::before,
+.contact-page-v2 .page-hero::before {
+  opacity: 0.55 !important;
+  filter: saturate(1.05) contrast(1.05) brightness(0.88);
+}
+
+/* ─── Lazy images: fade-in without layout shift ─── */
+
+img[loading="lazy"] {
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+
+img[loading="lazy"]:not(.loaded) {
+  opacity: 0.92;
+}
+
+/* ─── Project thumbnails ─── */
+
+.osiris-project-media img {
+  filter: saturate(1.08) contrast(1.04) brightness(0.92);
+  object-position: center top;
+}
+
+.osiris-project-link:hover .osiris-project-media img,
+.osiris-project-link:focus-visible .osiris-project-media img {
+  filter: saturate(1.15) contrast(1.03) brightness(1);
+}
+
+/* ─── Reduced motion: static poster-like treatment ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-hero-video {
+    display: none;
+  }
+
+  .cinematic-hero {
+    background:
+      linear-gradient(180deg, rgba(5, 7, 11, 0.35), rgba(5, 7, 11, 0.92)),
+      url("/media/osiris-coding-hero-poster.jpg") center 38% / cover no-repeat;
+  }
+}
+
+@media (max-width: 60rem) {
+  .cinematic-hero-video {
+    object-position: center 42%;
+    filter: saturate(1.05) contrast(1.04) brightness(0.7);
+  }
+
+  .cinematic-hero-shade {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(5, 7, 11, 0.35) 0%,
+        rgba(5, 7, 11, 0.55) 45%,
+        rgba(5, 7, 11, 0.88) 100%
+      );
+  }
+
+  .cinematic-process-media {
+    aspect-ratio: 4 / 3;
+    min-height: clamp(18rem, 52vw, 24rem);
+  }
+
+  .cinematic-process-media img {
+    object-position: center 42%;
+  }
+
+  .cinematic-process-media figcaption {
+    min-height: auto;
+    padding-top: clamp(2rem, 10vw, 3.5rem);
+  }
+}
