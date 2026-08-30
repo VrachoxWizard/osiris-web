@@ -38,6 +38,87 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* MSP positioning and outreach landing */
+.cinematic-hero-lead {
+  max-width: 46rem;
+  margin: 1.5rem 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.proof-rail { background: #0b1120; color: #fff; border-block: 1px solid rgba(255,255,255,.12); }
+.proof-rail-inner { display: grid; grid-template-columns: repeat(3, 1fr); }
+.proof-rail-inner span { padding: 1.4rem 1.6rem; border-right: 1px solid rgba(255,255,255,.12); text-transform: uppercase; letter-spacing: .08em; font-size: .76rem; font-weight: 800; }
+.proof-rail-inner span:last-child { border-right: 0; }
+.proof-rail-inner strong { margin-right: .35rem; color: #dce8ff; font-size: 1.25rem; }
+
+.outreach-page { background: #3f5ea2; }
+.outreach-hero { min-height: 100svh; padding: calc(var(--header-height) + 6rem) 0 2rem; background: radial-gradient(circle at 82% 22%, rgba(220,232,255,.15), transparent 30%), #0b1120; color: #fff; }
+.outreach-hero-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(18rem, .7fr); gap: clamp(2.5rem, 5vw, 5rem); align-items: center; }
+.outreach-eyebrow { display: inline-flex; margin-bottom: 1.4rem; color: #dce8ff; font-size: .76rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.outreach-hero h1 { max-width: 58rem; color: #fff; font-size: clamp(3.5rem, 5.5vw, 6.5rem); line-height: .94; }
+.outreach-hero-grid > div > p { max-width: 46rem; margin: 2rem 0 0; color: rgba(255,255,255,.78); font-size: clamp(1.05rem, 1.5vw, 1.3rem); }
+.outreach-actions { display: flex; flex-wrap: wrap; gap: 1.2rem 1.8rem; align-items: center; margin-top: 2.2rem; }
+.outreach-proof-card { padding: 2rem; border: 1px solid rgba(255,255,255,.2); background: #263f73; }
+.outreach-proof-card span { display: block; color: #dce8ff; font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.outreach-proof-card strong { display: block; margin: 1.2rem 0; color: #fff; font-size: clamp(2rem, 3vw, 3.25rem); line-height: 1; }
+.outreach-proof-card p { margin: 0; color: rgba(255,255,255,.72); }
+.outreach-proof-rail { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 3.5rem; border-top: 1px solid rgba(255,255,255,.16); }
+.outreach-proof-rail span { padding: 1.4rem 1rem 0; color: rgba(255,255,255,.7); font-size: .76rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.outreach-proof-rail b { color: #fff; font-size: 1.2rem; }
+
+.outreach-situations { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 3rem; border: 1px solid #cbd5e1; }
+.outreach-situation { min-height: 21rem; padding: 2rem; border-right: 1px solid #cbd5e1; background: #fff; }
+.outreach-situation:last-child { border-right: 0; }
+.outreach-situation > span { color: #3f5ea2; font-size: .75rem; font-weight: 900; letter-spacing: .12em; }
+.outreach-situation h3 { margin-top: 6rem; }
+
+.outreach-tailored, .outreach-team { background: #3f5ea2; color: #fff; }
+.outreach-tailored-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 8vw, 9rem); }
+.outreach-tailored h2, .outreach-tailored h3, .outreach-team h2 { color: #fff; }
+.outreach-tailored p, .outreach-team p { color: rgba(255,255,255,.74); }
+.outreach-tailored-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(255,255,255,.2); }
+.outreach-tailored-list li { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1rem; padding: 1.6rem 0; border-bottom: 1px solid rgba(255,255,255,.2); }
+.outreach-tailored-list li > span { color: #dce8ff; font-size: .76rem; font-weight: 900; }
+.outreach-tailored-list h3, .outreach-tailored-list p { margin-bottom: .35rem; }
+
+.outreach-team { background: #0b1120; }
+.outreach-team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 10vw, 10rem); align-items: end; }
+.outreach-team-grid > div:last-child { max-width: 42rem; }
+
+.outreach-analysis { scroll-margin-top: 6rem; }
+.outreach-analysis-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+.outreach-analysis-copy { position: sticky; top: calc(var(--header-height) + 2rem); }
+.outreach-analysis-copy ul { display: grid; gap: .8rem; padding-left: 1.2rem; color: #334155; }
+.outreach-form { margin: 0; }
+.field label span { color: #64748b; font-weight: 500; }
+.consent-field { display: grid; grid-template-columns: 1.2rem 1fr; gap: .7rem; margin: 1.2rem 0; color: #475569; font-size: .88rem; line-height: 1.5; }
+.consent-field input { width: 1.05rem; height: 1.05rem; margin-top: .15rem; accent-color: #3f5ea2; }
+.privacy-note { font-size: .82rem; }
+.privacy-note a, .form-footer small a, .legal-copy a { color: #1d4ed8; text-decoration: underline; text-underline-offset: .18em; }
+.form-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+.form-status { margin-top: 1rem; }
+.legal-copy { max-width: 54rem; }
+.legal-copy h2 { margin-top: 3rem; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+
+@media (max-width: 64rem) {
+  .outreach-hero-grid, .outreach-tailored-grid, .outreach-analysis-grid { grid-template-columns: 1fr; }
+  .outreach-analysis-copy { position: static; }
+  .outreach-proof-card { max-width: 36rem; }
+}
+
+@media (max-width: 46rem) {
+  .proof-rail-inner, .outreach-proof-rail, .outreach-situations, .outreach-team-grid { grid-template-columns: 1fr; }
+  .proof-rail-inner span, .outreach-situation { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+  .outreach-situation { min-height: auto; }
+  .outreach-situation h3 { margin-top: 3rem; }
+  .outreach-hero { padding-top: calc(var(--header-height) + 3rem); }
+  .outreach-hero h1 { font-size: clamp(3rem, 14vw, 4.7rem); }
+  .outreach-proof-rail { margin-top: 3.5rem; }
+  .outreach-proof-rail span { padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+}
+
 *,
 *::before,
 *::after {

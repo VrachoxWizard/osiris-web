@@ -21,6 +21,9 @@ const icon = (name) => {
 
 function logoMarkup() {
   return `
+    <span class="brand-mark" aria-hidden="true">
+      <img src="/images/osiris-logo.png" alt="" width="1254" height="1254" decoding="async">
+    </span>
     <span class="brand-name">OSIRIS</span>
   `;
 }
@@ -66,8 +69,8 @@ function renderHeader() {
           ${desktopNavLinks}
         </nav>
 
-        <a class="button button-small button-dark header-cta" href="/kontakt/">
-          Pokrenimo projekt ${icon("arrow")}
+        <a class="button button-small button-dark header-cta" href="/web-stranice-za-poduzeca/#analiza">
+          Besplatna analiza ${icon("arrow")}
         </a>
 
         <button class="menu-toggle" type="button" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
@@ -85,8 +88,8 @@ function renderHeader() {
             ${mobileNavLinks}
           </div>
           <div class="mobile-nav-footer">
-            <a class="button button-primary mobile-nav-cta" href="/kontakt/">
-              <span>Pokrenimo projekt</span>${icon("arrow")}
+            <a class="button button-primary mobile-nav-cta" href="/web-stranice-za-poduzeca/#analiza">
+              <span>Zatražite besplatnu analizu</span>${icon("arrow")}
             </a>
             <div class="mobile-nav-location" aria-label="Lokacija studija">
               <span>Zagreb, Hrvatska</span>
@@ -216,8 +219,8 @@ function renderFooter() {
 
         <div class="footer-contact">
           <p class="footer-label">Razgovarajmo</p>
-          <p>Imate ideju za web stranicu ili aplikaciju? Pretvorimo je u jasno i korisno digitalno rješenje.</p>
-          <a class="text-link text-link-light" href="/kontakt/">Javite nam se ${icon("arrow")}</a>
+          <p>Želite jasnije predstaviti svoje poslovanje? Poslat ćemo vam 3–5 konkretnih preporuka za vaš web.</p>
+          <a class="text-link text-link-light" href="/web-stranice-za-poduzeca/#analiza">Zatražite besplatnu analizu ${icon("arrow")}</a>
         </div>
       </div>
 
@@ -290,7 +293,7 @@ function packageCard(item) {
       <ul>
         ${item.includes.map((entry) => `<li>${entry}</li>`).join("")}
       </ul>
-      <a class="text-link" href="/kontakt/">Složimo pravi opseg ${icon("arrow")}</a>
+      <a class="text-link" href="/web-stranice-za-poduzeca/#analiza">Zatražite analizu ${icon("arrow")}</a>
     </article>
   `;
 }
@@ -362,16 +365,57 @@ function renderBrandData() {
   });
 }
 
-function setupContactForm() {
-  const form = document.querySelector("[data-contact-form]");
-  if (!form) return;
+function setupContactForms() {
+  document.querySelectorAll("[data-contact-form]").forEach((form) => {
+    const status = form.querySelector("[data-form-status]");
+    const submit = form.querySelector('button[type="submit"]');
+    const formspreeId = siteData.contact.formspreeId?.trim();
+    const isConfigured = formspreeId && formspreeId !== "YOUR_FORM_ID";
+    const endpoint = isConfigured ? `https://formspree.io/f/${formspreeId}` : "";
 
-  const status = form.querySelector("[data-form-status]");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    status.textContent = siteData.contact.statusMessage;
-    status.hidden = false;
-    status.focus();
+    if (endpoint) {
+      form.action = endpoint;
+      form.method = "POST";
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      if (!endpoint) {
+        status.hidden = false;
+        status.textContent = "Kontaktni obrazac još nije povezan. Dodajte Formspree form ID.";
+        status.focus();
+        return;
+      }
+
+      const formData = new FormData(form);
+      const params = new URLSearchParams(window.location.search);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content"].forEach((key) => {
+        formData.set(key, params.get(key) || form.elements.namedItem(key)?.value || "");
+      });
+      formData.set("pageUrl", window.location.href);
+
+      status.hidden = false;
+      status.textContent = "Šaljemo vaš zahtjev…";
+      submit.disabled = true;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: formData,
+        });
+        if (!response.ok) throw new Error("submission_failed");
+        form.reset();
+        status.textContent = siteData.contact.statusMessage;
+      } catch {
+        status.textContent = "Zahtjev trenutačno nije poslan. Pokušajte ponovno za nekoliko minuta.";
+      } finally {
+        submit.disabled = false;
+        status.focus();
+      }
+    });
   });
 }
 
@@ -544,7 +588,7 @@ renderFooter();
 renderProjects();
 renderPackages();
 renderBrandData();
-setupContactForm();
+setupContactForms();
 setupHeroVideo();
 setupReveals();
 setupSmoothScroll();

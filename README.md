@@ -9,6 +9,8 @@ Višestranična web stranica za OSIRIS — Tina i Matea, web developere iz Zagre
 - Projekti: `/projekti/`
 - O nama: `/o-nama/`
 - Kontakt: `/kontakt/`
+- Landing za MSP: `/web-stranice-za-poduzeca/`
+- Privatnost: `/privatnost/`
 
 ## Lokalno pokretanje
 
@@ -25,10 +27,12 @@ Stranica će biti dostupna na [http://localhost:4173](http://localhost:4173).
 Promjenjivi podaci nalaze se u `js/content.js`:
 
 - `brand` — naziv, lokacija, članovi i statistike
-- `contact` — email, telefon, društvene mreže i endpoint obrasca
+- `contact` — email, telefon, društvene mreže i Formspree form ID
 - `projects` — pet objavljenih portfolio projekata sa screenshotovima i live URL-ovima
 
-Kontaktni obrazac namjerno ne šalje podatke dok se ne unesu stvarni kontaktni podaci i endpoint. Portfolio kartice također ne vode na izmišljene adrese.
+Kontaktni obrasci šalju podatke izravno u Formspree. U besplatnom Formspree računu napravite obrazac, kopirajte njegov form ID i zamijenite `YOUR_FORM_ID` u `js/content.js`. Nisu potrebni vlastiti backend ni environment varijable. Portfolio kartice vode samo na provjerene javne projekte.
+
+Predlošci tri emaila i preduvjeti zasebne email kampanje nalaze se u `OUTREACH-EMAILS.md`. Kampanja nije dio web stranice niti kontaktnog obrasca.
 
 ## GitHub
 
@@ -67,6 +71,8 @@ images/        logo i grafički elementi
 js/            sadržaj i interakcije
 media/         lokalne fotografije i video
 kontakt/       kontakt stranica
+web-stranice-za-poduzeca/  landing za email promet
+privatnost/    informacije o privatnosti
 o-nama/        stranica o timu
 projekti/      portfolio stranica
 usluge/        stranica usluga

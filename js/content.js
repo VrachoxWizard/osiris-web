@@ -26,13 +26,13 @@ const projects = [
   {
     id: "tina-sport-pia",
     title: "Tina Šport–Pia",
-    category: "Web aplikacija",
+    category: "Web stranica",
     industry: "Sport",
-    services: ["UX/UI", "Frontend", "Sportski sadržaj"],
+    services: ["Web dizajn", "Development", "Sportski raspored"],
     summary:
-      "Sportska web aplikacija koja okuplja klupske informacije, sadržaj i digitalno iskustvo za korisnike.",
+      "Web stranica malonogometne lige s rasporedima, rezultatima, uzrastima i galerijom na jednom mjestu.",
     preview: "/images/projects/tina-sport-pia.png",
-    liveUrl: "https://stella-final-web.vercel.app/",
+    liveUrl: "https://mnk-tinasport.hr/",
     status: "Projekt uživo",
   },
   {
@@ -67,53 +67,52 @@ export const siteData = {
     location: "Zagreb, Hrvatska",
     founders: ["Tin", "Mate"],
     description:
-      "Web development studio iz Zagreba koji izrađuje web stranice, web aplikacije i digitalna rješenja za male i srednje poduzetnike.",
+      "Mali, iskusan web tim iz Zagreba koji izrađuje web stranice po mjeri za mala i srednja poduzeća.",
     stats: [
-      { value: "12", label: "izrađenih projekata" },
-      { value: "2", label: "iskusna developera" },
-      { value: "ZG", label: "studio iz Zagreba" },
+      { value: "5", label: "živih projekata" },
+      { value: "2", label: "člana tima" },
+      { value: "1", label: "izravan razgovor" },
     ],
   },
   contact: {
     email: "",
     phone: "",
-    endpoint: "",
+    formspreeId: "xeaqovbe",
     socials: {
       linkedin: "",
       instagram: "",
       github: "",
     },
-    statusMessage:
-      "Kontaktni podaci i slanje obrasca bit će aktivirani prije javne objave stranice.",
+    statusMessage: "Hvala! Javit ćemo vam se u roku od tri radna dana.",
   },
   packages: [
     {
-      code: "START",
-      title: "Poslovna web stranica",
+      code: "NOVA",
+      title: "Nova poslovna web stranica",
       description:
-        "Za poduzetnike kojima treba vjerodostojna online prisutnost i jasan put do upita.",
-      includes: ["Struktura i UI/UX", "Responzivan development", "Kontakt i SEO osnova"],
+        "Za poduzeća kojima treba profesionalna web prisutnost prilagođena ponudi, kupcima i cilju.",
+      includes: ["Struktura i sadržaj", "Dizajn po mjeri", "Responzivan razvoj"],
       tone: "light",
     },
     {
-      code: "SHOP",
-      title: "Webshop spreman za prodaju",
+      code: "REDIZAJN",
+      title: "Redizajn postojeće stranice",
       description:
-        "Za poslovanja koja žele pregledno predstaviti ponudu i pojednostaviti online kupnju.",
-      includes: ["Katalog i kategorije", "Košarica i prodajni tok", "Upravljanje sadržajem"],
+        "Za poslovanja čija stranica više ne predstavlja kvalitetu njihova rada ili ne vodi prema upitu.",
+      includes: ["Analiza postojećeg weba", "Nova hijerarhija", "Migracija sadržaja"],
       tone: "blue",
     },
     {
-      code: "APP",
-      title: "Prilagođena web aplikacija",
+      code: "RAST",
+      title: "Web za sljedeću fazu rasta",
       description:
-        "Za procese koje generički alati ne rješavaju dovoljno dobro ili jednostavno.",
-      includes: ["Analiza procesa", "Sučelje i razvoj", "Temelj za nadogradnje"],
+        "Za tvrtke kojima uz novu stranicu trebaju webshop, korisnički portal ili prilagođene funkcionalnosti.",
+      includes: ["Poslovne funkcionalnosti", "Webshop ili portal", "Temelj za nadogradnje"],
       tone: "dark",
     },
     {
       code: "CARE",
-      title: "Održavanje i kontinuirani rast",
+      title: "Održavanje i kontinuirano poboljšanje",
       description:
         "Za tvrtke koje žele pouzdanog partnera nakon objave prve verzije proizvoda.",
       includes: ["Tehnička podrška", "Optimizacija performansi", "Nove funkcionalnosti"],

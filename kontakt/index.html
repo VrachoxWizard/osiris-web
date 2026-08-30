@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b1120">
-    <meta name="description" content="Kontaktirajte OSIRIS studio iz Zagreba za izradu web stranice, web aplikacije ili drugog digitalnog rješenja.">
+    <meta name="description" content="Zatražite besplatnu analizu web prisutnosti i 3–5 konkretnih preporuka OSIRIS tima u roku od tri radna dana.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Kontakt — OSIRIS">
-    <meta property="og:description" content="Opišite nam svoju ideju ili poslovni problem. OSIRIS, Zagreb.">
+    <meta property="og:description" content="Krenite od besplatne analize vaše web prisutnosti. OSIRIS, Zagreb.">
     <meta property="og:image" content="/images/osiris-logo.png">
     <title>Kontakt — OSIRIS</title>
     <link rel="icon" href="/images/osiris-logo.png" type="image/png">
@@ -26,12 +26,12 @@
           <div>
             <nav class="breadcrumb" aria-label="Putanja"><a href="/">Početna</a><span>/</span><span>Kontakt</span></nav>
             <span class="section-label">Kontakt</span>
-            <h1>Imate ideju? Krenimo od razgovora.</h1>
+            <h1>Krenimo od besplatne analize vaše web prisutnosti.</h1>
           </div>
           <div class="page-hero-copy">
             <p>
-              Opišite što želite napraviti, kome je rješenje namijenjeno i koji problem
-              treba riješiti. Kontaktni podaci bit će objavljeni prije javnog pokretanja stranice.
+              Pošaljite nam osnovne informacije. U roku od tri radna dana dobit ćete
+              3–5 ručno pripremljenih preporuka, bez obveze nastavka suradnje.
             </p>
           </div>
         </div>
@@ -41,32 +41,34 @@
         <div class="container contact-layout">
           <div class="contact-intro">
             <span class="section-label">OSIRIS · Zagreb</span>
-            <h2 id="contact-title">Recite nam što želite izgraditi.</h2>
+            <h2 id="contact-title">Recite nam gdje ste danas.</h2>
             <p>
-              Ne trebate imati gotovu specifikaciju. Dovoljno je opisati poslovni cilj,
-              trenutačni problem ili ideju koju želite provjeriti.
+              Nije važno nemate li stranicu, trebate redizajn ili želite više upita.
+              Dovoljno je opisati trenutačno stanje i najvažniji poslovni cilj.
             </p>
             <div class="contact-details">
               <div class="contact-detail"><span>Lokacija</span><strong data-brand-location>Zagreb, Hrvatska</strong></div>
-              <div class="contact-detail"><span>Email</span><a data-contact-email aria-disabled="true">Poslovni email bit će objavljen ovdje</a></div>
-              <div class="contact-detail"><span>Telefon</span><a data-contact-phone aria-disabled="true">Telefon još nije objavljen</a></div>
+              <div class="contact-detail"><span>Odgovor</span><strong>U roku od 3 radna dana</strong></div>
+              <div class="contact-detail"><span>Obveza</span><strong>Bez obveze nastavka suradnje</strong></div>
             </div>
           </div>
 
           <div class="contact-form-wrap reveal">
-            <h2>Pošaljite upit</h2>
-            <p>Forma je vizualno dovršena, ali slanje ostaje isključeno dok se ne unese stvarni kontaktni endpoint.</p>
+            <h2>Zatražite analizu</h2>
+            <p>Pregledat ćemo vašu web prisutnost i javiti se s konkretnim preporukama.</p>
             <form data-contact-form novalidate>
               <div class="form-grid">
                 <div class="field"><label for="name">Ime i prezime</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Vaše ime" required></div>
                 <div class="field"><label for="company">Tvrtka</label><input id="company" name="company" type="text" autocomplete="organization" placeholder="Naziv tvrtke"></div>
                 <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="ime@tvrtka.hr" required></div>
-                <div class="field"><label for="project-type">Vrsta projekta</label><select id="project-type" name="projectType"><option value="">Odaberite</option><option>Web stranica</option><option>Web aplikacija</option><option>Webshop</option><option>UI/UX dizajn</option><option>Digitalizacija</option><option>Ostalo</option></select></div>
-                <div class="field field-full"><label for="message">O projektu</label><textarea id="message" name="message" placeholder="Što želite postići i kome je rješenje namijenjeno?" required></textarea></div>
+                <div class="field"><label for="project-type">Trenutačno stanje</label><select id="project-type" name="websiteStatus" required><option value="">Odaberite</option><option value="no-website">Nemamo web stranicu</option><option value="existing">Imamo postojeću stranicu</option><option value="redesign">Treba nam redizajn</option></select></div>
+                <div class="field field-full"><label for="message">Glavni poslovni cilj</label><textarea id="message" name="primaryGoal" placeholder="Što bi nova ili poboljšana stranica trebala omogućiti?" required></textarea></div>
+                <div class="field field-full form-honeypot" aria-hidden="true"><label for="fax-number">Ne ispunjavajte ovo polje</label><input id="fax-number" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
               </div>
+              <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content">
               <div class="form-footer">
-                <small>Uneseni podaci se trenutačno ne šalju niti pohranjuju.</small>
-                <button class="button button-primary" type="submit">Provjeri status forme</button>
+                <small>Slanjem prihvaćate obradu podataka radi odgovora na zahtjev. <a href="/privatnost/">Pročitajte informacije o privatnosti.</a></small>
+                <button class="button button-primary" type="submit">Zatražite besplatnu analizu</button>
               </div>
               <p class="form-status" data-form-status tabindex="-1" role="status" hidden></p>
             </form>
