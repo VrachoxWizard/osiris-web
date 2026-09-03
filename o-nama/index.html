@@ -23,7 +23,7 @@
     <div data-site-header></div>
 
     <main id="main-content">
-      <section class="inner-hero section section--dark" aria-labelledby="about-title">
+      <section class="inner-hero section section--dark about-hero" aria-labelledby="about-title">
         <div class="container inner-hero__grid">
           <div class="inner-hero__copy">
             <nav class="breadcrumb" aria-label="Putanja"><a href="/">Početna</a><span aria-hidden="true">/</span><span>O nama</span></nav>
@@ -32,72 +32,82 @@
             <p>Od prvog razgovora do objave surađujete s ljudima koji razumiju cilj, oblikuju iskustvo i razvijaju završno rješenje.</p>
             <a class="button button--primary" href="/kontakt/#analiza">Upoznajmo vaš projekt</a>
           </div>
-          <div class="media-frame inner-hero__media founder-duo-visual" aria-label="Tin i Mate, suosnivači OSIRIS-a">
-            <div><span>01 / Suosnivač</span><strong>Tin</strong></div>
-            <div><span>02 / Suosnivač</span><strong>Mate</strong></div>
-            <p>Izravna suradnja · zajednička odgovornost · isti tim kroz cijeli projekt.</p>
+          <div class="about-continuity">
+            <ol aria-label="Kontinuitet projekta">
+              <li><span>01</span><strong>Poslovni cilj</strong></li>
+              <li><span>02</span><strong>Struktura i sadržaj</strong></li>
+              <li><span>03</span><strong>Dizajn i razvoj</strong></li>
+              <li><span>04</span><strong>Provjera i objava</strong></li>
+            </ol>
+            <p><strong>Tin + Mate</strong><span>Isti kontekst kroz cijeli projekt</span></p>
           </div>
         </div>
       </section>
 
-      <section class="proof-rail section--brand" aria-label="OSIRIS način suradnje">
+      <section class="proof-rail section--brand about-proof" aria-label="OSIRIS način suradnje">
         <div class="container proof-rail__grid">
-          <p><strong>2</strong><span>člana tima</span></p>
-          <p><strong>5</strong><span>javnih projekata</span></p>
-          <p><strong>Izravno</strong><span>bez predaje između odjela</span></p>
+          <p><strong>2</strong><span>osnivača</span></p>
+          <p><strong>5</strong><span>javno dostupnih projekata</span></p>
+          <p><strong>1</strong><span>tim od prvog razgovora do objave</span></p>
         </div>
       </section>
 
-      <section class="section section--paper" aria-labelledby="about-story-title">
-        <div class="container editorial-grid">
-          <div>
-            <span class="eyebrow">01 / Kako razmišljamo</span>
+      <section class="section section--paper about-story" aria-labelledby="about-story-title">
+        <div class="container about-story__layout">
+          <div class="about-story__copy">
+            <span class="eyebrow">01 / Način razmišljanja</span>
             <h2 id="about-story-title">Tehnologija je alat. Poslovni cilj je polazište.</h2>
+            <p>Prije izgleda i funkcionalnosti definiramo što korisnik treba saznati, odlučiti ili napraviti. Tako sadržaj, dizajn i razvoj odgovaraju na isti poslovni cilj.</p>
+            <p>Jednostavnost nam nije vizualni trend. Ona projekt čini razumljivim, brzim i spremnim za daljnji razvoj.</p>
+            <a class="text-link" href="/projekti/">Pogledajte svih 5 projekata</a>
           </div>
-          <div>
-            <p>Prije izbora izgleda ili funkcionalnosti pokušavamo razumjeti što korisnik treba saznati, odlučiti ili napraviti. Tako struktura, sadržaj i razvoj ostaju usmjereni na isti cilj.</p>
-            <p>Jednostavnost nam nije vizualni trend, nego način da projekt ostane razumljiv, brz i spreman za daljnji razvoj.</p>
-          </div>
+          <figure class="media-frame project-composite about-project-composite">
+            <picture>
+              <source type="image/avif" srcset="/images/projects/dolce-torte-480.avif 480w, /images/projects/dolce-torte-800.avif 800w, /images/projects/dolce-torte-1200.avif 1200w, /images/projects/dolce-torte-1920.avif 1920w" sizes="(max-width: 60rem) calc(100vw - 2.5rem), 52vw">
+              <source type="image/webp" srcset="/images/projects/dolce-torte-480.webp 480w, /images/projects/dolce-torte-800.webp 800w, /images/projects/dolce-torte-1200.webp 1200w, /images/projects/dolce-torte-1920.webp 1920w" sizes="(max-width: 60rem) calc(100vw - 2.5rem), 52vw">
+              <img src="/images/projects/dolce-torte.png" alt="Naslovnica web stranice Dolce Torte Zagreb" width="1920" height="1080" loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source type="image/avif" srcset="/images/projects/produkt-auto-480.avif 480w, /images/projects/produkt-auto-800.avif 800w, /images/projects/produkt-auto-1200.avif 1200w, /images/projects/produkt-auto-1920.avif 1920w" sizes="(max-width: 60rem) 72vw, 38vw">
+              <source type="image/webp" srcset="/images/projects/produkt-auto-480.webp 480w, /images/projects/produkt-auto-800.webp 800w, /images/projects/produkt-auto-1200.webp 1200w, /images/projects/produkt-auto-1920.webp 1920w" sizes="(max-width: 60rem) 72vw, 38vw">
+              <img src="/images/projects/produkt-auto.png" alt="Naslovnica web platforme Produkt Auto" width="1920" height="1080" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Stvarni rad: poslovna stranica i web platforma.</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section class="section section--soft" aria-labelledby="founders-title">
+      <section class="section section--soft about-collaboration" aria-labelledby="collaboration-title">
         <div class="container">
           <header class="section-heading">
             <div>
-              <span class="eyebrow">02 / Ljudi iza OSIRIS-a</span>
-              <h2 id="founders-title">Tin i Mate ostaju uz projekt od početka do kraja.</h2>
+              <span class="eyebrow">02 / Kako izgleda suradnja</span>
+              <h2 id="collaboration-title">Dvoje ljudi vodi jedan projektni kontekst.</h2>
             </div>
-            <p>Surađujete izravno s osnivačima koji čuvaju poslovni i korisnički kontekst kroz cijeli projekt.</p>
+            <p>Informacije ne putuju između prodaje, dizajna i razvoja. Ljudi s kojima razgovarate razumiju odluke i sudjeluju u izvedbi.</p>
           </header>
-          <div class="founder-grid">
-            <article class="card founder-card">
-              <div class="founder-card__portrait" aria-hidden="true">
-                <span>T</span>
-                <p>Tin · 01</p>
-              </div>
-              <div class="founder-card__content">
-                <span>Suosnivač OSIRIS-a</span>
-                <h3>Tin</h3>
-                <p>Izravno sudjeluje u razumijevanju projekta, oblikovanju rješenja i njegovoj izvedbi.</p>
-              </div>
-            </article>
-            <article class="card founder-card">
-              <div class="founder-card__portrait" aria-hidden="true">
-                <span>M</span>
-                <p>Mate · 02</p>
-              </div>
-              <div class="founder-card__content">
-                <span>Suosnivač OSIRIS-a</span>
-                <h3>Mate</h3>
-                <p>Izravno sudjeluje u razumijevanju projekta, oblikovanju rješenja i njegovoj izvedbi.</p>
-              </div>
-            </article>
-          </div>
+          <ol class="about-collaboration__list">
+            <li>
+              <span>01</span>
+              <h3>Prije prve skice</h3>
+              <p>Razumijemo poslovni cilj, publiku i prioritete prije nego što definiramo strukturu rješenja.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <h3>Tijekom izvedbe</h3>
+              <p>Povezujemo strukturu, sadržaj, dizajn i razvoj bez predaje projekta između odjela.</p>
+            </li>
+            <li>
+              <span>03</span>
+              <h3>Prije i nakon objave</h3>
+              <p>Završno provjeravamo rješenje, objavljujemo ga i ostajemo dostupni za daljnji razvoj.</p>
+            </li>
+          </ol>
+          <p class="about-team-signature"><strong>Tin + Mate</strong><span>Suosnivači OSIRIS-a · Zagreb</span></p>
         </div>
       </section>
 
-      <section class="section section--dark" aria-labelledby="principles-title">
+      <section class="section section--dark about-principles-section" aria-labelledby="principles-title">
         <div class="container">
           <header class="section-heading">
             <div>
@@ -106,11 +116,11 @@
             </div>
             <p>Ne obećavamo neprovjerene rezultate. Dogovaramo realan cilj, jasno komuniciramo odluke i preuzimamo odgovornost za izvedbu.</p>
           </header>
-          <div class="card-grid">
-            <article class="card"><span class="card__index">01</span><h3>Jasnoća</h3><p>Projekt, odluke i sljedeći koraci razumljivi su bez nepotrebnog žargona.</p></article>
-            <article class="card"><span class="card__index">02</span><h3>Kontinuitet</h3><p>Isti tim čuva poslovni i korisnički kontekst kroz cijeli proces.</p></article>
-            <article class="card"><span class="card__index">03</span><h3>Odgovornost</h3><p>Kvalitetu provjeravamo prije objave i ostajemo dostupni za daljnji razvoj.</p></article>
-          </div>
+          <ol class="about-principles">
+            <li><span>01</span><h3>Jasnoća</h3><p>Odluke i sljedeći koraci objašnjeni su bez nepotrebnog žargona.</p></li>
+            <li><span>02</span><h3>Kontinuitet</h3><p>Isti ljudi čuvaju poslovni i korisnički kontekst kroz cijeli projekt.</p></li>
+            <li><span>03</span><h3>Odgovornost</h3><p>Rješenje prolazi završnu provjeru prije objave, a tim ostaje dostupan i nakon nje.</p></li>
+          </ol>
         </div>
       </section>
 

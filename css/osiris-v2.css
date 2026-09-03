@@ -1656,6 +1656,180 @@
     font-size: var(--step--1);
   }
 
+  body[data-page="about"] .about-hero {
+    min-height: auto;
+    padding-block: calc(var(--header-height) + 3.5rem) clamp(4rem, 7vw, 6rem);
+  }
+
+  body[data-page="about"] .about-hero .inner-hero__grid {
+    grid-template-columns: minmax(0, 6.5fr) minmax(22rem, 5.5fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+
+  .about-continuity {
+    overflow: hidden;
+    border: 1px solid var(--line-dark);
+    background:
+      radial-gradient(circle at 82% 12%, rgb(63 94 162 / 0.28), transparent 38%),
+      var(--navy);
+  }
+
+  .about-continuity ol {
+    display: grid;
+    min-height: clamp(21rem, 32vw, 27rem);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .about-continuity li {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+  }
+
+  .about-continuity li:nth-child(odd) {
+    border-right: 1px solid var(--line-dark);
+  }
+
+  .about-continuity li:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .about-continuity li > span {
+    color: var(--link-dark);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .about-continuity li > strong {
+    max-width: 12ch;
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.3vw, 2rem);
+    font-weight: 400;
+    line-height: 1.12;
+  }
+
+  .about-continuity > p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.35rem 1.5rem;
+    border-top: 1px solid var(--line-dark);
+    background: var(--soft-blue);
+    color: var(--text-ink);
+    padding: 1rem 1.25rem;
+    font-size: var(--step--1);
+  }
+
+  .about-continuity > p strong {
+    color: var(--deep-blue);
+  }
+
+  body[data-page="about"] .about-proof .proof-rail__grid p {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+  }
+
+  body[data-page="about"] .about-proof .proof-rail__grid strong {
+    text-align: center;
+  }
+
+  .about-story__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(26rem, 7fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .about-story__copy > :not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
+
+  .about-story__copy h2 {
+    max-width: 12ch;
+  }
+
+  .about-story__copy p {
+    max-width: 58ch;
+    color: var(--text-muted);
+  }
+
+  .about-story__copy .text-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+  }
+
+  .about-project-composite {
+    min-height: clamp(25rem, 42vw, 35rem);
+  }
+
+  .about-collaboration__list,
+  .about-principles {
+    margin: 0;
+    border-block: 1px solid var(--line);
+    padding: 0;
+    list-style: none;
+  }
+
+  .about-collaboration__list li,
+  .about-principles li {
+    display: grid;
+    grid-template-columns: 4rem minmax(12rem, 4fr) minmax(0, 7fr);
+    gap: clamp(1rem, 3vw, 3rem);
+    align-items: baseline;
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .about-collaboration__list li + li,
+  .about-principles li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  .about-collaboration__list li > span,
+  .about-principles li > span {
+    color: var(--link);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .about-collaboration__list h3,
+  .about-principles h3 {
+    font-size: var(--step-2);
+  }
+
+  .about-collaboration__list p,
+  .about-principles p {
+    max-width: 58ch;
+    color: var(--text-muted);
+  }
+
+  .about-team-signature {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.4rem 1.5rem;
+    padding-top: 1.25rem;
+    color: var(--text-muted);
+    font-size: var(--step--1);
+  }
+
+  .about-team-signature strong {
+    color: var(--deep-blue);
+    letter-spacing: 0.04em;
+  }
+
+  .about-principles-section .section-heading {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
   .home-hero .eyebrow,
   .inner-hero .eyebrow {
     margin-bottom: 1.1rem;
@@ -2190,6 +2364,100 @@
 
     .video-toggle {
       display: none;
+    }
+  }
+}
+
+@layer utilities {
+  @media (max-width: 59.99rem) {
+    .about-story__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .about-project-composite {
+      min-height: min(68vw, 34rem);
+    }
+
+    .about-collaboration__list li,
+    .about-principles li {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .about-collaboration__list p,
+    .about-principles p {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: 39.99rem) {
+    body[data-page="about"] .about-hero {
+      min-height: auto;
+      padding-block: calc(var(--header-height) + 2.5rem) 3.5rem;
+    }
+
+    body[data-page="about"] .about-hero h1 {
+      max-width: none;
+    }
+
+    .about-continuity ol {
+      min-height: 0;
+      grid-template-columns: 1fr;
+    }
+
+    .about-continuity li {
+      display: grid;
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+      gap: 0.75rem;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .about-continuity li:nth-child(odd) {
+      border-right: 0;
+    }
+
+    .about-continuity li:not(:last-child) {
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .about-continuity li:last-child {
+      border-bottom: 0;
+    }
+
+    .about-continuity li > strong {
+      max-width: none;
+      font-size: 1.1rem;
+    }
+
+    .about-continuity > p,
+    .about-team-signature {
+      flex-direction: column;
+    }
+
+    body[data-page="about"] .about-proof .proof-rail__grid p {
+      min-height: 0;
+      padding-block: 0.9rem;
+    }
+
+    .about-project-composite {
+      min-height: 22rem;
+    }
+
+    .about-collaboration__list li,
+    .about-principles li {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+      gap: 0.65rem 0.85rem;
+      padding-block: 1.35rem;
+    }
+
+    .about-collaboration__list h3,
+    .about-principles h3 {
+      font-size: var(--step-1);
+    }
+
+    body[data-page="about"] .editorial-grid--cta .button {
+      width: 100%;
     }
   }
 }
