@@ -1,6 +1,6 @@
 # OSIRIS
 
-Višestranična web stranica za OSIRIS — Tina i Matea, web developere iz Zagreba. Projekt je izrađen kao lagana statička stranica bez frameworka, vanjskih JavaScript paketa ili backenda.
+Višestranična web stranica za OSIRIS — mali web tim Tina i Matea iz Zagreba. Projekt je izrađen kao lagana statička stranica bez frameworka, vanjskih JavaScript paketa ili vlastitog backenda.
 
 ## Stranice
 
@@ -28,9 +28,18 @@ Promjenjivi podaci nalaze se u `js/content.js`:
 
 - `brand` — naziv, lokacija, članovi i statistike
 - `contact` — email, telefon, društvene mreže i Formspree form ID
-- `projects` — pet objavljenih portfolio projekata sa screenshotovima i live URL-ovima
+- `serviceTracks` — tri jedinstvena smjera usluge
+- `projects` — pet objavljenih projekata s ulogom, izazovom, rješenjem, ishodom, responsive medijima i live URL-ovima
 
-Kontaktni obrasci šalju podatke izravno u Formspree. U besplatnom Formspree računu napravite obrazac, kopirajte njegov form ID i zamijenite `YOUR_FORM_ID` u `js/content.js`. Nisu potrebni vlastiti backend ni environment varijable. Portfolio kartice vode samo na provjerene javne projekte.
+Oba kontaktna obrasca koriste isti skup polja i šalju podatke izravno u Formspree ID zapisan u `js/content.js`. Nisu potrebni vlastiti backend ni environment varijable. Portfolio kartice vode samo na provjerene javne projekte.
+
+## Provjera kvalitete
+
+```bash
+npm run check
+```
+
+Provjera obuhvaća svih sedam ruta, lokalne assete, strukturu naslova, ugovor obrazaca, responsive slike, sigurnost vanjskih poveznica, CSS tokene, kontrast i zabranjene globalne overrideove. Pravila novog vizualnog sustava nalaze se u `DESIGN-SYSTEM.md`.
 
 Predlošci tri emaila i preduvjeti zasebne email kampanje nalaze se u `OUTREACH-EMAILS.md`. Kampanja nije dio web stranice niti kontaktnog obrasca.
 

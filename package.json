@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "npm run check && node scripts/build-static.mjs",
+    "check": "node scripts/validate-site.mjs && node --check js/app.js && node --check js/content.js && node --check server.mjs",
     "dev": "node server.mjs",
     "start": "node server.mjs"
   }

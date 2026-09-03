@@ -3,245 +3,155 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b1120">
-    <meta name="description" content="Web stranice po mjeri za mala i srednja poduzeća: nova stranica, redizajn, razvoj dodatnih funkcionalnosti i održavanje.">
+    <meta name="theme-color" content="#05070b">
+    <meta name="description" content="Web stranice po mjeri, redizajn i web rješenja za rast malih i srednjih poduzeća.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Usluge — OSIRIS">
-    <meta property="og:description" content="Stranica prilagođena vašem poslu, kupcima i ciljevima — od strukture do objave.">
-    <meta property="og:image" content="/images/osiris-logo.png">
+    <meta property="og:description" content="Struktura, sadržaj, dizajn i razvoj prilagođeni vašem poslovnom cilju.">
+    <meta property="og:image" content="/images/osiris-social-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Usluge — OSIRIS</title>
-    <link rel="icon" href="/images/osiris-logo.png" type="image/png">
-    <link rel="preload" href="/media/osiris-modern-workspace.jpg" as="image">
-    <link rel="stylesheet" href="/css/osiris.css">
-    <link rel="stylesheet" href="/css/osiris-brutal.css">
-    <link rel="stylesheet" href="/css/osiris-polish.css">
-    <link rel="stylesheet" href="/css/osiris-enhanced.css">
-    <link rel="stylesheet" href="/css/osiris-services.css">
-    <link rel="stylesheet" href="/css/osiris-media.css">
+    <link rel="icon" href="/images/osiris-mark-128.png" type="image/png">
+    <link rel="stylesheet" href="/css/osiris-v2.css">
+    <script type="module" src="/js/content.js"></script>
     <script type="module" src="/js/app.js"></script>
   </head>
-  <body class="inner-v2 services-page-v2" data-page="services">
+  <body class="page page--services" data-page="services">
     <a class="skip-link" href="#main-content">Preskoči na sadržaj</a>
     <div data-site-header></div>
 
     <main id="main-content">
-      <section class="svc-hero" aria-labelledby="svc-hero-title">
-        <div class="svc-hero__media" aria-hidden="true">
-          <img
-            src="/media/osiris-modern-workspace.jpg"
-            alt=""
-            width="1600"
-            height="1067"
-            decoding="async"
-          >
-        </div>
-        <div class="svc-hero__shade" aria-hidden="true"></div>
-        <div class="svc-hero__grid" aria-hidden="true"></div>
-
-        <div class="container svc-hero__inner">
-          <nav class="svc-hero__breadcrumb" aria-label="Putanja">
-            <a href="/">Početna</a><span>/</span><span>Usluge</span>
-          </nav>
-
-          <div class="svc-hero__layout">
-            <div>
-              <span class="svc-hero__label">Usluge</span>
-              <h1 id="svc-hero-title">Stranica prilagođena vašem poslu, a ne obrnuto.</h1>
-            </div>
-            <div class="svc-hero__aside">
-              <p>
-                Web počinjemo od vašeg poslovnog cilja, ponude i kupaca. Tek tada
-                definiramo strukturu, sadržaj, dizajn i funkcionalnosti.
-              </p>
-              <a class="svc-hero__cta" href="/web-stranice-za-poduzeca/#analiza">
-                Zatražite besplatnu analizu
-                <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h12M11 5l5 5-5 5"></path></svg>
-              </a>
-              <div class="svc-hero__stats" aria-label="Sažetak iskustva">
-                <span><strong>5</strong> živih projekata</span>
-                <span><strong>2</strong> člana tima</span>
-                <span><strong>1</strong> izravan razgovor</span>
-              </div>
-            </div>
+      <section class="inner-hero section section--dark" aria-labelledby="services-title">
+        <div class="container inner-hero__grid">
+          <div class="inner-hero__copy">
+            <nav class="breadcrumb" aria-label="Putanja"><a href="/">Početna</a><span aria-hidden="true">/</span><span>Usluge</span></nav>
+            <span class="eyebrow">Usluge</span>
+            <h1 id="services-title">Web prilagođen vašem poslu, a ne obrnuto.</h1>
+            <p>Najprije razumijemo što želite postići, kome se obraćate i što posjetitelj treba učiniti. Tek tada definiramo pravi opseg.</p>
+            <a class="button button--primary" href="/kontakt/#analiza">Zatražite besplatnu analizu</a>
           </div>
+          <figure class="media-frame inner-hero__media project-composite">
+            <picture>
+              <source type="image/avif" srcset="/images/projects/produkt-auto-800.avif 800w, /images/projects/produkt-auto-1200.avif 1200w, /images/projects/produkt-auto-1920.avif 1920w" sizes="(max-width: 60rem) 90vw, 42vw">
+              <source type="image/webp" srcset="/images/projects/produkt-auto-800.webp 800w, /images/projects/produkt-auto-1200.webp 1200w, /images/projects/produkt-auto-1920.webp 1920w" sizes="(max-width: 60rem) 90vw, 42vw">
+              <img src="/images/projects/produkt-auto.png" alt="Prikaz web platforme Produkt Auto" width="1920" height="1080" decoding="async">
+            </picture>
+            <picture>
+              <source type="image/avif" srcset="/images/projects/dogan-septem-480.avif 480w, /images/projects/dogan-septem-800.avif 800w, /images/projects/dogan-septem-1200.avif 1200w" sizes="(max-width: 60rem) 70vw, 30vw">
+              <source type="image/webp" srcset="/images/projects/dogan-septem-480.webp 480w, /images/projects/dogan-septem-800.webp 800w, /images/projects/dogan-septem-1200.webp 1200w" sizes="(max-width: 60rem) 70vw, 30vw">
+              <img src="/images/projects/dogan-septem.png" alt="Prikaz web stranice Dogan Septem Interijeri" width="1920" height="1080" decoding="async">
+            </picture>
+            <figcaption>Dva stvarna OSIRIS projekta · platforma i poslovna web stranica.</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section class="svc-proof" aria-label="Dokaz iskustva">
-        <div class="container svc-proof__inner">
-          <span><strong>Po mjeri</strong> bez gotovih predložaka</span>
-          <span><strong>Responzivno</strong> na svim uređajima</span>
-          <span><strong>Od ideje</strong> do objave i podrške</span>
+      <section class="proof-rail section--brand" aria-label="Kako radimo">
+        <div class="container proof-rail__grid">
+          <p><strong>Po mjeri</strong><span>bez gotovih predložaka</span></p>
+          <p><strong>Responzivno</strong><span>za mobitel, tablet i računalo</span></p>
+          <p><strong>Izravno</strong><span>s ljudima koji vode projekt</span></p>
         </div>
       </section>
 
-      <section class="svc-section svc-section--dark" aria-labelledby="svc-pillars-title">
+      <section class="section section--paper" aria-labelledby="offers-title">
         <div class="container">
-          <header class="svc-section__head">
+          <header class="section-heading">
             <div>
-              <span class="svc-section__label">Tri glavna smjera</span>
-              <h2 id="svc-pillars-title">Tri načina na koja vaš web može napraviti sljedeći korak.</h2>
+              <span class="eyebrow">01 / Ponude</span>
+              <h2 id="offers-title">Tri jasna polazišta, svaki put prilagođen opseg.</h2>
             </div>
-            <p class="svc-section__intro">
-              Ne nudimo isti paket svima. Opseg određujemo prema tome trebate li prvu
-              stranicu, kvalitetan redizajn ili funkcionalnosti za daljnji rast.
-            </p>
+            <p>Cijenu, rok i točan sadržaj potvrđujemo nakon kratkog razgovora, kada znamo što projekt mora postići.</p>
           </header>
-
-          <div class="svc-pillars">
-            <article class="svc-pillar svc-pillar--lead reveal" style="--svc-accent: #5b7fd4">
-              <div class="svc-pillar__top">
-                <span>01</span>
-                <span class="svc-pillar__tag">Najčešći početak</span>
-                <i aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Nova poslovna web stranica</h3>
-                <p>Profesionalna web prisutnost koja jasno objašnjava vašu vrijednost i vodi posjetitelja prema sljedećem koraku.</p>
-                <ul class="svc-pillar__list">
-                  <li>Struktura i sadržaj</li>
-                  <li>Responzivan dizajn</li>
-                  <li>Tehnička optimizacija</li>
-                </ul>
-              </div>
+          <div class="card-grid card-grid--offers">
+            <article id="nova-stranica" class="card card--offer">
+              <span class="card__index">01</span>
+              <h3>Nova poslovna web stranica</h3>
+              <p>Za poduzeća kojima treba profesionalna digitalna prisutnost i jasan put prema upitu.</p>
+              <h4>Uključuje</h4>
+              <ul>
+                <li>Strukturu i prioritete sadržaja</li>
+                <li>Dizajn prilagođen identitetu i publici</li>
+                <li>Responzivnu i tehnički urednu izvedbu</li>
+              </ul>
             </article>
-
-            <article class="svc-pillar reveal" style="--svc-accent: #dce8ff">
-              <div class="svc-pillar__top">
-                <span>02</span>
-                <i aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Redizajn postojećeg weba</h3>
-                <p>Nova struktura i suvremenije iskustvo kada postojeća stranica više ne predstavlja kvalitetu vašeg poslovanja.</p>
-                <ul class="svc-pillar__list">
-                  <li>Analiza postojećeg stanja</li>
-                  <li>Nova hijerarhija</li>
-                  <li>Migracija sadržaja</li>
-                </ul>
-              </div>
+            <article id="redizajn" class="card card--offer">
+              <span class="card__index">02</span>
+              <h3>Redizajn postojećeg weba</h3>
+              <p>Za poslovanja čija stranica više ne predstavlja kvalitetu ponude ili ne vodi prema sljedećem koraku.</p>
+              <h4>Uključuje</h4>
+              <ul>
+                <li>Pregled postojećeg stanja</li>
+                <li>Novu informacijsku hijerarhiju</li>
+                <li>Prijenos i prilagodbu korisnog sadržaja</li>
+              </ul>
             </article>
-
-            <article class="svc-pillar reveal" style="--svc-accent: #7eb8ff">
-              <div class="svc-pillar__top">
-                <span>03</span>
-                <i aria-hidden="true"></i>
-              </div>
-              <div>
-                <h3>Web za sljedeću fazu rasta</h3>
-                <p>Kada poslovna stranica treba prerasti u webshop, portal ili rješenje s prilagođenim funkcionalnostima.</p>
-                <ul class="svc-pillar__list">
-                  <li>Webshop ili portal</li>
-                  <li>Prilagođene funkcionalnosti</li>
-                  <li>Prostor za nadogradnju</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-
-          <div class="svc-support" aria-label="Dodatne usluge">
-            <article class="svc-support-card reveal" style="--svc-accent: #3f5ea2">
-              <span class="svc-support-card__num">04</span>
-              <div>
-                <h3>Struktura, sadržaj i dizajn</h3>
-                <p>Jasna hijerarhija, uvjerljiv sadržaj i sučelje prilagođeno stvarnim korisnicima.</p>
-              </div>
-            </article>
-            <article class="svc-support-card reveal" style="--svc-accent: #6b8fd6">
-              <span class="svc-support-card__num">05</span>
-              <div>
-                <h3>Poslovne funkcionalnosti</h3>
-                <p>Obrasci, integracije i alati — web koji radi za vaše poslovanje, ne samo kao prezentacija.</p>
-              </div>
-            </article>
-            <article class="svc-support-card reveal" style="--svc-accent: #9eb5e8">
-              <span class="svc-support-card__num">06</span>
-              <div>
-                <h3>Održavanje i optimizacija</h3>
-                <p>Brzo, pouzdano i spremno za nove potrebe — i nakon objave prve verzije.</p>
-              </div>
+            <article id="rast" class="card card--offer">
+              <span class="card__index">03</span>
+              <h3>Web za sljedeću fazu rasta</h3>
+              <p>Za tvrtke kojima uz prezentaciju trebaju webshop, portal, integracije ili prilagođene funkcionalnosti.</p>
+              <h4>Uključuje</h4>
+              <ul>
+                <li>Definiciju poslovnih funkcionalnosti</li>
+                <li>Prilagođeno korisničko iskustvo</li>
+                <li>Temelj spreman za buduće nadogradnje</li>
+              </ul>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="svc-section svc-packages" aria-labelledby="service-packages-title">
+      <section class="section section--dark" aria-labelledby="service-proof-title">
+        <div class="container editorial-grid editorial-grid--proof">
+          <figure class="media-frame">
+            <picture>
+              <source type="image/avif" srcset="/images/projects/produkt-auto-480.avif 480w, /images/projects/produkt-auto-800.avif 800w, /images/projects/produkt-auto-1200.avif 1200w, /images/projects/produkt-auto-1920.avif 1920w" sizes="(max-width: 48rem) 100vw, (max-width: 84rem) 46vw, 616px">
+              <source type="image/webp" srcset="/images/projects/produkt-auto-480.webp 480w, /images/projects/produkt-auto-800.webp 800w, /images/projects/produkt-auto-1200.webp 1200w, /images/projects/produkt-auto-1920.webp 1920w" sizes="(max-width: 48rem) 100vw, (max-width: 84rem) 46vw, 616px">
+              <img src="/images/projects/produkt-auto.png" alt="Naslovnica web platforme Produkt Auto" width="1920" height="1080" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <div>
+            <span class="eyebrow">02 / Stvarni primjer</span>
+            <h2 id="service-proof-title">Kad poslovnoj stranici treba više od prezentacije.</h2>
+            <p>Produkt Auto je javno dostupna web platforma s pregledom vozila i jasnim putem do informacija i upita.</p>
+            <ul class="feature-list">
+              <li>UX/UI prilagođen katalogu vozila</li>
+              <li>Web platforma umjesto statične brošure</li>
+              <li>Projekt koji možete otvoriti i provjeriti</li>
+            </ul>
+            <a class="button button--secondary" href="https://produktauto.com/" target="_blank" rel="noopener noreferrer">Otvori Produkt Auto</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--soft" aria-labelledby="services-process-title">
         <div class="container">
-          <header class="svc-section__head">
+          <header class="section-heading">
             <div>
-              <span class="svc-section__label">Jasna polazišta</span>
-              <h2 id="service-packages-title">Ne prodajemo gotove kalupe. Definiramo pravi opseg.</h2>
+              <span class="eyebrow">03 / Proces</span>
+              <h2 id="services-process-title">Od prvog razgovora do stabilne objave.</h2>
             </div>
-            <p class="svc-section__intro">
-              Svaki paket prilagođavamo stvarnom opsegu, sadržaju i poslovnom cilju.
-              Zato cijenu i rok potvrđujemo tek nakon kratkog uvodnog razgovora.
-            </p>
+            <p>Faze su jasne, odluke se donose u kontekstu, a napredak redovito pregledavamo zajedno.</p>
           </header>
-          <div class="package-grid" data-package-grid></div>
+          <ol class="process-grid">
+            <li class="process-step"><span class="card-index">01</span><h3>Razumijevanje i struktura</h3><p>Postavljamo poslovni cilj, publiku i prioritete te organiziramo sadržaj i korisnički put.</p></li>
+            <li class="process-step"><span class="card-index">02</span><h3>Dizajn i razvoj</h3><p>Gradimo ključne ekrane i funkcionalnosti uz responzivne provjere.</p></li>
+            <li class="process-step"><span class="card-index">03</span><h3>Objava i podrška</h3><p>Provjeravamo završnu verziju, objavljujemo i ostajemo dostupni.</p></li>
+          </ol>
         </div>
       </section>
 
-      <section class="svc-section svc-section--navy" aria-labelledby="delivery-title">
-        <div class="container">
-          <header class="svc-section__head">
-            <div>
-              <span class="svc-section__label">Što dobivate</span>
-              <h2 id="delivery-title">Projekt koji je razumljiv i nakon objave.</h2>
-            </div>
-            <p class="svc-section__intro">
-              Ne gradimo samo lijep ekran. Cilj je rješenje koje radi pouzdano, jednostavno se koristi i može se dalje razvijati.
-            </p>
-          </header>
-          <div class="svc-delivery">
-            <article class="svc-delivery-card reveal"><span>01</span><h3>Jasan opseg</h3><p>Dogovoreni ciljevi, prioriteti i sadržaj prije početka razvoja.</p></article>
-            <article class="svc-delivery-card reveal"><span>02</span><h3>Responzivna izvedba</h3><p>Dosljedno iskustvo na mobitelu, tabletu i računalu.</p></article>
-            <article class="svc-delivery-card reveal"><span>03</span><h3>Brz temelj</h3><p>Pažnja prema performansama, strukturi i kvaliteti koda.</p></article>
-            <article class="svc-delivery-card reveal"><span>04</span><h3>Prostor za rast</h3><p>Rješenje se može prilagoditi novim sadržajima i funkcionalnostima.</p></article>
+      <section class="section section--dark" aria-labelledby="services-cta-title">
+        <div class="container editorial-grid editorial-grid--cta">
+          <div>
+            <span class="eyebrow">Sljedeći korak</span>
+            <h2 id="services-cta-title">Niste sigurni koje je polazište pravo?</h2>
           </div>
-        </div>
-      </section>
-
-      <section class="svc-section svc-section--dark" aria-labelledby="service-process-title">
-        <div class="container">
-          <header class="svc-section__head svc-section__head--center">
-            <div>
-              <span class="svc-section__label">Suradnja</span>
-              <h2 id="service-process-title">Od razgovora do gotovog rješenja.</h2>
-            </div>
-            <p class="svc-section__intro">
-              Praktičan proces s jasnim fazama i redovitim pregledom napretka.
-            </p>
-          </header>
-          <div class="svc-process">
-            <article class="svc-process__step reveal">
-              <span>01 / Definicija</span>
-              <h3>Razumijemo cilj</h3>
-              <p>Postavljamo cilj, publiku, sadržaj i funkcionalni opseg projekta.</p>
-            </article>
-            <article class="svc-process__step reveal">
-              <span>02 / Izrada</span>
-              <h3>Dizajn i razvoj</h3>
-              <p>Gradimo ključne ekrane i funkcionalnosti uz provjeru na različitim uređajima.</p>
-            </article>
-            <article class="svc-process__step reveal">
-              <span>03 / Objave</span>
-              <h3>Objava i podrška</h3>
-              <p>Provjeravamo završnu verziju, pripremamo objavu i dogovaramo daljnji razvoj.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="svc-section svc-section--dark">
-        <div class="container">
-          <div class="svc-cta reveal">
-            <div class="svc-cta__inner">
-              <h2>Niste sigurni što vaš web treba? Krenimo od besplatne analize.</h2>
-              <a class="button" href="/web-stranice-za-poduzeca/#analiza">
-                Zatražite analizu
-                <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h12M11 5l5 5-5 5"></path></svg>
-              </a>
-            </div>
+          <div>
+            <p>Krenimo od besplatne ručne analize vaše web prisutnosti i 3–5 konkretnih preporuka.</p>
+            <a class="button button--primary" href="/kontakt/#analiza">Zatražite analizu</a>
           </div>
         </div>
       </section>

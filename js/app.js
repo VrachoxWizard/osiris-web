@@ -1,12 +1,14 @@
 import { siteData } from "./content.js";
 
 const routes = [
-  { id: "home", label: "Početna", href: "/" },
   { id: "services", label: "Usluge", href: "/usluge/" },
   { id: "projects", label: "Projekti", href: "/projekti/" },
   { id: "about", label: "O nama", href: "/o-nama/" },
   { id: "contact", label: "Kontakt", href: "/kontakt/" },
 ];
+
+const privacyRoute = { id: "privacy", label: "Privatnost", href: "/privatnost/" };
+const analysisHref = "/web-stranice-za-poduzeca/#analiza";
 
 const icon = (name) => {
   const icons = {
@@ -22,7 +24,10 @@ const icon = (name) => {
 function logoMarkup() {
   return `
     <span class="brand-mark" aria-hidden="true">
-      <img src="/images/osiris-logo.png" alt="" width="1254" height="1254" decoding="async">
+      <picture>
+        <source srcset="/images/osiris-mark-128.webp" type="image/webp">
+        <img src="/images/osiris-mark-128.png" alt="" width="128" height="128" decoding="async">
+      </picture>
     </span>
     <span class="brand-name">OSIRIS</span>
   `;
@@ -47,7 +52,6 @@ function renderHeader() {
     .join("");
 
   const desktopNavLinks = routes
-    .filter((route) => route.id !== "contact")
     .map(
       (route) => `
         <a class="nav-link${route.id === currentPage ? " is-active" : ""}"
@@ -69,8 +73,8 @@ function renderHeader() {
           ${desktopNavLinks}
         </nav>
 
-        <a class="button button-small button-primary header-cta" href="/web-stranice-za-poduzeca/#analiza">
-          Analiza ${icon("arrow")}
+        <a class="button button-small button-primary header-cta" href="${analysisHref}">
+          Besplatna analiza ${icon("arrow")}
         </a>
 
         <button class="menu-toggle" type="button" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
@@ -88,12 +92,11 @@ function renderHeader() {
             ${mobileNavLinks}
           </div>
           <div class="mobile-nav-footer">
-            <a class="button button-primary mobile-nav-cta" href="/web-stranice-za-poduzeca/#analiza">
-              <span>Zatražite besplatnu analizu</span>${icon("arrow")}
+            <a class="button button-primary mobile-nav-cta" href="${analysisHref}">
+              <span>Besplatna analiza</span>${icon("arrow")}
             </a>
             <div class="mobile-nav-location" aria-label="Lokacija studija">
               <span>Zagreb, Hrvatska</span>
-              <span>45.8° N / 16.0° E</span>
             </div>
           </div>
         </nav>
@@ -180,9 +183,16 @@ function renderHeader() {
     }
   });
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 960) closeMenu();
-  });
+  const desktopNavigation = window.matchMedia("(min-width: 60rem)");
+  const closeMenuAtDesktop = (event) => {
+    if (event.matches) closeMenu();
+  };
+
+  if (desktopNavigation.addEventListener) {
+    desktopNavigation.addEventListener("change", closeMenuAtDesktop);
+  } else {
+    desktopNavigation.addListener(closeMenuAtDesktop);
+  }
 
   const setHeaderState = () => {
     header.classList.toggle("is-scrolled", window.scrollY > 12);
@@ -196,10 +206,42 @@ function renderFooter() {
   const target = document.querySelector("[data-site-footer]");
   if (!target) return;
 
-  const footerLinks = routes
-    .filter((route) => route.id !== "home")
+  const footerLinks = [...routes, privacyRoute]
     .map((route) => `<a href="${route.href}">${route.label}</a>`)
     .join("");
+
+  const contactChannels = [];
+  const email = siteData.contact.email?.trim();
+  const phone = siteData.contact.phone?.trim();
+
+  if (email) {
+    contactChannels.push(
+      `<a class="text-link text-link-light" href="mailto:${email}">${email}</a>`,
+    );
+  }
+
+  if (phone) {
+    contactChannels.push(
+      `<a class="text-link text-link-light" href="tel:${phone.replace(/\s/g, "")}">${phone}</a>`,
+    );
+  }
+
+  const socialLabels = {
+    linkedin: "LinkedIn",
+    instagram: "Instagram",
+    github: "GitHub",
+  };
+
+  Object.entries(siteData.contact.socials ?? {}).forEach(([network, href]) => {
+    if (!href?.trim()) return;
+    contactChannels.push(
+      `<a class="text-link text-link-light" href="${href}" target="_blank" rel="noopener noreferrer">${socialLabels[network] ?? network}</a>`,
+    );
+  });
+
+  const contactChannelsMarkup = contactChannels.length
+    ? `<div class="footer-contact-channels" aria-label="Kontaktni kanali">${contactChannels.join("")}</div>`
+    : "";
 
   target.innerHTML = `
     <footer class="site-footer">
@@ -220,7 +262,8 @@ function renderFooter() {
         <div class="footer-contact">
           <p class="footer-label">Razgovarajmo</p>
           <p>Želite jasnije predstaviti svoje poslovanje? Poslat ćemo vam 3–5 konkretnih preporuka za vaš web.</p>
-          <a class="text-link text-link-light" href="/web-stranice-za-poduzeca/#analiza">Zatražite besplatnu analizu ${icon("arrow")}</a>
+          <a class="text-link text-link-light" href="${analysisHref}">Besplatna analiza ${icon("arrow")}</a>
+          ${contactChannelsMarkup}
         </div>
       </div>
 
@@ -239,13 +282,45 @@ function renderFooter() {
 function projectCard(project, index) {
   const hasLiveUrl = Boolean(project.liveUrl);
   const projectNumber = String(index + 1).padStart(2, "0");
+  const roles = Array.isArray(project.role)
+    ? project.role
+    : project.role
+      ? [project.role]
+      : project.services ?? [];
+  const media = project.media ?? {
+    type: "image",
+    src: project.preview,
+    alt: `Prikaz projekta ${project.title}`,
+  };
+  const mediaDimensions = [
+    media.width ? `width="${media.width}"` : "",
+    media.height ? `height="${media.height}"` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const mediaPosition = media.objectPosition
+    ? ` style="object-position: ${media.objectPosition}"`
+    : "";
+  const mediaSizes = media.sizes ? ` sizes="${media.sizes}"` : "";
+  const responsiveSources = [
+    media.sources?.avif
+      ? `<source type="image/avif" srcset="${media.sources.avif}"${mediaSizes}>`
+      : "",
+    media.sources?.webp
+      ? `<source type="image/webp" srcset="${media.sources.webp}"${mediaSizes}>`
+      : "",
+  ].join("");
+  const projectImage =
+    media.type === "image" && media.src
+      ? `<picture>${responsiveSources}<img src="${media.src}" alt="${media.alt ?? `Prikaz projekta ${project.title}`}" ${mediaDimensions}${mediaSizes} loading="lazy" decoding="async"${mediaPosition}></picture>`
+      : "";
 
   return `
     <article class="project-card${index === 0 ? " project-card-featured" : ""} reveal" data-project-category="${project.category}">
       <div class="project-preview preview-${(index % 4) + 1}">
         ${
-          project.preview
-            ? `<img src="${project.preview}" alt="Pregled projekta ${project.title}" loading="lazy">`
+          projectImage
+            ? projectImage
             : `<div class="project-window" aria-hidden="true">
                 <div class="window-bar"><span></span><span></span><span></span></div>
                 <div class="window-layout">
@@ -265,8 +340,8 @@ function projectCard(project, index) {
           <span>${project.industry}</span>
         </div>
         <h3>${project.title}</h3>
-        <div class="project-services" aria-label="Usluge na projektu">
-          ${project.services.map((service) => `<span>${service}</span>`).join("")}
+        <div class="project-services" aria-label="Uloga OSIRIS tima na projektu">
+          ${roles.map((role) => `<span>${role}</span>`).join("")}
         </div>
         <p>${project.summary}</p>
         ${
@@ -293,19 +368,22 @@ function packageCard(item) {
       <ul>
         ${item.includes.map((entry) => `<li>${entry}</li>`).join("")}
       </ul>
-      <a class="text-link" href="/web-stranice-za-poduzeca/#analiza">Zatražite analizu ${icon("arrow")}</a>
+      <a class="text-link" href="${analysisHref}">Besplatna analiza ${icon("arrow")}</a>
     </article>
   `;
 }
 
 function renderPackages() {
   document.querySelectorAll("[data-package-grid]").forEach((grid) => {
-    grid.innerHTML = siteData.packages.map(packageCard).join("");
+    if (grid.children.length) return;
+    const serviceTracks = siteData.serviceTracks ?? siteData.packages ?? [];
+    grid.innerHTML = serviceTracks.map(packageCard).join("");
   });
 }
 
 function renderProjects() {
   document.querySelectorAll("[data-project-grid]").forEach((grid) => {
+    if (grid.children.length) return;
     const limit = Number(grid.dataset.limit || siteData.projects.length);
     grid.innerHTML = siteData.projects
       .slice(0, limit)
@@ -339,53 +417,241 @@ function renderBrandData() {
   });
 
   document.querySelectorAll("[data-contact-email]").forEach((element) => {
-    if (siteData.contact.email) {
-      element.textContent = siteData.contact.email;
+    const email = siteData.contact.email?.trim();
+    const channel = element.closest("[data-contact-channel]") ?? element;
+    if (email) {
+      channel.hidden = false;
+      channel.removeAttribute("aria-hidden");
+      element.textContent = email;
+      element.removeAttribute("aria-disabled");
       if (element instanceof HTMLAnchorElement) {
-        element.href = `mailto:${siteData.contact.email}`;
+        element.href = `mailto:${email}`;
       }
       return;
     }
-    element.textContent = "Poslovni email bit će objavljen ovdje";
-    element.removeAttribute("href");
-    element.setAttribute("aria-disabled", "true");
+    channel.hidden = true;
+    channel.setAttribute("aria-hidden", "true");
   });
 
   document.querySelectorAll("[data-contact-phone]").forEach((element) => {
-    if (siteData.contact.phone) {
-      element.textContent = siteData.contact.phone;
+    const phone = siteData.contact.phone?.trim();
+    const channel = element.closest("[data-contact-channel]") ?? element;
+    if (phone) {
+      channel.hidden = false;
+      channel.removeAttribute("aria-hidden");
+      element.textContent = phone;
+      element.removeAttribute("aria-disabled");
       if (element instanceof HTMLAnchorElement) {
-        element.href = `tel:${siteData.contact.phone.replace(/\s/g, "")}`;
+        element.href = `tel:${phone.replace(/\s/g, "")}`;
       }
       return;
     }
-    element.textContent = "Telefon još nije objavljen";
-    element.removeAttribute("href");
-    element.setAttribute("aria-disabled", "true");
+    channel.hidden = true;
+    channel.setAttribute("aria-hidden", "true");
+  });
+
+  document.querySelectorAll("[data-contact-social]").forEach((element) => {
+    const network = element.dataset.contactSocial;
+    const href = siteData.contact.socials?.[network]?.trim();
+    const channel = element.closest("[data-contact-channel]") ?? element;
+    if (!href) {
+      channel.hidden = true;
+      channel.setAttribute("aria-hidden", "true");
+      return;
+    }
+
+    channel.hidden = false;
+    channel.removeAttribute("aria-hidden");
+    if (element instanceof HTMLAnchorElement) {
+      element.href = href;
+      element.target = "_blank";
+      element.rel = "noopener noreferrer";
+    }
   });
 }
 
+const formFieldContract = {
+  name: {
+    required: true,
+    empty: "Unesite ime i prezime.",
+  },
+  email: {
+    required: true,
+    empty: "Unesite email adresu.",
+    invalid: "Unesite ispravnu email adresu, primjerice ime@tvrtka.hr.",
+  },
+  websiteStatus: {
+    required: true,
+    empty: "Odaberite trenutačno stanje web stranice.",
+  },
+  primaryGoal: {
+    required: true,
+    empty: "Opišite glavni poslovni cilj web stranice.",
+  },
+};
+
 function setupContactForms() {
-  document.querySelectorAll("[data-contact-form]").forEach((form) => {
-    const status = form.querySelector("[data-form-status]");
+  document.querySelectorAll("[data-contact-form]").forEach((form, formIndex) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    let status = form.querySelector("[data-form-status]");
     const submit = form.querySelector('button[type="submit"]');
+    if (!(submit instanceof HTMLButtonElement)) return;
+
+    if (!status) {
+      status = document.createElement("p");
+      status.className = "form-status";
+      status.dataset.formStatus = "";
+      status.tabIndex = -1;
+      status.hidden = true;
+      form.append(status);
+    }
+
+    const controls = [...form.elements].filter(
+      (control) =>
+        (control instanceof HTMLInputElement ||
+          control instanceof HTMLSelectElement ||
+          control instanceof HTMLTextAreaElement) &&
+        control.type !== "hidden" &&
+        control.name !== "_gotcha",
+    );
+    const fieldErrors = new Map();
     const formspreeId = siteData.contact.formspreeId?.trim();
     const isConfigured = formspreeId && formspreeId !== "YOUR_FORM_ID";
     const endpoint = isConfigured ? `https://formspree.io/f/${formspreeId}` : "";
+    const originalSubmitMarkup = submit.innerHTML;
+
+    form.noValidate = true;
+    form.dataset.state = "idle";
+
+    controls.forEach((control) => {
+      const isRequired = Boolean(formFieldContract[control.name]?.required);
+      control.required = isRequired;
+      if (isRequired) {
+        control.setAttribute("aria-required", "true");
+      } else {
+        control.removeAttribute("aria-required");
+      }
+    });
 
     if (endpoint) {
       form.action = endpoint;
       form.method = "POST";
     }
 
+    const setFormState = (state, message = "", { focus = false } = {}) => {
+      form.dataset.state = state;
+      status.dataset.state = state;
+      status.hidden = !message;
+      status.textContent = message;
+      status.setAttribute("role", state === "error" ? "alert" : "status");
+      status.setAttribute("aria-live", state === "error" ? "assertive" : "polite");
+
+      if (focus && message) status.focus();
+    };
+
+    const getFieldError = (control) => {
+      if (fieldErrors.has(control)) return fieldErrors.get(control);
+
+      const controlKey = (control.id || control.name || "field").replace(/[^a-z0-9_-]/gi, "-");
+      const existingError = [...form.querySelectorAll("[data-error-for]")].find(
+        (element) => element.dataset.errorFor === control.name,
+      );
+      const error = existingError ?? document.createElement("small");
+      if (!error.id) error.id = `form-${formIndex}-${controlKey}-error`;
+      error.classList.add("field-error");
+      error.dataset.fieldError = control.name;
+      error.hidden = true;
+      if (!existingError) control.insertAdjacentElement("afterend", error);
+
+      const describedBy = new Set(
+        (control.getAttribute("aria-describedby") ?? "").split(/\s+/).filter(Boolean),
+      );
+      describedBy.add(error.id);
+      control.setAttribute("aria-describedby", [...describedBy].join(" "));
+      control.setAttribute("aria-errormessage", error.id);
+      fieldErrors.set(control, error);
+      return error;
+    };
+
+    const validationMessage = (control) => {
+      const rule = formFieldContract[control.name];
+      const value = control.value.trim();
+
+      if (rule?.required && !value) return rule.empty;
+      if (!value) return "";
+      if (control.validity.typeMismatch && control.type === "email") {
+        return rule?.invalid ?? "Unesite ispravnu email adresu.";
+      }
+      if (control.validity.typeMismatch && control.type === "url") {
+        return "Unesite potpunu web adresu, primjerice https://primjer.hr.";
+      }
+      if (!control.validity.valid) return "Provjerite unesenu vrijednost.";
+      return "";
+    };
+
+    const showFieldError = (control, message) => {
+      const error = getFieldError(control);
+      error.textContent = message;
+      error.hidden = false;
+      control.setAttribute("aria-invalid", "true");
+    };
+
+    const clearFieldError = (control) => {
+      const error = fieldErrors.get(control);
+      if (error) {
+        error.textContent = "";
+        error.hidden = true;
+      }
+      control.removeAttribute("aria-invalid");
+    };
+
+    const clearAllFieldErrors = () => {
+      controls.forEach(clearFieldError);
+    };
+
+    controls.forEach((control) => {
+      const clearOnEdit = () => {
+        clearFieldError(control);
+        if (form.dataset.state === "error") setFormState("idle");
+      };
+      control.addEventListener("input", clearOnEdit);
+      control.addEventListener("change", clearOnEdit);
+      control.addEventListener("blur", () => {
+        if (control.getAttribute("aria-invalid") !== "true") return;
+        const message = validationMessage(control);
+        if (message) showFieldError(control, message);
+        else clearFieldError(control);
+      });
+    });
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (!form.reportValidity()) return;
+      clearAllFieldErrors();
+
+      let firstInvalid = null;
+      controls.forEach((control) => {
+        const message = validationMessage(control);
+        if (!message) return;
+        showFieldError(control, message);
+        firstInvalid ??= control;
+      });
+
+      if (firstInvalid) {
+        setFormState(
+          "error",
+          "Provjerite označena polja. Uz svako polje nalazi se opis potrebnog ispravka.",
+        );
+        firstInvalid.focus();
+        return;
+      }
 
       if (!endpoint) {
-        status.hidden = false;
-        status.textContent = "Kontaktni obrazac još nije povezan. Dodajte Formspree form ID.";
-        status.focus();
+        setFormState(
+          "error",
+          "Obrazac trenutačno nije povezan sa servisom za slanje. Pokušajte ponovno kasnije.",
+          { focus: true },
+        );
         return;
       }
 
@@ -396,9 +662,13 @@ function setupContactForms() {
       });
       formData.set("pageUrl", window.location.href);
 
-      status.hidden = false;
-      status.textContent = "Šaljemo vaš zahtjev…";
+      setFormState("pending", "Šaljemo vaš zahtjev…");
+      form.setAttribute("aria-busy", "true");
       submit.disabled = true;
+      submit.setAttribute("aria-disabled", "true");
+      submit.textContent = "Slanje u tijeku…";
+
+      let responseErrorMessage = "";
 
       try {
         const response = await fetch(endpoint, {
@@ -406,14 +676,28 @@ function setupContactForms() {
           headers: { Accept: "application/json" },
           body: formData,
         });
-        if (!response.ok) throw new Error("submission_failed");
+
+        if (!response.ok) {
+          responseErrorMessage =
+            response.status === 429
+              ? "Poslano je previše zahtjeva u kratkom vremenu. Pričekajte nekoliko minuta pa pokušajte ponovno."
+              : "Zahtjev nije poslan zbog pogreške servisa. Provjerite podatke i pokušajte ponovno.";
+          throw new Error("submission_failed");
+        }
+
         form.reset();
-        status.textContent = siteData.contact.statusMessage;
+        clearAllFieldErrors();
+        setFormState("success", siteData.contact.statusMessage, { focus: true });
       } catch {
-        status.textContent = "Zahtjev trenutačno nije poslan. Pokušajte ponovno za nekoliko minuta.";
+        const message =
+          responseErrorMessage ||
+          "Zahtjev trenutačno nije poslan. Provjerite internetsku vezu i pokušajte ponovno.";
+        setFormState("error", message, { focus: true });
       } finally {
+        form.removeAttribute("aria-busy");
         submit.disabled = false;
-        status.focus();
+        submit.removeAttribute("aria-disabled");
+        submit.innerHTML = originalSubmitMarkup;
       }
     });
   });
@@ -428,28 +712,149 @@ function setupHeroVideo() {
   video.playsInline = true;
   video.setAttribute("playsinline", "");
   video.setAttribute("webkit-playsinline", "");
+  video.removeAttribute("autoplay");
+  video.removeAttribute("src");
+  video.querySelectorAll("source").forEach((source) => source.removeAttribute("src"));
+  video.preload = "none";
+  video.pause();
+  video.load();
 
-  const play = () => {
-    if (document.visibilityState !== "visible") return;
-    const attempt = video.play();
-    if (attempt?.catch) {
-      attempt.catch(() => {
-        // Poster stays visible if autoplay is blocked.
-      });
+  const configuredSources = [
+    { src: video.dataset.videoSrcWebm?.trim(), type: "video/webm" },
+    { src: video.dataset.videoSrcMp4?.trim(), type: "video/mp4" },
+  ].filter(({ src }) => Boolean(src));
+  const hero = video.closest(".home-hero, .cinematic-hero") ?? video.parentElement;
+  let toggle = hero?.querySelector("[data-video-toggle]") ?? document.querySelector("[data-video-toggle]");
+
+  if (!configuredSources.length) {
+    if (toggle) {
+      toggle.hidden = true;
+      toggle.disabled = true;
+      toggle.setAttribute("aria-pressed", "false");
     }
-  };
-
-  if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-    play();
-  } else {
-    video.addEventListener("loadeddata", play, { once: true });
+    return;
   }
 
-  video.addEventListener("canplay", play, { once: true });
-  window.addEventListener("pageshow", play);
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") play();
+  video.querySelectorAll("source").forEach((source) => source.remove());
+  const sourceRecords = configuredSources.map(({ src, type }) => {
+    const source = document.createElement("source");
+    source.type = type;
+    source.dataset.src = src;
+    video.append(source);
+    return { element: source, src };
   });
+
+  const desktopViewport = window.matchMedia("(min-width: 60rem)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const connection = navigator.connection ?? navigator.mozConnection ?? navigator.webkitConnection;
+
+  if (!toggle) {
+    toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "video-toggle cinematic-video-toggle";
+    toggle.dataset.videoToggle = "";
+    const toggleContainer = hero?.querySelector(
+      ".home-hero__inner, .cinematic-hero-inner, .home-hero__actions, .cinematic-actions",
+    );
+    (toggleContainer ?? hero)?.append(toggle);
+  }
+
+  if (!video.id) video.id = "hero-background-video";
+  toggle?.setAttribute("aria-controls", video.id);
+  const toggleLabel = toggle?.querySelector("[data-video-toggle-label]") ?? toggle;
+
+  let sourceLoaded = false;
+  const canObserveIntersection = "IntersectionObserver" in window;
+  let isIntersecting = !canObserveIntersection;
+  let userPaused = false;
+
+  const canUseVideo = () =>
+    desktopViewport.matches && !reducedMotion.matches && !connection?.saveData;
+
+  const updateToggle = () => {
+    if (!toggle) return;
+    const allowed = canUseVideo();
+    const isPlaying = allowed && sourceLoaded && !video.paused;
+    toggle.hidden = !allowed;
+    toggle.disabled = !allowed;
+    toggle.setAttribute("aria-pressed", String(isPlaying));
+    toggle.setAttribute(
+      "aria-label",
+      isPlaying ? "Pauziraj pozadinski video" : "Pokreni pozadinski video",
+    );
+    toggleLabel.textContent = isPlaying ? "Pauziraj video" : "Pokreni video";
+  };
+
+  const loadSource = () => {
+    if (sourceLoaded) return;
+    sourceRecords.forEach(({ element, src }) => element.setAttribute("src", src));
+    sourceLoaded = true;
+    video.preload = "metadata";
+    video.load();
+  };
+
+  const unloadSource = () => {
+    video.pause();
+    if (!sourceLoaded) return;
+    sourceRecords.forEach(({ element }) => element.removeAttribute("src"));
+    sourceLoaded = false;
+    video.preload = "none";
+    video.load();
+  };
+
+  const attemptPlay = () => {
+    const attempt = video.play();
+    if (attempt?.catch) attempt.catch(updateToggle);
+  };
+
+  const syncPlayback = () => {
+    if (!canUseVideo()) {
+      unloadSource();
+      updateToggle();
+      return;
+    }
+
+    loadSource();
+    const shouldPlay =
+      document.visibilityState === "visible" && isIntersecting && !userPaused;
+
+    if (shouldPlay) attemptPlay();
+    else video.pause();
+    updateToggle();
+  };
+
+  toggle?.addEventListener("click", () => {
+    if (!canUseVideo()) return;
+    userPaused = !video.paused;
+    syncPlayback();
+  });
+
+  video.addEventListener("play", updateToggle);
+  video.addEventListener("pause", updateToggle);
+  video.addEventListener("ended", updateToggle);
+
+  if (canObserveIntersection) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        syncPlayback();
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(video);
+  }
+
+  const listenForMediaChange = (query) => {
+    if (query.addEventListener) query.addEventListener("change", syncPlayback);
+    else query.addListener(syncPlayback);
+  };
+
+  listenForMediaChange(desktopViewport);
+  listenForMediaChange(reducedMotion);
+  connection?.addEventListener?.("change", syncPlayback);
+  window.addEventListener("pageshow", syncPlayback);
+  document.addEventListener("visibilitychange", syncPlayback);
+  syncPlayback();
 }
 
 function setupParallax() {
@@ -484,6 +889,8 @@ function setupReveals() {
 }
 
 function setupSmoothScroll() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (event) {
       const href = this.getAttribute("href");
@@ -500,7 +907,7 @@ function setupSmoothScroll() {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: reducedMotion.matches ? "auto" : "smooth",
       });
     });
   });
