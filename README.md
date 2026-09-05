@@ -1,96 +1,41 @@
 # OSIRIS
 
-Višestranična web stranica za OSIRIS — mali web tim Tina i Matea iz Zagreba. Projekt je izrađen kao lagana statička stranica bez frameworka, vanjskih JavaScript paketa ili vlastitog backenda.
+Statička web stranica OSIRIS-a, web tima Tina i Matea iz Zagreba. Nema frameworka, baze podataka ni produkcijskih JavaScript ovisnosti. Razvojne ovisnosti služe isključivo testiranju.
 
-## Stranice
+## Pokretanje i build
 
-- Početna: `/`
-- Usluge: `/usluge/`
-- Projekti: `/projekti/`
-- O nama: `/o-nama/`
-- Kontakt: `/kontakt/`
-- Landing za MSP: `/web-stranice-za-poduzeca/`
-- Privatnost: `/privatnost/`
+Potreban je Node.js 22 ili noviji.
 
-## Lokalno pokretanje
+- `npm ci` — instalacija zaključanih razvojnih ovisnosti.
+- `npm run dev` — lokalni prikaz na http://localhost:4173.
+- `npm run build` — provjere i generiranje kompletne statičke stranice u `dist/`.
+- `npm run preview` — posluživanje gotovog `dist/` na istom portu.
 
-Potreban je Node.js. Projekt nema pakete koje treba instalirati.
+Razvojni server i build koriste isti renderer iz `scripts/render-page.mjs`. HTML predlošci sadrže označena mjesta za zajedničku navigaciju, obrasce, usluge i projekte. Ne objavljujte izvorne HTML predloške izravno: objavljuje se isključivo `dist/`.
 
-```bash
-npm run dev
-```
+## Sadržaj
 
-Stranica će biti dostupna na [http://localhost:4173](http://localhost:4173).
+`js/content.js` sadrži poslovni naziv, kontakt, provjerene podatke osnivača, usluge, svih pet projekata i Formspree ID. Stranični tekst nalazi se u pripadajućim HTML predlošcima. Renderer HTML-escapea podatke prije umetanja.
 
-## Uređivanje sadržaja
+Rute: `/`, `/usluge/`, `/projekti/`, `/o-nama/`, `/kontakt/`, `/web-stranice-za-poduzeca/`, `/privatnost/`. Nepostojeća ruta prikazuje `404.html` sa statusom 404.
 
-Promjenjivi podaci nalaze se u `js/content.js`:
+Oba obrasca koriste isti skup polja i Formspree POST odredište. HTML ima izvornu validaciju; JavaScript dodaje poruke uz polja, obradu pogrešaka, zaštitu od ponovljenog slanja i timeout od 20 sekundi. Nazivi polja ostaju `name`, `email`, `websiteStatus`, `primaryGoal`, `websiteUrl`, `company`, `message`, `_gotcha`, četiri UTM oznake i `pageUrl`.
 
-- `brand` — naziv, lokacija, članovi i statistike
-- `contact` — email, telefon, društvene mreže i Formspree form ID
-- `serviceTracks` — tri jedinstvena smjera usluge
-- `projects` — pet objavljenih projekata s ulogom, izazovom, rješenjem, ishodom, responsive medijima i live URL-ovima
+UTM oznake prenose se putem internih poveznica. Ne koriste se kolačići ni trajna pohrana za praćenje. Besplatna analiza vodi na Kontakt, osim na landing i kontakt stranici gdje poveznica ostaje na lokalnom obrascu.
 
-Oba kontaktna obrasca koriste isti skup polja i šalju podatke izravno u Formspree ID zapisan u `js/content.js`. Nisu potrebni vlastiti backend ni environment varijable. Portfolio kartice vode samo na provjerene javne projekte.
+## Testiranje
 
-## Provjera kvalitete
+- `npm run check` — statički ugovori, struktura naslova, ID-jevi, lokalni asseti, ARIA reference, obrasci, CSS tokeni i odabrani kontrastni parovi.
+- `npx playwright install chromium firefox webkit` — instalacija razvojnih preglednika.
+- `npm test` — build i provjere u sva tri browser enginea.
+- `npm run test:chromium` — brža provjera u Chromiumu.
 
-```bash
-npm run check
-```
+Testovi pokrivaju osam ruta, 17 širina, kratki mobilni zaslon, fokus, native navigaciju, rad bez JavaScripta, povećanje teksta, reduced motion, axe provjere i simulirane ishode obrasca. Zahtjevi prema Formspreeju presreću se; testovi ne šalju stvarne upite. Screenshotovi i tragovi nalaze se u ignoriranom `test-results/`, a izvještaj u `playwright-report/`.
 
-Provjera obuhvaća svih sedam ruta, lokalne assete, strukturu naslova, ugovor obrazaca, responsive slike, sigurnost vanjskih poveznica, CSS tokene, kontrast i zabranjene globalne overrideove. Pravila novog vizualnog sustava nalaze se u `DESIGN-SYSTEM.md`.
+Automatizirani testovi ne zamjenjuju ručnu provjeru čitačem zaslona i na stvarnom telefonu. Stvarnu dostavu provjeravajte samo unaprijed dogovorenim testnim upitom.
 
-Predlošci tri emaila i preduvjeti zasebne email kampanje nalaze se u `OUTREACH-EMAILS.md`. Kampanja nije dio web stranice niti kontaktnog obrasca.
+## Objava
 
-## GitHub
+Postojeća Sites konfiguracija koristi `dist/`. Vercel također koristi `dist/` i naredbu `npm run build`. Sačuvajte postojeći projekt i način pristupa; ne objavljujte `node_modules`, testove, nacrte ni arhivske stilove. Poslovni naziv i email potvrđeni su od vlasnika; poslovnu adresu i dodatne poslovne podatke unosite samo nakon potvrde.
 
-Lokalni repozitorij koristi granu `main`, a `origin` treba pokazivati na:
-
-```text
-https://github.com/VrachoxWizard/osiris-web.git
-```
-
-Za prvi ručni commit i push:
-
-```bash
-git add .
-git status
-git commit -m "feat: initial OSIRIS website"
-git push -u origin main
-```
-
-## Ručni deploy na Vercel
-
-1. U Vercel nadzornoj ploči odaberite **New Project**.
-2. Uvezite GitHub repozitorij `VrachoxWizard/osiris-web`.
-3. Ostavite root direktorij na `./`.
-4. Framework Preset postavite na **Other**. To je već naznačeno u `vercel.json`.
-5. Build Command i Output Directory ostavite praznima — stranica je statička i nema build korak.
-6. Nisu potrebne environment varijable.
-7. Odaberite **Deploy**.
-
-Nakon povezivanja GitHub repozitorija, budući commitovi na produkcijsku granu mogu automatski pokretati nova Vercel izdanja.
-
-## Struktura
-
-```text
-css/           stilovi
-images/        logo i grafički elementi
-js/            sadržaj i interakcije
-media/         lokalne fotografije i video
-kontakt/       kontakt stranica
-web-stranice-za-poduzeca/  landing za email promet
-privatnost/    informacije o privatnosti
-o-nama/        stranica o timu
-projekti/      portfolio stranica
-usluge/        stranica usluga
-index.html     početna stranica
-server.mjs     lokalni razvojni server
-```
-
-Izvori korištenih medija navedeni su u [MEDIA-CREDITS.md](MEDIA-CREDITS.md).
-
-## Licenca
-
-Sva prava pridržana. Izvorni kod i OSIRIS vizualni identitet nisu objavljeni pod open-source licencom.
+Aktualni vizualni ugovor je `DESIGN-SYSTEM.md`. Stariji DESIGN dokumenti i stilovi predstavljaju povijest projekta. Izvori medija nalaze se u `MEDIA-CREDITS.md`. Email kampanja iz `OUTREACH-EMAILS.md` zaseban je posao i nije dio obrasca.

@@ -1,53 +1,39 @@
 # OSIRIS visual system
 
-The live site has one authoritative stylesheet: `css/osiris-v2.css`. Older OSIRIS stylesheets are retained only as historical references and must not be linked from a page.
+The sole production stylesheet is `css/osiris-v2.css`. Historical CSS files are neither linked nor published. The visual direction is a restrained editorial studio website: real project screenshots, clear Croatian language, Ink navigation and heroes, Paper information sections, Soft Blue process sections, and blue calls to action.
 
-## Direction
+## Type and layout
 
-- Polished cinematic/editorial tone with a controlled light–dark rhythm.
-- Dark surfaces are reserved for navigation, heroes, project media, the footer, and one proof section per page.
-- Informational content uses Paper; explanatory/process content uses Soft Blue.
-- Real project work is the primary visual proof. Generated or stock people must never represent the OSIRIS team or a client.
+- Local Libre Baskerville for headings, Instrument Sans for body and controls; retain Latin Extended fonts for Croatian.
+- Homepage H1: 40–80px. Internal H1: 36–64px. H2: 30–48px. H3: 22–28px.
+- Headings use approximately 1.12–1.15 line height and restrained tracking. Do not impose narrow global character limits.
+- Body: 16–18px, line height 1.6, readable measure up to 65 characters.
+- Container maximum: 1280px. Mobile gutters: 20px. Section spacing: 56px mobile, 64px tablet, up to 96px desktop.
+- Breakpoints: 640, 960, 1200px. CSS and navigation JavaScript share 60rem for desktop navigation.
+- Mobile heroes and process rows are content-sized. Project previews are three columns on desktop and one on mobile/tablet; case studies use two desktop columns and one final split case.
 
-## Core tokens
+## Palette and component surfaces
 
-| Role | Value |
-| --- | --- |
-| Cinematic ink | `#05070B` |
-| Navy | `#0B1120` |
-| Tech Blue | `#3F5EA2` |
-| Deep Blue | `#263F73` |
-| Soft Blue | `#DCE8FF` |
-| Paper | `#F5F7FA` |
-| Light text | `#FFFFFF` |
-| Dark text | `#0F172A` |
-| Secondary dark text | `#475569` |
+Ink `#05070B`, Navy `#0B1120`, Tech Blue `#3F5EA2`, Deep Blue `#263F73`, Soft Blue `#DCE8FF`, Paper `#F5F7FA`, White `#FFFFFF`. Dark text `#0F172A`, secondary text `#475569`, field border `#64748B`.
 
-All opaque text/background pairs used by the system are checked at a minimum contrast ratio of 4.5:1 by `npm run check`. New hex colours belong in the token layer; literal hex colours are rejected elsewhere.
+Surface components define their own text, muted text, link, border, focus, and button tokens. A white form nested in a blue section must reset every relevant token, including the blue submit button and dark focus ring. Breadcrumbs inherit local surface colors. New colors belong in the token layer.
 
-## Typography
+## Interaction and accessibility
 
-- Libre Baskerville, weights 400 and 700: hero and editorial headings.
-- Instrument Sans variable, weights 400–700: body, navigation, labels, buttons, and form copy.
-- Both families are loaded locally as WOFF2 with Latin and Latin Extended subsets.
-- Body copy uses a fluid 16–18 px scale and a maximum readable measure of 68 characters.
+- Deliver complete navigation, forms, projects and footer in rendered HTML; JavaScript only enhances them.
+- Native mobile details navigation remains available without JavaScript. The enhanced overlay scrolls independently, traps keyboard focus, makes page content inert, closes with Escape, and resets at desktop widths.
+- Native fragments preserve history. Main has tabindex -1 for the skip link.
+- Controls have visible labels and 52px height; standalone links aim for at least 44px. Inline prose links retain normal line flow.
+- Form errors use explicit descriptions; status messages are persistent live regions. Native POST and validation remain the fallback.
+- Hover styles apply only to hover-capable fine pointers; reduced-motion mode uses instant scrolling and no transitions.
+- Avoid clipping text or focus outlines. Crop only in dedicated media containers.
 
-## Layout
+## Media
 
-- Maximum content width: 1280 px.
-- Breakpoints: 640 px, 960 px, and 1200 px.
-- JavaScript and CSS share the desktop query `(min-width: 60rem)`.
-- Section rhythm: approximately 96 px desktop, 64 px tablet, and 56 px mobile.
-- Internal heroes are capped at 75 svh; only the homepage hero occupies a full viewport.
+Use supplied artwork and real project screenshots. Preserve 16:9 project images and AVIF/WebP sources with accurate sizes. Captions sit below the media. Only the principal hero image is high priority; below-fold content is lazy loaded. The stock hero image is illustrative, not an OSIRIS team portrait. The unrelated laboratory video remains disconnected.
 
-## Media and interaction
+## Maintenance and validation
 
-- Project imagery uses AVIF, WebP, and PNG fallback sources at 480, 800, 1200, and 1920 px.
-- The homepage poster uses dedicated 960, 1600, and 1920 px AVIF/WebP sources.
-- Every content image has dimensions, descriptive alternative text, and asynchronous decoding.
-- Reduced-motion mode removes motion and instantaneously handles scrolling.
-- A hero video may be restored only with approved WebM and MP4 sources that show relevant OSIRIS work; mobile, reduced-motion, and save-data modes remain poster-only.
+Shared components are generated in `scripts/render-page.mjs` using `js/content.js`; page-specific text remains in the HTML templates. Both development serving and production building use the same renderer. Browser tests validate actual nested surfaces, keyboard paths and responsive layouts in addition to static checks. Do not describe automated checks as complete accessibility conformance or field performance measurement.
 
-## Quality gate
-
-Run `npm run check` before publication. It validates all seven routes, local assets, heading structure, shared form fields, responsive image metadata, external-link safety, CSS layers, token usage, contrast pairs, undefined variables, and banned `!important` or `transition: all` declarations.
+Before future Superdesign canvas work, refresh its ignored context from this file and the current renderer/templates. Historical canvas drafts use an obsolete visual system and must not overwrite this implementation.

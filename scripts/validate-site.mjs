@@ -3,6 +3,7 @@ import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+import { renderPage } from './render-page.mjs';
 const pages = [
   "index.html",
   "usluge/index.html",
@@ -11,6 +12,7 @@ const pages = [
   "kontakt/index.html",
   "web-stranice-za-poduzeca/index.html",
   "privatnost/index.html",
+  "404.html",
 ];
 const errors = [];
 
@@ -43,11 +45,12 @@ function contrastRatio(foreground, background) {
 
 function localAssetCandidates(html) {
   const candidates = new Set();
-  const attributes = /(?:src|poster|data-video-src-(?:mp4|webm))=["']([^"']+)["']/g;
+  const attributes = /(?:src|href|poster|data-video-src-(?:mp4|webm))=["']([^"']+)["']/g;
   for (const match of html.matchAll(attributes)) {
     const value = match[1];
     if (!value.startsWith("/") || value.startsWith("//")) continue;
-    candidates.add(value.split(/[?#]/)[0]);
+    const pathname = value.split(/[?#]/)[0];
+    if (pathname && extname(pathname)) candidates.add(pathname);
   }
 
   for (const match of html.matchAll(/srcset=["']([^"']+)["']/g)) {
@@ -65,13 +68,14 @@ for (const page of pages) {
   const file = join(root, page);
   let html;
   try {
-    html = await readFile(file, "utf8");
+    html = renderPage(await readFile(file, "utf8"), page);
   } catch {
     errors.push(`${page}: datoteka ne postoji`);
     continue;
   }
 
   report(count(html, /<h1\b/gi) === 1, `${page}: mora imati točno jedan h1`);
+  report(/name="viewport" content="width=device-width, initial-scale=1(?:\.0)?"/.test(html), `${page}: neispravan viewport`);
   report(count(html, /<main\b/gi) === 1, `${page}: mora imati točno jedan main`);
   report(html.includes("data-site-header"), `${page}: nedostaje header mount`);
   report(html.includes("data-site-footer"), `${page}: nedostaje footer mount`);
@@ -81,14 +85,28 @@ for (const page of pages) {
     `${page}: još učitava legacy stylesheet`,
   );
 
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
+  report(new Set(ids).size === ids.length, page + ': duplicirani ID');
+  let previousHeading = 0;
+  for (const match of html.matchAll(/<h([1-6])\b/g)) {
+    const level = Number(match[1]);
+    report(level <= previousHeading + 1, page + ': preskočena razina naslova');
+    previousHeading = level;
+  }
+  for (const match of html.matchAll(/href="#([^"]+)"/g)) report(ids.includes(match[1]), page + ': nepostojeći fragment ' + match[1]);
+  for (const match of html.matchAll(/aria-(?:labelledby|describedby)="([^"]+)"/g)) {
+    for (const id of match[1].split(/\s+/)) report(ids.includes(id), page + ': nepostojeći ARIA cilj ' + id);
+  }
+  report(html.includes('<header ') && html.includes('<footer>') || html.includes('<header ') && html.includes('<footer '), page + ': nedostaje statička navigacija');
   for (const image of html.matchAll(/<img\b[^>]*>/gi)) {
+    report(/\balt=["'][^"']*["']/i.test(image[0]), page + ': slika nema alt');
     report(/\bwidth=["']\d+["']/i.test(image[0]), `${page}: slika nema width`);
     report(/\bheight=["']\d+["']/i.test(image[0]), `${page}: slika nema height`);
     report(/\bdecoding=["']async["']/i.test(image[0]), `${page}: slika nema decoding="async"`);
   }
 
   for (const source of html.matchAll(/<source\b[^>]*\bsrcset=[^>]*>/gi)) {
-    report(/\bsizes=["'][^"']+["']/i.test(source[0]), `${page}: responsive source nema sizes`);
+    report(!/\d+w/.test(source[0]) || /\bsizes=["'][^"']+["']/i.test(source[0]), `${page}: responsive source nema sizes`);
   }
 
   for (const externalLink of html.matchAll(/<a\b[^>]*\btarget=["']_blank["'][^>]*>/gi)) {
@@ -105,6 +123,9 @@ for (const page of pages) {
 
   for (const form of html.matchAll(/<form\b[\s\S]*?<\/form>/gi)) {
     const markup = form[0];
+    report(markup.includes('action="https://formspree.io/f/'), page + ': nedostaje POST odredište');
+    report(/method="post"/i.test(markup), page + ': obrazac mora koristiti POST');
+    report(!/\bnovalidate\b/i.test(markup), page + ': native validacija mora raditi bez JavaScripta');
     for (const requiredName of ["name", "email", "websiteStatus", "primaryGoal"]) {
       const field = new RegExp(`<[^>]+name=["']${requiredName}["'][^>]*>`, "i").exec(markup)?.[0];
       report(Boolean(field), `${page}: obrazac nema polje ${requiredName}`);
@@ -170,6 +191,9 @@ const contrastPairs = [
   ["sekundarni tekst / Tech Blue", "--text-muted-brand", "--tech-blue"],
   ["success tekst / success površina", "--success", "--success-surface"],
   ["error tekst / error površina", "--error", "--error-surface"],
+  ["breadcrumb na svijetloj površini", "--deep-blue", "--paper"],
+  ["obrub polja", "--field-border", "--white"],
+  ["fokus kartice", "--deep-blue", "--white"],
 ];
 
 for (const [label, foregroundToken, backgroundToken] of contrastPairs) {
@@ -182,6 +206,9 @@ for (const [label, foregroundToken, backgroundToken] of contrastPairs) {
   }
 }
 
+for (const match of css.matchAll(/url\(["']?(\/fonts\/[^"')]+)["']?\)/g)) {
+  try { await access(join(root, match[1].slice(1))); } catch { errors.push('Nedostaje font: ' + match[1]); }
+}
 if (errors.length) {
   console.error(`Provjera nije prošla (${errors.length}):`);
   errors.forEach((error) => console.error(`- ${error}`));

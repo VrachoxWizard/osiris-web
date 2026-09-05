@@ -1,10 +1,13 @@
 import { createReadStream } from "node:fs";
-import { stat } from "node:fs/promises";
+import { stat, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = dirname(fileURLToPath(import.meta.url));
+import { renderPage } from './scripts/render-page.mjs';
+const projectRoot = dirname(fileURLToPath(import.meta.url));
+const built = process.argv.includes('--built');
+const root = built ? join(projectRoot, 'dist') : projectRoot;
 const port = Number.parseInt(process.env.PORT ?? "4173", 10);
 
 const mimeTypes = {
@@ -66,6 +69,13 @@ const server = createServer(async (request, response) => {
 
     if (!fileStat.isFile()) throw new Error("Not a file");
 
+    if (extname(filePath) === '.html') {
+      const source = await readFile(filePath, 'utf8');
+      const html = built ? source : renderPage(source, request.url);
+      response.writeHead(200, {'Content-Type':'text/html; charset=utf-8','Content-Length':Buffer.byteLength(html),'Cache-Control':'no-cache','X-Content-Type-Options':'nosniff'});
+      response.end(request.method === 'HEAD' ? undefined : html);
+      return;
+    }
     const contentType = mimeTypes[extname(filePath).toLowerCase()] ?? "application/octet-stream";
     response.writeHead(200, {
       "Content-Type": contentType,
@@ -81,13 +91,14 @@ const server = createServer(async (request, response) => {
 
     createReadStream(filePath).pipe(response);
   } catch {
-    const notFound = "<!doctype html><html lang=\"hr\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width\"><title>404 — OSIRIS</title><style>body{font-family:system-ui;display:grid;min-height:100vh;place-items:center;margin:0;background:#f8fafc;color:#070a0f}main{text-align:center;padding:2rem}a{color:#2563eb;font-weight:700}</style><main><p>404</p><h1>Stranica nije pronađena.</h1><a href=\"/\">Povratak na početnu</a></main></html>";
+    const source = await readFile(join(root, '404.html'), 'utf8');
+    const notFound = built ? source : renderPage(source, '/404.html');
     response.writeHead(404, {
       "Content-Type": "text/html; charset=utf-8",
       "Content-Length": Buffer.byteLength(notFound),
       "Cache-Control": "no-cache",
     });
-    response.end(notFound);
+    response.end(request.method === "HEAD" ? undefined : notFound);
   }
 });
 

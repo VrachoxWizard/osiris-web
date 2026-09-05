@@ -1,3 +1,5 @@
+> Historical reference only. This document describes a retired implementation. Use DESIGN-SYSTEM.md for the current design and README.md for build and validation instructions.
+
 # OSIRIS Website Design Enhancement Summary
 
 ## Overview

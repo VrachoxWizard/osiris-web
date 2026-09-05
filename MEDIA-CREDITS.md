@@ -5,7 +5,7 @@ Lokalne kopije fotografija korištene na OSIRIS web stranici preuzete su s Pexel
 | Lokalna datoteka | Autor | Izvor |
 | --- | --- | --- |
 | `media/osiris-coding-hero-poster.jpg` | Christina Morillo | [Person using MacBook Pro](https://www.pexels.com/photo/person-using-macbook-pro-1181677/) |
-| `media/osiris-planning-workspace.jpg` | Startup Stock Photos | [Laptop and notebook on desk](https://www.pexels.com/photo/startup-photos-7376/) |
+| `media/osiris-planning-workspace.jpg` | Startup Stock Photos | [Whiteboard with project-planning notes](https://www.pexels.com/photo/startup-photos-7376/) |
 
 Datoteke `media/osiris-modern-workspace.jpg` i `media/osiris-team-process.jpg` zadržane su kao legacy izvori, ali se više ne prikazuju. Postojeći `media/osiris-coding-hero.mp4` također nije povezan sa stranicom jer njegov kadar ne odgovara hero sadržaju ni ranije navedenoj atribuciji; prije eventualne ponovne uporabe treba potvrditi izvor i isporučiti odgovarajuće WebM/MP4 verzije.
 
