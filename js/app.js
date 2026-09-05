@@ -58,7 +58,7 @@ function setupNavigation() {
 const requiredMessages = {
   name: 'Unesite ime i prezime.',
   email: 'Unesite email adresu.',
-  websiteStatus: 'Odaberite trenutačno stanje web stranice.',
+  websiteStatus: 'Odaberite trenutačno stanje.',
   primaryGoal: 'Opišite što želite postići web stranicom.',
 };
 function normalizeWebsite(control) {
@@ -69,7 +69,7 @@ function normalizeWebsite(control) {
     if (!['http:', 'https:'].includes(url.protocol) || !url.hostname.includes('.') || url.username || url.password) throw new Error();
     control.value = url.href;
     return '';
-  } catch { return 'Unesite web adresu, primjerice primjer.hr ili https://primjer.hr.'; }
+  } catch { return 'Unesite web adresu, npr. primjer.hr ili https://primjer.hr.'; }
 }
 function setupContactForms() {
   document.querySelectorAll('[data-contact-form]').forEach(form => {
@@ -106,7 +106,7 @@ function setupContactForms() {
         clearError(control);
         let message = normalizeWebsite(control);
         if (control.required && !control.value.trim()) message = requiredMessages[control.name];
-        else if (control.type === 'email' && control.validity.typeMismatch) message = 'Unesite ispravnu email adresu, primjerice ime@primjer.hr.';
+        else if (control.type === 'email' && control.validity.typeMismatch) message = 'Unesite ispravnu email adresu, npr. ime@primjer.hr.';
         else if (!message && !control.validity.valid) message = 'Provjerite unesenu vrijednost.';
         if (!message) return;
         control.setAttribute('aria-invalid','true');
@@ -114,7 +114,7 @@ function setupContactForms() {
         firstInvalid ||= control;
       });
       if (firstInvalid) {
-        setState('error','Provjerite označena polja. Uz svako polje nalazi se opis potrebnog ispravka.');
+        setState('error','Provjerite označena polja.');
         firstInvalid.focus(); return;
       }
       const data = new FormData(form);
@@ -125,7 +125,7 @@ function setupContactForms() {
       controls.forEach(control => { control.disabled = true; });
       submit.disabled = true;
       const originalLabel = submit.textContent;
-      submit.textContent = 'Slanje u tijeku…';
+      submit.textContent = 'Šaljemo…';
       setState('pending','Šaljemo vaš zahtjev…');
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 20000);
@@ -136,7 +136,7 @@ function setupContactForms() {
         preserveAttribution();
         setState('success',siteData.contact.statusMessage,true);
       } catch (error) {
-        const message = error.name === 'AbortError' ? 'Slanje traje predugo. Pokušajte ponovno za nekoliko trenutaka.' : error.message === 'rate-limit' ? 'Poslano je previše zahtjeva. Pričekajte nekoliko minuta pa pokušajte ponovno.' : error.message === 'service' ? 'Zahtjev nije poslan zbog pogreške servisa. Pokušajte ponovno.' : 'Zahtjev nije poslan. Provjerite internetsku vezu i pokušajte ponovno.';
+        const message = error.name === 'AbortError' ? 'Slanje traje predugo. Pokušajte ponovno za nekoliko trenutaka.' : error.message === 'rate-limit' ? 'Previše zahtjeva. Pričekajte nekoliko minuta pa pokušajte ponovno.' : error.message === 'service' ? 'Zahtjev nije poslan zbog pogreške servisa. Pokušajte ponovno.' : 'Zahtjev nije poslan. Provjerite vezu i pokušajte ponovno.';
         setState('error',message,true);
       } finally {
         clearTimeout(timeout);

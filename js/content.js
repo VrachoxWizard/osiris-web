@@ -3,7 +3,7 @@ export const serviceTracks = [
     "id": "nova-stranica",
     "code": "NOVA",
     "title": "Nova poslovna web stranica",
-    "description": "Za poduzeća kojima treba profesionalna web prisutnost prilagođena ponudi, kupcima i cilju.",
+    "description": "Jasna struktura, dizajn i razvoj koji vašu ponudu čine razumljivom i olakšavaju prvi kontakt.",
     "idealFor": "Poslovanja koja kreću bez kvalitetne web stranice.",
     "includes": [
       "Struktura i sadržaj",
@@ -16,7 +16,7 @@ export const serviceTracks = [
     "id": "redizajn",
     "code": "REDIZAJN",
     "title": "Redizajn postojeće stranice",
-    "description": "Za poslovanja čija stranica više ne predstavlja kvalitetu njihova rada ili ne vodi prema upitu.",
+    "description": "Kad stranica više ne odražava kvalitetu vašeg rada ili ne vodi do upita, uredimo je od temelja.",
     "idealFor": "Timove koji već imaju sadržaj, ali trebaju jasniji i uvjerljiviji web.",
     "includes": [
       "Analiza postojećeg weba",
@@ -29,7 +29,7 @@ export const serviceTracks = [
     "id": "rast",
     "code": "RAST",
     "title": "Web za sljedeću fazu rasta",
-    "description": "Za tvrtke kojima uz novu stranicu trebaju webshop, korisnički portal ili prilagođene funkcionalnosti.",
+    "description": "Kad vam uz prezentaciju trebaju webshop, portal ili prilagođene funkcionalnosti, gradimo ih uz stranicu.",
     "idealFor": "Poslovanja kojima standardna prezentacijska stranica više nije dovoljna.",
     "includes": [
       "Poslovne funkcionalnosti",
@@ -54,15 +54,15 @@ export const siteData = {
       {
         "name": "Tin",
         "role": "Suosnivač · Podatkovna znanost",
-        "bio": "Tin je magistar podatkovne znanosti."
+        "bio": "Tin vodi strukturu projekta i sadržaj. Magistar je podatkovne znanosti i voli urediti složene informacije u jasan korisnički put."
       },
       {
         "name": "Mate",
         "role": "Suosnivač · Web razvoj",
-        "bio": "Mate je full stack web developer. Razvija korisničko sučelje i pozadinske funkcionalnosti web stranica."
+        "bio": "Mate gradi sučelje i pozadinu. Full stack developer koji brine da dizajn radi jednako dobro na mobitelu kao i na računalu."
       }
     ],
-    "description": "Mali web tim iz Zagreba koji izrađuje web stranice po mjeri za mala i srednja poduzeća.",
+    "description": "Tin i Mate iz Zagreba. Gradimo web stranice i platforme za mala i srednja poduzeća, od sadržaja do objave.",
     "stats": [
       {
         "value": "5",
@@ -74,7 +74,7 @@ export const siteData = {
       },
       {
         "value": "1",
-        "label": "izravan razgovor"
+        "label": "tim od razgovora do objave"
       }
     ]
   },
@@ -87,7 +87,7 @@ export const siteData = {
       "instagram": "",
       "github": ""
     },
-    "statusMessage": "Hvala! Javit ćemo vam se u roku od tri radna dana."
+    "statusMessage": "Hvala! Javimo se u roku od tri radna dana s konkretnim preporukama."
   },
   "serviceTracks": serviceTracks,
   "projects": [
@@ -101,15 +101,15 @@ export const siteData = {
         "Razvoj",
         "SEO osnova"
       ],
-      "challenge": "Predstaviti ponudu slastičarnice tako da posjetitelj brzo razumije što je dostupno i kako poslati upit za narudžbu.",
-      "solution": "Sadržaj i navigacija organizirani su oko ponude, ključnih informacija i kratkog puta prema kontaktu.",
-      "outcome": "Javno dostupna stranica na kojoj kupci mogu pregledati ponudu i jednostavno započeti razgovor o narudžbi.",
+      "challenge": "Posjetitelj mora brzo vidjeti što je dostupno i kako naručiti, bez lutanja po stranici.",
+      "solution": "Ponuda, ključne informacije i kontakt vode istim, kratkim putem do upita za narudžbu.",
+      "outcome": "Javna stranica na kojoj kupci pregledaju ponudu i lako započnu razgovor o narudžbi.",
       "services": [
         "UX/UI",
         "Razvoj",
         "SEO osnova"
       ],
-      "summary": "Web stranica zagrebačke slastičarnice s jasnim pregledom ponude i jednostavnim putem do narudžbe.",
+      "summary": "Slastičarnica u Zagrebu: jasan pregled ponude i kratak put do narudžbe.",
       "preview": "/images/projects/dolce-torte.png",
       "media": {
         "type": "image",
@@ -119,7 +119,7 @@ export const siteData = {
           "webp": "/images/projects/dolce-torte-480.webp 480w, /images/projects/dolce-torte-800.webp 800w, /images/projects/dolce-torte-1200.webp 1200w, /images/projects/dolce-torte-1920.webp 1920w"
         },
         "sizes": "(min-width: 75rem) 40vw, (min-width: 60rem) 50vw, 100vw",
-        "alt": "Prikaz naslovne stranice projekta Dolce Torte",
+        "alt": "Naslovnica web stranice Dolce Torte",
         "width": 1920,
         "height": 1080,
         "objectPosition": "center top"
@@ -137,15 +137,15 @@ export const siteData = {
         "Razvoj",
         "Responzivna izvedba"
       ],
-      "challenge": "U prvi plan staviti karakter prostora i izvedene radove, uz dovoljno jasne informacije o uslugama studija.",
-      "solution": "Vizualno vođena struktura povezuje projekte, usluge i kontakt u pregledno iskustvo na različitim veličinama zaslona.",
-      "outcome": "Javna prezentacijska stranica koja služi kao portfolio radova i izravna ulazna točka za novi upit.",
+      "challenge": "Prostor i izvedeni radovi moraju biti u prvom planu, uz dovoljno jasan opis usluga studija.",
+      "solution": "Vizualno vođena stranica povezuje projekte, usluge i kontakt u pregledno iskustvo na svim uređajima.",
+      "outcome": "Portfolio koji pokazuje kvalitetu rada i otvara put novom upitu.",
       "services": [
         "Web dizajn",
         "Razvoj",
         "Responzivnost"
       ],
-      "summary": "Prezentacijska web stranica za studio interijera, oblikovana oko prostora, usluga i izvedenih radova.",
+      "summary": "Studio interijera: stranica oblikovana oko prostora, usluga i izvedenih radova.",
       "preview": "/images/projects/dogan-septem.png",
       "media": {
         "type": "image",
@@ -155,7 +155,7 @@ export const siteData = {
           "webp": "/images/projects/dogan-septem-480.webp 480w, /images/projects/dogan-septem-800.webp 800w, /images/projects/dogan-septem-1200.webp 1200w, /images/projects/dogan-septem-1920.webp 1920w"
         },
         "sizes": "(min-width: 75rem) 40vw, (min-width: 60rem) 50vw, 100vw",
-        "alt": "Prikaz naslovne stranice projekta Dogan Septem",
+        "alt": "Naslovnica web stranice Dogan Septem Interijeri",
         "width": 1920,
         "height": 1080,
         "objectPosition": "center top"
@@ -173,15 +173,15 @@ export const siteData = {
         "Razvoj",
         "Struktura sportskog sadržaja"
       ],
-      "challenge": "Okupiti rasporede, rezultate, uzraste i galeriju tako da različite skupine posjetitelja brzo pronađu aktualne informacije.",
-      "solution": "Sadržaj je složen u jedinstvenu strukturu s jasnim ulazima prema natjecanjima, rezultatima i klupskim informacijama.",
-      "outcome": "Javno dostupno središnje mjesto za praćenje lige i informiranje igrača, roditelja i publike.",
+      "challenge": "Rasporedi, rezultati, uzrasti i galerija moraju biti na jednom mjestu: za igrače, roditelje i publiku.",
+      "solution": "Jedinstvena struktura s jasnim ulazima prema natjecanjima, rezultatima i klupskim informacijama.",
+      "outcome": "Središnje mjesto za praćenje lige i brzo informiranje svih skupina posjetitelja.",
       "services": [
         "Web dizajn",
         "Razvoj",
         "Sportski raspored"
       ],
-      "summary": "Web stranica malonogometne lige s rasporedima, rezultatima, uzrastima i galerijom na jednom mjestu.",
+      "summary": "Malonogometna liga: rasporedi, rezultati, uzrasti i galerija na jednom mjestu.",
       "preview": "/images/projects/tina-sport-pia.png",
       "media": {
         "type": "image",
@@ -191,7 +191,7 @@ export const siteData = {
           "webp": "/images/projects/tina-sport-pia-480.webp 480w, /images/projects/tina-sport-pia-800.webp 800w, /images/projects/tina-sport-pia-1200.webp 1200w, /images/projects/tina-sport-pia-1920.webp 1920w"
         },
         "sizes": "(min-width: 75rem) 40vw, (min-width: 60rem) 50vw, 100vw",
-        "alt": "Prikaz naslovne stranice projekta Tina Šport Pia",
+        "alt": "Naslovnica web stranice Tina Šport Pia",
         "width": 1920,
         "height": 1080,
         "objectPosition": "center top"
@@ -209,15 +209,15 @@ export const siteData = {
         "Razvoj",
         "Responzivna izvedba"
       ],
-      "challenge": "Osjetljivu temu i opseg usluga predstaviti mirno, razumljivo i bez prepreka na putu prema prvom kontaktu.",
-      "solution": "Smirena vizualna hijerarhija i responzivna struktura vode od upoznavanja pristupa do relevantne usluge i kontakta.",
-      "outcome": "Javna stranica koja posjetiteljima daje pregled usluga i jasan način za uspostavljanje prvog kontakta.",
+      "challenge": "Osjetljivu temu i opseg usluga predstaviti mirno, razumljivo i bez prepreka do prvog kontakta.",
+      "solution": "Smirena hijerarhija vodi od upoznavanja pristupa do relevantne usluge i kontakta.",
+      "outcome": "Stranica koja daje pregled usluga i jasan način za uspostavljanje prvog kontakta.",
       "services": [
         "Web dizajn",
         "Razvoj",
         "Responzivnost"
       ],
-      "summary": "Smirena i pregledna web stranica za somatsku psihoterapiju, usmjerena na usluge i prvi kontakt.",
+      "summary": "Somatska psihoterapija: smirena, pregledna stranica usmjerena na usluge i prvi kontakt.",
       "preview": "/images/projects/atasol.png",
       "media": {
         "type": "image",
@@ -227,7 +227,7 @@ export const siteData = {
           "webp": "/images/projects/atasol-480.webp 480w, /images/projects/atasol-800.webp 800w, /images/projects/atasol-1200.webp 1200w, /images/projects/atasol-1920.webp 1920w"
         },
         "sizes": "(min-width: 75rem) 40vw, (min-width: 60rem) 50vw, 100vw",
-        "alt": "Prikaz naslovne stranice projekta ATASOL",
+        "alt": "Naslovnica web stranice ATASOL",
         "width": 1920,
         "height": 1080,
         "objectPosition": "center top"
@@ -245,15 +245,15 @@ export const siteData = {
         "Razvoj platforme",
         "Katalog vozila"
       ],
-      "challenge": "Omogućiti pregled dostupnih vozila i važnih informacija bez gubitka jasnog puta prema konkretnom upitu.",
-      "solution": "Katalog i detalji vozila povezani su s dosljednim navigacijskim i kontaktnim putanjama kroz platformu.",
-      "outcome": "Javna web platforma za pregled dostupnih vozila, informiranje i slanje upita.",
+      "challenge": "Pregledati dostupna vozila i detalje, a da put do konkretnog upita ostane jasan.",
+      "solution": "Katalog i stranice vozila povezani su s dosljednom navigacijom i kontaktom kroz cijelu platformu.",
+      "outcome": "Javna platforma za pregled vozila, informiranje i slanje upita.",
       "services": [
         "UX/UI",
         "Web platforma",
         "Katalog vozila"
       ],
-      "summary": "Automobilska web platforma s pregledom dostupnih vozila i jasnim putem do informacija i upita.",
+      "summary": "Automobilska platforma: pregled vozila s jasnim putem do informacija i upita.",
       "preview": "/images/projects/produkt-auto.png",
       "media": {
         "type": "image",
@@ -263,7 +263,7 @@ export const siteData = {
           "webp": "/images/projects/produkt-auto-480.webp 480w, /images/projects/produkt-auto-800.webp 800w, /images/projects/produkt-auto-1200.webp 1200w, /images/projects/produkt-auto-1920.webp 1920w"
         },
         "sizes": "(min-width: 75rem) 40vw, (min-width: 60rem) 50vw, 100vw",
-        "alt": "Prikaz naslovne stranice projekta Produkt Auto",
+        "alt": "Naslovnica web platforme Produkt Auto",
         "width": 1920,
         "height": 1080,
         "objectPosition": "center top"
