@@ -76,7 +76,7 @@ export const siteData = {
     ]
   },
   "contact": {
-    "email": "mvukusic67@gmail.com",
+    "email": "",
     "phone": "",
     "formspreeId": "xeaqovbe",
     "socials": {

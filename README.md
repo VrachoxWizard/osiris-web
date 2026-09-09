@@ -42,6 +42,6 @@ Lokalno: `npm run dev` učitava `.env` (ako postoji) putem `process.loadEnvFile`
 
 ## Objava
 
-Postojeća Sites konfiguracija koristi `dist/`. Vercel također koristi `dist/` i naredbu `npm run build`. Serverless ruta `/api/chat` ostaje iz korijenskog `api/` direktorija uz statički `dist/`. Sačuvajte postojeći projekt i način pristupa; ne objavljujte `node_modules`, testove, nacrte ni arhivske stilove. Poslovni naziv i email potvrđeni su od vlasnika; poslovnu adresu i dodatne poslovne podatke unosite samo nakon potvrde.
+Postojeća Sites konfiguracija koristi `dist/`. Vercel također koristi `dist/` i naredbu `npm run build`. Serverless ruta `/api/chat` ostaje iz korijenskog `api/` direktorija uz statički `dist/`. Sačuvajte postojeći projekt i način pristupa; ne objavljujte `node_modules`, testove, nacrte ni arhivske stilove. Poslovni naziv potvrđen je od vlasnika; javni email nije objavljen, a poslovnu adresu i dodatne poslovne podatke unosite samo nakon potvrde.
 
 Aktualni vizualni ugovor je `DESIGN-SYSTEM.md`. Stariji DESIGN dokumenti i stilovi predstavljaju povijest projekta. Izvori medija nalaze se u `MEDIA-CREDITS.md`. Email kampanja iz `OUTREACH-EMAILS.md` zaseban je posao i nije dio obrasca.

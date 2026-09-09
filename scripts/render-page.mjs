@@ -2,7 +2,7 @@ import { siteData } from '../js/content.js';
 
 export const pages = ['index.html', 'usluge/index.html', 'projekti/index.html', 'o-nama/index.html', 'kontakt/index.html', 'web-stranice-za-poduzeca/index.html', 'privatnost/index.html', '404.html'];
 export const routes = [
-  ['services', 'Usluge', '/usluge/'], ['projects', 'Projekti', '/projekti/'],
+  ['home', 'Početna', '/'], ['services', 'Usluge', '/usluge/'], ['projects', 'Projekti', '/projekti/'],
   ['about', 'O nama', '/o-nama/'], ['contact', 'Kontakt', '/kontakt/'],
 ];
 export const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -54,10 +54,14 @@ export function form(prefix) {
     ${['utm_source','utm_medium','utm_campaign','utm_content','pageUrl'].map(n=>`<input type="hidden" name="${n}">`).join('')}
     <p class="privacy-note">Podatke koristimo samo za pripremu analize i odgovor. <a href="/privatnost/">Privatnost</a></p>
     <button class="button button--primary" type="submit">Zatražite besplatnu analizu</button><p class="form-status" data-form-status tabindex="-1" role="status" aria-live="polite" aria-atomic="true"></p>
-    ${siteData.contact.email?`<p class="form-fallback" data-form-fallback hidden>Možete nam pisati i na <a href="mailto:${e(siteData.contact.email)}">${e(siteData.contact.email)}</a>.</p>`:''}</form>`;
+    ${siteData.contact.email
+      ? `<p class="form-fallback" data-form-fallback hidden>Možete nam pisati i na <a href="mailto:${e(siteData.contact.email)}">${e(siteData.contact.email)}</a>.</p>`
+      : `<p class="form-fallback" data-form-fallback hidden>Ako slanje ne uspije, pokušajte ponovno za nekoliko minuta.</p>`}</form>`;
 }
-function founders() {
-  return siteData.brand.founderProfiles.map(p=>`<article class="founder-card"><span class="eyebrow">${e(p.role || 'OSIRIS')}</span><h2>${e(p.name)}</h2>${p.bio?`<p>${e(p.bio)}</p>`:''}</article>`).join('');
+// The compact variant sits under a section h2, so its cards drop a level.
+function founders(variant = 'page') {
+  const tag = variant === 'compact' ? 'h3' : 'h2';
+  return siteData.brand.founderProfiles.map(p=>`<article class="founder-card"><span class="eyebrow">${e(p.role || 'OSIRIS')}</span><${tag}>${e(p.name)}</${tag}>${p.bio?`<p>${e(p.bio)}</p>`:''}</article>`).join('');
 }
 export function chatWidget(page = 'default') {
   const greeting = 'Mi smo OSIRIS iz Zagreba. Pitajte nas o uslugama, projektima ili sljedećem koraku za vaš web.';
@@ -131,7 +135,7 @@ export function renderPage(html, route='/') {
     .replace(/<!-- projects:(previews|cases) -->/g,(_,v)=>projectCards(v))
     .replace(/<!-- services:(summary|offers) -->/g,(_,v)=>services(v))
     .replace(/<!-- form:(contact|landing) -->/g,(_,v)=>form(v))
-    .replace('<!-- founders -->',founders())
+    .replace(/<!-- founders(?::(compact))? -->/g,(_,v)=>founders(v))
     .replaceAll('<!-- contact-channels -->',contactLinks()?`<div class="contact-channels">${contactLinks()}</div>`:'')
     .replace('<!-- controller -->', e(siteData.brand.businessName || 'OSIRIS') + ', ' + e(siteData.brand.businessAddress || siteData.brand.location))
     .replace('<!-- privacy-contact -->',siteData.contact.email?`<a href="mailto:${e(siteData.contact.email)}">${e(siteData.contact.email)}</a>`:'<a href="/kontakt/">kontaktni obrazac</a>')

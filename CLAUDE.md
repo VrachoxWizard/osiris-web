@@ -91,7 +91,7 @@ Three files must stay in step: `chatWidget()` in `scripts/render-page.mjs`, `js/
 - `DESIGN-ENHANCEMENTS.md`, `DESIGN-POLISH.md`, `DESIGN-TRANSFORMATION.md` and `css/osiris.css` are project history, superseded by `DESIGN-SYSTEM.md` and `css/osiris-v2.css`.
 - `.superdesign/` is an ignored local design workspace whose drafts use an obsolete visual system.
 - `OUTREACH-EMAILS.md` is a separate campaign, unrelated to the contact form.
-- `mvukusic67@gmail.com` and the business name are owner-confirmed. Do not add a street address or other business details without confirmation.
+- The public email field in `js/content.js` is intentionally empty; contact goes through the form. The business name is owner-confirmed. Do not add a street address, public email or other business details without confirmation.
 - `media/archive/` and the unlinked laboratory video stay disconnected.
 
 ## Before you finish

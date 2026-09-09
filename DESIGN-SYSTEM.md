@@ -48,7 +48,7 @@ The widget lives in three places that must stay in step: `chatWidget()` in `scri
 
 Use supplied artwork and real project screenshots. Preserve 16:9 project images and AVIF/WebP sources with accurate sizes. Captions sit below the media. Only the principal hero image is high priority; below-fold content is lazy loaded. The stock hero image is illustrative, not an OSIRIS team portrait. The unrelated laboratory video remains disconnected.
 
-Decorative stock photography is not used inside content sections; each supporting figure is a real project screenshot, and no project repeats on a single page. The hero image fills its own container without a transform offset, so no band of surface shows under the fixed header.
+Decorative stock photography is not used inside content sections. Project screenshots belong in project and services contexts; the homepage About section uses the capability cards from `founderProfiles` rather than a client screenshot. The hero image fills its own container without a transform offset, anchored with `object-position: … top` so the subject keeps headroom, and the scrim clears on the right so the photograph stays visible.
 
 ## Maintenance and validation
 
