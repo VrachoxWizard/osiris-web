@@ -67,17 +67,21 @@ export function chatWidget(page = 'default') {
     ['Kako krenuti?', 'Kako možemo krenuti s besplatnom analizom?'],
   ];
   return `<div class="osiris-chat" data-osiris-chat>
-  <div class="osiris-chat__panel" data-chat-panel hidden id="osiris-chat-panel">
+  <div class="osiris-chat__scrim" data-chat-scrim hidden></div>
+  <div class="osiris-chat__panel" data-chat-panel hidden id="osiris-chat-panel" role="dialog" aria-labelledby="osiris-chat-title">
+    <span class="osiris-chat__grip" aria-hidden="true"></span>
     <div class="osiris-chat__header">
       <div class="osiris-chat__identity">
         <span class="osiris-chat__avatar" aria-hidden="true"><picture><source srcset="/images/osiris-mark-128.webp" type="image/webp"><img src="/images/osiris-mark-128.png" alt="" width="48" height="48" decoding="async"></picture></span>
         <div class="osiris-chat__brand">
           <p class="osiris-chat__eyebrow">Studio · Zagreb</p>
-          <p class="osiris-chat__title">OSIRIS AI</p>
+          <p class="osiris-chat__title" id="osiris-chat-title">OSIRIS AI</p>
         </div>
       </div>
       <div class="osiris-chat__controls">
-        <button type="button" class="osiris-chat__text-btn" data-chat-reset>Novi razgovor</button>
+        <button type="button" class="osiris-chat__icon-btn" data-chat-reset aria-label="Novi razgovor" disabled>
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M9 4v10M4 9h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+        </button>
         <button type="button" class="osiris-chat__icon-btn" data-chat-close aria-label="Zatvori razgovor">
           <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M4 4l10 10M14 4L4 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
         </button>
@@ -97,17 +101,20 @@ export function chatWidget(page = 'default') {
       <form class="osiris-chat__form" data-chat-form>
         <label class="sr-only" for="osiris-chat-input">Vaša poruka</label>
         <div class="osiris-chat__composer">
-          <textarea id="osiris-chat-input" data-chat-input rows="2" maxlength="2000" placeholder="Napišite pitanje o webu, redizajnu ili suradnji…" required></textarea>
+          <textarea id="osiris-chat-input" data-chat-input rows="2" maxlength="2000" placeholder="Napišite pitanje…" required></textarea>
           <button type="submit" class="osiris-chat__send" data-chat-send>
             <span>Pošalji</span>
             <span aria-hidden="true">↗</span>
           </button>
         </div>
-        <a class="osiris-chat__cta" href="${analysisHref(page)}">Besplatna analiza <span aria-hidden="true">↗</span></a>
+        <div class="osiris-chat__foot">
+          <p class="osiris-chat__note">Automatski odgovori studija OSIRIS. Cijene i rokove potvrđujemo putem obrasca.</p>
+          <a class="osiris-chat__cta" href="${analysisHref(page)}">Besplatna analiza <span aria-hidden="true">↗</span></a>
+        </div>
       </form>
     </div>
   </div>
-  <button type="button" class="osiris-chat__launcher" data-chat-launcher aria-expanded="false" aria-controls="osiris-chat-panel">
+  <button type="button" class="osiris-chat__launcher" data-chat-launcher aria-expanded="false" aria-controls="osiris-chat-panel" aria-label="Pitajte OSIRIS AI">
     <span class="osiris-chat__launcher-mark" aria-hidden="true"><picture><source srcset="/images/osiris-mark-128.webp" type="image/webp"><img src="/images/osiris-mark-128.png" alt="" width="32" height="32" decoding="async"></picture></span>
     <span class="osiris-chat__launcher-copy">
       <span class="osiris-chat__launcher-kicker">Razgovor</span>

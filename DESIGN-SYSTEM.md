@@ -12,6 +12,12 @@ The sole production stylesheet is `css/osiris-v2.css`. Historical CSS files are 
 - Breakpoints: 640, 960, 1200px. CSS and navigation JavaScript share 60rem for desktop navigation.
 - Mobile heroes and process rows are content-sized. Project previews are three columns on desktop and one on mobile/tablet; case studies use two desktop columns and one final split case.
 
+## Spacing scale
+
+Every gap, padding and margin comes from `--space-1` through `--space-10`, a 4px grid running 4, 8, 12, 16, 20, 24, 32, 40, 48 and 64px. Ad hoc literals such as `.65rem` or `1.05rem` are not permitted; snap to the nearest step instead. Fluid values stay in `clamp()` but take their endpoints from the same scale. Small body copy and control labels use `--step--1` rather than a repeated `.875rem`.
+
+Editorial grids align to the top so media never floats in the middle of a taller text column; only `.editorial-grid--cta` and `.inner-hero__grid` stay centred. The proof rail stacks its figure above its label at every width, keeping one label baseline across all three cells. Footer bottom padding clears the fixed chat launcher.
+
 ## Palette and component surfaces
 
 Ink `#05070B`, Navy `#0B1120`, Tech Blue `#3F5EA2`, Deep Blue `#263F73`, Soft Blue `#DCE8FF`, Paper `#F5F7FA`, White `#FFFFFF`. Dark text `#0F172A`, secondary text `#475569`, field border `#64748B`.
@@ -28,9 +34,21 @@ Surface components define their own text, muted text, link, border, focus, and b
 - Hover styles apply only to hover-capable fine pointers; reduced-motion mode uses instant scrolling and no transitions.
 - Avoid clipping text or focus outlines. Crop only in dedicated media containers.
 
+## Chat widget
+
+The widget lives in three places that must stay in step: `chatWidget()` in `scripts/render-page.mjs`, `js/chat.js`, and the `.osiris-chat*` block in `css/osiris-v2.css`.
+
+- Desktop is a floating panel anchored above the launcher, which collapses to its mark while open. Below 40rem the panel becomes a modal bottom sheet: full width, pinned to the bottom edge, with a scrim, `aria-modal`, a Tab trap, inert header, main and footer, and a locked body scroll. The `matchMedia` listener unwinds all of it when the viewport grows.
+- The message list carries `min-height:0` so the composer, the AI disclosure and the analysis link are never clipped. Do not reintroduce a `min-height` floor on it.
+- The conversation and the open state persist in `sessionStorage` under `osiris-chat`, because this is a multi-page site. "Novi razgovor" clears both and is disabled while there is nothing to clear.
+- Every reply carries an AI disclosure under the composer. A failed request keeps the visitor's text and offers a retry chip instead of silently dropping it. Auto-scroll only follows the newest message when the reader is already near the bottom.
+- The chat root joins `main` and the footer in the inert list used by the mobile menu, so the launcher is unreachable behind the open overlay.
+
 ## Media
 
 Use supplied artwork and real project screenshots. Preserve 16:9 project images and AVIF/WebP sources with accurate sizes. Captions sit below the media. Only the principal hero image is high priority; below-fold content is lazy loaded. The stock hero image is illustrative, not an OSIRIS team portrait. The unrelated laboratory video remains disconnected.
+
+Decorative stock photography is not used inside content sections; each supporting figure is a real project screenshot, and no project repeats on a single page. The hero image fills its own container without a transform offset, so no band of surface shows under the fixed header.
 
 ## Maintenance and validation
 

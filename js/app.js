@@ -23,7 +23,7 @@ function setupNavigation() {
   const header = document.querySelector('[data-header]');
   if (!disclosure || !header) return;
   const summary = disclosure.querySelector('summary');
-  const regions = [document.querySelector('main'), document.querySelector('[data-site-footer]')].filter(Boolean);
+  const regions = [document.querySelector('main'), document.querySelector('[data-site-footer]'), document.querySelector('[data-osiris-chat]')].filter(Boolean);
   const desktop = matchMedia('(min-width: 60rem)');
   const close = (focus = false) => {
     disclosure.open = false;
