@@ -34,8 +34,14 @@ Testovi pokrivaju osam ruta, 17 širina, kratki mobilni zaslon, fokus, native na
 
 Automatizirani testovi ne zamjenjuju ručnu provjeru čitačem zaslona i na stvarnom telefonu. Stvarnu dostavu provjeravajte samo unaprijed dogovorenim testnim upitom.
 
+## Digitalni blizanac (chat)
+
+Plutajući chat widget na svim stranicama govori glasom studija OSIRIS. Ključ `OPENROUTER_API_KEY` mora biti u lokalnom `.env` (vidi `.env.example`) i u Vercel Project Settings → Environment Variables. Model: `deepseek/deepseek-v4-flash-0731` putem OpenRoutera. Endpoint `POST /api/chat` drži ključ na serveru; klijent šalje samo povijest poruka.
+
+Lokalno: `npm run dev` učitava `.env` (ako postoji) putem `process.loadEnvFile` u `server.mjs`.
+
 ## Objava
 
-Postojeća Sites konfiguracija koristi `dist/`. Vercel također koristi `dist/` i naredbu `npm run build`. Sačuvajte postojeći projekt i način pristupa; ne objavljujte `node_modules`, testove, nacrte ni arhivske stilove. Poslovni naziv i email potvrđeni su od vlasnika; poslovnu adresu i dodatne poslovne podatke unosite samo nakon potvrde.
+Postojeća Sites konfiguracija koristi `dist/`. Vercel također koristi `dist/` i naredbu `npm run build`. Serverless ruta `/api/chat` ostaje iz korijenskog `api/` direktorija uz statički `dist/`. Sačuvajte postojeći projekt i način pristupa; ne objavljujte `node_modules`, testove, nacrte ni arhivske stilove. Poslovni naziv i email potvrđeni su od vlasnika; poslovnu adresu i dodatne poslovne podatke unosite samo nakon potvrde.
 
 Aktualni vizualni ugovor je `DESIGN-SYSTEM.md`. Stariji DESIGN dokumenti i stilovi predstavljaju povijest projekta. Izvori medija nalaze se u `MEDIA-CREDITS.md`. Email kampanja iz `OUTREACH-EMAILS.md` zaseban je posao i nije dio obrasca.

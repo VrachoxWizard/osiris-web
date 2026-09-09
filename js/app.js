@@ -1,3 +1,4 @@
+import { setupChatWidget } from './chat.js';
 import { siteData } from './content.js';
 
 const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
@@ -155,3 +156,4 @@ function setupContactForms() {
 setupNavigation();
 preserveAttribution();
 setupContactForms();
+setupChatWidget();

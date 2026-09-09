@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run check && node scripts/build-static.mjs",
-    "check": "node scripts/validate-site.mjs && node --check js/app.js && node --check js/content.js && node --check server.mjs && node --check scripts/render-page.mjs",
+    "check": "node scripts/validate-site.mjs && node --check js/app.js && node --check js/chat.js && node --check js/content.js && node --check server.mjs && node --check api/chat-handler.mjs && node --check api/chat.js && node --check scripts/render-page.mjs",
     "dev": "node server.mjs",
     "start": "node server.mjs",
     "test": "npm run build && playwright test",

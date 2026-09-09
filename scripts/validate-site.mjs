@@ -121,8 +121,11 @@ for (const page of pages) {
     }
   }
 
+  report(html.includes('data-osiris-chat'), `${page}: nedostaje chat widget`);
+
   for (const form of html.matchAll(/<form\b[\s\S]*?<\/form>/gi)) {
     const markup = form[0];
+    if (/\bdata-chat-form\b/i.test(markup)) continue;
     report(markup.includes('action="https://formspree.io/f/'), page + ': nedostaje POST odredište');
     report(/method="post"/i.test(markup), page + ': obrazac mora koristiti POST');
     report(!/\bnovalidate\b/i.test(markup), page + ': native validacija mora raditi bez JavaScripta');

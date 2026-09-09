@@ -4,11 +4,19 @@ import { createServer } from "node:http";
 import { dirname, extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { handleChatRequest, readJsonBody } from './api/chat-handler.mjs';
 import { renderPage } from './scripts/render-page.mjs';
+
 const projectRoot = dirname(fileURLToPath(import.meta.url));
 const built = process.argv.includes('--built');
 const root = built ? join(projectRoot, 'dist') : projectRoot;
 const port = Number.parseInt(process.env.PORT ?? "4173", 10);
+
+try {
+  process.loadEnvFile?.(join(projectRoot, '.env'));
+} catch {
+  // Optional local .env; production uses platform env vars.
+}
 
 const mimeTypes = {
   ".avif": "image/avif",
@@ -40,7 +48,57 @@ function safePath(urlPath) {
   return candidate;
 }
 
+function sendJson(response, status, body) {
+  const payload = JSON.stringify(body);
+  response.writeHead(status, {
+    "Content-Type": "application/json; charset=utf-8",
+    "Content-Length": Buffer.byteLength(payload),
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+  });
+  response.end(payload);
+}
+
+async function handleChat(request, response) {
+  if (request.method === "OPTIONS") {
+    response.writeHead(204, {
+      "Access-Control-Allow-Origin": "null",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    });
+    response.end();
+    return;
+  }
+
+  if (request.method !== "POST") {
+    response.writeHead(405, {
+      "Content-Type": "application/json; charset=utf-8",
+      Allow: "POST, OPTIONS",
+    });
+    response.end(JSON.stringify({ error: "Method Not Allowed" }));
+    return;
+  }
+
+  let body;
+  try {
+    body = await readJsonBody(request);
+  } catch {
+    sendJson(response, 400, { error: "Neispravan JSON." });
+    return;
+  }
+
+  const result = await handleChatRequest(body, process.env);
+  sendJson(response, result.status, result.body);
+}
+
 const server = createServer(async (request, response) => {
+  const pathOnly = (request.url ?? "").split("?")[0];
+
+  if (pathOnly === "/api/chat") {
+    await handleChat(request, response);
+    return;
+  }
+
   if (!request.url || !["GET", "HEAD"].includes(request.method ?? "")) {
     response.writeHead(405, { "Content-Type": "text/plain; charset=utf-8" });
     response.end("Method Not Allowed");
