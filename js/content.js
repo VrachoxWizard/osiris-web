@@ -44,33 +44,30 @@ export const siteData = {
   "brand": {
     "name": "OSIRIS",
     "location": "Zagreb, Hrvatska",
-    "founders": [
-      "Tin",
-      "Mate"
-    ],
+    "founders": [],
     "businessName": "OSIRIS",
     "businessAddress": "",
     "founderProfiles": [
       {
-        "name": "Tin",
-        "role": "Suosnivač · Podatkovna znanost",
-        "bio": "Tin vodi strukturu projekta i sadržaj. Magistar je podatkovne znanosti i voli urediti složene informacije u jasan korisnički put."
+        "name": "Struktura i sadržaj",
+        "role": "Što radimo",
+        "bio": "Složene informacije pretvaramo u jasan korisnički put, od ponude do prvog kontakta."
       },
       {
-        "name": "Mate",
-        "role": "Suosnivač · Web razvoj",
-        "bio": "Mate gradi sučelje i pozadinu. Full stack developer koji brine da dizajn radi jednako dobro na mobitelu kao i na računalu."
+        "name": "Dizajn i razvoj",
+        "role": "Što radimo",
+        "bio": "Gradimo sučelje i pozadinu tako da stranica radi jednako dobro na mobitelu kao i na računalu."
       }
     ],
-    "description": "Tin i Mate iz Zagreba. Gradimo web stranice i platforme za mala i srednja poduzeća, od sadržaja do objave.",
+    "description": "Mi smo OSIRIS iz Zagreba. Gradimo web stranice i platforme za mala i srednja poduzeća, od sadržaja do objave.",
     "stats": [
       {
         "value": "5",
         "label": "objavljenih projekata"
       },
       {
-        "value": "2",
-        "label": "člana tima"
+        "value": "Zagreb",
+        "label": "naše sjedište"
       },
       {
         "value": "1",

@@ -25,7 +25,7 @@ export function contactLinks() {
   return [email && `<a href="mailto:${e(email)}">${e(email)}</a>`, phone && `<a href="tel:${e(phone.replace(/\s/g,''))}">${e(phone)}</a>`, ...Object.entries(socials).filter(([,url])=>url).map(([name,url])=>`<a href="${e(url)}" target="_blank" rel="noopener noreferrer">${e({linkedin:'LinkedIn',instagram:'Instagram',github:'GitHub'}[name] || name)}<span class="sr-only"> (nova kartica)</span></a>`)].filter(Boolean).join('');
 }
 export function footer(page) {
-  return `<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand-block"><a class="brand" href="/" aria-label="OSIRIS početna stranica">${logo()}</a><p>${e(siteData.brand.description)}</p><span class="location-pill">${e(siteData.brand.location)}</span></div><nav class="footer-links" aria-label="Navigacija u podnožju"><p class="footer-label">Navigacija</p>${navLinks(page)}<a href="/privatnost/">Privatnost</a></nav><div class="footer-contact"><p class="footer-label">Razgovarajmo</p><p>Recite nam što želite poboljšati na webu. Odgovaramo u roku od tri radna dana.</p><a class="text-link" href="${analysisHref(page)}">Besplatna analiza ${arrow}</a><div class="contact-channels">${contactLinks()}</div></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} OSIRIS. Sva prava pridržana.</span><span>${e(siteData.brand.businessName || 'Tin i Mate · Zagreb')}</span></div></footer>`;
+  return `<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand-block"><a class="brand" href="/" aria-label="OSIRIS početna stranica">${logo()}</a><p>${e(siteData.brand.description)}</p><span class="location-pill">${e(siteData.brand.location)}</span></div><nav class="footer-links" aria-label="Navigacija u podnožju"><p class="footer-label">Navigacija</p>${navLinks(page)}<a href="/privatnost/">Privatnost</a></nav><div class="footer-contact"><p class="footer-label">Razgovarajmo</p><p>Recite nam što želite poboljšati na webu. Odgovaramo u roku od tri radna dana.</p><a class="text-link" href="${analysisHref(page)}">Besplatna analiza ${arrow}</a><div class="contact-channels">${contactLinks()}</div></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} OSIRIS. Sva prava pridržana.</span><span>${e(siteData.brand.businessName || 'OSIRIS')} · Zagreb</span></div></footer>`;
 }
 export function picture(project, {sizes='(min-width: 87rem) 405px, (min-width: 60rem) 29vw, 92vw', eager=false, className='project-card__media'} = {}) {
   const m = project.media;
@@ -57,10 +57,10 @@ export function form(prefix) {
     ${siteData.contact.email?`<p class="form-fallback" data-form-fallback hidden>Možete nam pisati i na <a href="mailto:${e(siteData.contact.email)}">${e(siteData.contact.email)}</a>.</p>`:''}</form>`;
 }
 function founders() {
-  return siteData.brand.founderProfiles.map(p=>`<article class="founder-card"><span class="eyebrow">${e(p.role || 'Suosnivač')}</span><h2>${e(p.name)}</h2>${p.bio?`<p>${e(p.bio)}</p>`:''}</article>`).join('');
+  return siteData.brand.founderProfiles.map(p=>`<article class="founder-card"><span class="eyebrow">${e(p.role || 'OSIRIS')}</span><h2>${e(p.name)}</h2>${p.bio?`<p>${e(p.bio)}</p>`:''}</article>`).join('');
 }
 export function chatWidget(page = 'default') {
-  const greeting = 'Mi smo OSIRIS, Tin i Mate iz Zagreba. Pitajte nas o uslugama, projektima ili sljedećem koraku za vaš web.';
+  const greeting = 'Mi smo OSIRIS iz Zagreba. Pitajte nas o uslugama, projektima ili sljedećem koraku za vaš web.';
   const suggestions = [
     ['Što radite?', 'Što točno radite?'],
     ['Vaši projekti', 'Koje projekte ste objavili?'],
@@ -126,7 +126,7 @@ export function renderPage(html, route='/') {
     .replace(/<!-- form:(contact|landing) -->/g,(_,v)=>form(v))
     .replace('<!-- founders -->',founders())
     .replaceAll('<!-- contact-channels -->',contactLinks()?`<div class="contact-channels">${contactLinks()}</div>`:'')
-    .replace('<!-- controller -->', e(siteData.brand.businessName || 'OSIRIS Tin i Mate') + ', ' + e(siteData.brand.businessAddress || siteData.brand.location))
+    .replace('<!-- controller -->', e(siteData.brand.businessName || 'OSIRIS') + ', ' + e(siteData.brand.businessAddress || siteData.brand.location))
     .replace('<!-- privacy-contact -->',siteData.contact.email?`<a href="mailto:${e(siteData.contact.email)}">${e(siteData.contact.email)}</a>`:'<a href="/kontakt/">kontaktni obrazac</a>')
     .replace('</body>', `${chatWidget(page)}</body>`);
 }

@@ -16,7 +16,6 @@ Ako razmišljate o prvoj stranici, redizajnu ili jasnijem putu do upita, možemo
 
 Zatražite analizu: `{{landing_url}}?utm_source=email&utm_medium=outreach&utm_campaign=hr_msp&utm_content=email_1`
 
-Tin i Mate  
 OSIRIS · Zagreb
 
 `{{privacy_and_unsubscribe_notice}}`
@@ -33,7 +32,6 @@ Radimo kao tim od dvije osobe, pa od prvog razgovora do objave komunicirate izra
 
 Pogledajte radove i zatražite besplatnu analizu: `{{landing_url}}?utm_source=email&utm_medium=outreach&utm_campaign=hr_msp&utm_content=email_2`
 
-Tin i Mate  
 OSIRIS · Zagreb
 
 `{{privacy_and_unsubscribe_notice}}`
@@ -50,7 +48,6 @@ Analiza je ručna, besplatna i bez obveze nastavka suradnje.
 
 Zatražite analizu: `{{landing_url}}?utm_source=email&utm_medium=outreach&utm_campaign=hr_msp&utm_content=email_3`
 
-Tin i Mate  
 OSIRIS · Zagreb
 
 `{{privacy_and_unsubscribe_notice}}`

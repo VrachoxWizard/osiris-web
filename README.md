@@ -1,6 +1,6 @@
 # OSIRIS
 
-Statička web stranica OSIRIS-a, web tima Tina i Matea iz Zagreba. Nema frameworka, baze podataka ni produkcijskih JavaScript ovisnosti. Razvojne ovisnosti služe isključivo testiranju.
+Statička web stranica OSIRIS-a, web studija iz Zagreba. Nema frameworka, baze podataka ni produkcijskih JavaScript ovisnosti. Razvojne ovisnosti služe isključivo testiranju.
 
 ## Pokretanje i build
 
@@ -15,7 +15,7 @@ Razvojni server i build koriste isti renderer iz `scripts/render-page.mjs`. HTML
 
 ## Sadržaj
 
-`js/content.js` sadrži poslovni naziv, kontakt, provjerene podatke osnivača, usluge, svih pet projekata i Formspree ID. Stranični tekst nalazi se u pripadajućim HTML predlošcima. Renderer HTML-escapea podatke prije umetanja.
+`js/content.js` sadrži poslovni naziv, kontakt, podatke o studiju, usluge, svih pet projekata i Formspree ID. Stranični tekst nalazi se u pripadajućim HTML predlošcima. Renderer HTML-escapea podatke prije umetanja.
 
 Rute: `/`, `/usluge/`, `/projekti/`, `/o-nama/`, `/kontakt/`, `/web-stranice-za-poduzeca/`, `/privatnost/`. Nepostojeća ruta prikazuje `404.html` sa statusom 404.
 
