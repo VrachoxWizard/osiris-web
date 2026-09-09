@@ -28,6 +28,7 @@ export function setupChatWidget() {
   const launcher = root.querySelector('[data-chat-launcher]');
   const panel = root.querySelector('[data-chat-panel]');
   const closeBtn = root.querySelector('[data-chat-close]');
+  const resetBtn = root.querySelector('[data-chat-reset]');
   const form = root.querySelector('[data-chat-form]');
   const input = root.querySelector('[data-chat-input]');
   const send = root.querySelector('[data-chat-send]');
@@ -36,6 +37,7 @@ export function setupChatWidget() {
   const suggestions = root.querySelector('[data-chat-suggestions]');
   if (!launcher || !panel || !form || !input || !send || !messages || !status) return;
 
+  const introHtml = messages.innerHTML;
   let open = false;
   let pending = false;
 
@@ -60,6 +62,21 @@ export function setupChatWidget() {
     if (suggestions) suggestions.hidden = true;
   };
 
+  const showSuggestions = () => {
+    if (suggestions) suggestions.hidden = false;
+  };
+
+  const resetConversation = () => {
+    if (pending) return;
+    history.length = 0;
+    messages.innerHTML = introHtml;
+    messages.scrollTop = 0;
+    showSuggestions();
+    setStatus('');
+    input.value = '';
+    input.focus();
+  };
+
   const sendMessage = async (text) => {
     if (pending || !text) return;
 
@@ -70,6 +87,7 @@ export function setupChatWidget() {
     pending = true;
     send.disabled = true;
     input.disabled = true;
+    if (resetBtn) resetBtn.disabled = true;
     form.setAttribute('aria-busy', 'true');
     setStatus('OSIRIS odgovara…');
 
@@ -108,6 +126,7 @@ export function setupChatWidget() {
       pending = false;
       send.disabled = false;
       input.disabled = false;
+      if (resetBtn) resetBtn.disabled = false;
       form.removeAttribute('aria-busy');
       input.focus();
     }
@@ -115,6 +134,7 @@ export function setupChatWidget() {
 
   launcher.addEventListener('click', () => setOpen(!open));
   closeBtn?.addEventListener('click', () => setOpen(false));
+  resetBtn?.addEventListener('click', resetConversation);
 
   document.addEventListener('keydown', (event) => {
     if (!open) return;

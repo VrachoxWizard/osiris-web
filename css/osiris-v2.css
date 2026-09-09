@@ -362,8 +362,15 @@
     border-radius:var(--radius-control); background:rgb(255 255 255 / .04); color:var(--white);
     display:grid; place-items:center; flex:none;
   }
-  .osiris-chat__icon-btn:hover {background:rgb(255 255 255 / .1)}
-  .osiris-chat__icon-btn:focus-visible {outline-color:var(--focus-light)}
+  .osiris-chat__controls {display:flex; align-items:center; gap:.45rem; flex:none}
+  .osiris-chat__text-btn {
+    min-height:2.75rem; padding:0 .8rem; border:1px solid rgb(255 255 255 / .14);
+    border-radius:var(--radius-control); background:rgb(255 255 255 / .04); color:var(--white);
+    font:700 .75rem/1.2 var(--font-body); letter-spacing:.04em; text-transform:uppercase;
+  }
+  .osiris-chat__text-btn:hover,.osiris-chat__icon-btn:hover {background:rgb(255 255 255 / .1)}
+  .osiris-chat__text-btn:disabled {opacity:.45}
+  .osiris-chat__text-btn:focus-visible,.osiris-chat__icon-btn:focus-visible {outline-color:var(--focus-light)}
   .osiris-chat__body {display:flex; flex-direction:column; min-height:0; flex:1; background:var(--paper)}
   .osiris-chat__messages {
     display:flex; flex-direction:column; gap:.85rem; flex:1; min-height:13rem;

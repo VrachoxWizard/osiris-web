@@ -76,9 +76,12 @@ export function chatWidget(page = 'default') {
           <p class="osiris-chat__title">OSIRIS AI</p>
         </div>
       </div>
-      <button type="button" class="osiris-chat__icon-btn" data-chat-close aria-label="Zatvori razgovor">
-        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M4 4l10 10M14 4L4 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
-      </button>
+      <div class="osiris-chat__controls">
+        <button type="button" class="osiris-chat__text-btn" data-chat-reset>Novi razgovor</button>
+        <button type="button" class="osiris-chat__icon-btn" data-chat-close aria-label="Zatvori razgovor">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M4 4l10 10M14 4L4 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg>
+        </button>
+      </div>
     </div>
     <div class="osiris-chat__body">
       <div class="osiris-chat__messages" data-chat-messages role="log" aria-live="polite" aria-relevant="additions">
