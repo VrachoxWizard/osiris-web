@@ -153,7 +153,42 @@ function setupContactForms() {
   });
 }
 
+// The markup ships visible. Only this function arms the hidden start state, so a failed script,
+// a missing IntersectionObserver or a reduced-motion preference all leave the content on screen.
+function setupReveals() {
+  const targets = document.querySelectorAll('[data-reveal]');
+  if (!targets.length) return;
+  if (!('IntersectionObserver' in window)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('js-reveal');
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('is-revealed');
+      observer.unobserve(entry.target);
+    }
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+  targets.forEach((target, index) => {
+    target.style.setProperty('--reveal-index', index % 4);
+    observer.observe(target);
+  });
+}
+
+function setupScrollProgress() {
+  const bar = document.querySelector('[data-scroll-progress]');
+  if (!bar) return;
+  const update = () => {
+    const scrollable = document.documentElement.scrollHeight - innerHeight;
+    bar.style.setProperty('--progress', scrollable > 0 ? Math.min(scrollY / scrollable, 1) : 0);
+  };
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update, { passive: true });
+  update();
+}
+
 setupNavigation();
 preserveAttribution();
 setupContactForms();
 setupChatWidget();
+setupReveals();
+setupScrollProgress();

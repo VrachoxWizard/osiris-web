@@ -7,12 +7,12 @@ export const routes = [
 ];
 export const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const e = escapeHtml;
-const arrow = '<span aria-hidden="true">↗</span>';
+const arrow = '<span class="arrow" aria-hidden="true">↗</span>';
 export const analysisHref = page => ['landing', 'contact'].includes(page) ? '#analiza' : '/kontakt/#analiza';
 const logo = () => '<span class="brand-mark" aria-hidden="true"><picture><source srcset="/images/osiris-mark-128.webp" type="image/webp"><img src="/images/osiris-mark-128.png" alt="" width="128" height="128" decoding="async"></picture></span><span class="brand-name">OSIRIS</span>';
 const navLinks = page => routes.map(([id,label,href]) => `<a class="nav-link" href="${href}"${id === page ? ' aria-current="page"' : ''}>${label}</a>`).join('');
 export function header(page) {
-  return `<header class="site-header" data-header><div class="container header-inner">
+  return `<header class="site-header" data-header><span class="scroll-progress" data-scroll-progress aria-hidden="true"></span><div class="container header-inner">
     <a class="brand" href="/" aria-label="OSIRIS početna stranica">${logo()}</a>
     <nav class="desktop-nav" aria-label="Glavna navigacija">${navLinks(page)}</nav>
     <a class="button button--small button--primary header-cta" href="${analysisHref(page)}">Besplatna analiza ${arrow}</a>
@@ -27,20 +27,41 @@ export function contactLinks() {
 export function footer(page) {
   return `<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand-block"><a class="brand" href="/" aria-label="OSIRIS početna stranica">${logo()}</a><p>${e(siteData.brand.description)}</p><span class="location-pill">${e(siteData.brand.location)}</span></div><nav class="footer-links" aria-label="Navigacija u podnožju"><p class="footer-label">Navigacija</p>${navLinks(page)}<a href="/privatnost/">Privatnost</a></nav><div class="footer-contact"><p class="footer-label">Razgovarajmo</p><p>Recite nam što želite poboljšati na webu. Odgovaramo u roku od tri radna dana.</p><a class="text-link" href="${analysisHref(page)}">Besplatna analiza ${arrow}</a><div class="contact-channels">${contactLinks()}</div></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} OSIRIS. Sva prava pridržana.</span><span>${e(siteData.brand.businessName || 'OSIRIS')} · Zagreb</span></div></footer>`;
 }
-export function picture(project, {sizes='(min-width: 87rem) 405px, (min-width: 60rem) 29vw, 92vw', eager=false, className='project-card__media'} = {}) {
+export function picture(project, {sizes='(min-width: 87rem) 405px, (min-width: 60rem) 29vw, 92vw', eager=false, className='frame__media'} = {}) {
   const m = project.media;
   return `<picture class="${className}">${['avif','webp'].map(type=>`<source type="image/${type}" srcset="${e(m.sources[type])}" sizes="${e(sizes)}">`).join('')}<img src="${e(m.src)}" alt="${e(m.alt)}" width="${m.width}" height="${m.height}" loading="${eager?'eager':'lazy'}" decoding="async"${eager?' fetchpriority="high"':''}></picture>`;
+}
+// Browser chrome around a screenshot. The bar shows the project title, never the host: two live
+// URLs contain hyphens and body.innerText must stay free of them.
+export function frame(label, media, className='') {
+  return `<div class="frame${className?' '+className:''}"><span class="frame__bar" aria-hidden="true"><span class="frame__dots"></span><span class="frame__label">${e(label)}</span></span>${media}</div>`;
+}
+// The hero carries the two projects the rest of the homepage does not use, so no project repeats.
+export function heroTiles() {
+  return ['tina-sport-pia','atasol'].map((id,i)=>{
+    const project = siteData.projects.find(p=>p.id===id);
+    return frame(project.title, picture(project,{sizes:'(min-width: 60rem) 34vw, 78vw',eager:i===0}), `hero-tile hero-tile--${i+1}`);
+  }).join('');
+}
+export function proofStrip() {
+  return ['dolce-torte','produkt-auto'].map(id=>{
+    const project = siteData.projects.find(p=>p.id===id);
+    return frame(project.title, picture(project,{sizes:'(min-width: 60rem) 17vw, 42vw'}), 'proof-strip__item');
+  }).join('');
+}
+export function capabilityPanel() {
+  return `<div class="capability-panel">${siteData.serviceTracks.map(s=>`<div class="capability-panel__row"><span class="capability-panel__code">${e(s.code)}</span><ul class="capability-panel__list">${s.includes.map(x=>`<li>${e(x)}</li>`).join('')}</ul></div>`).join('')}</div>`;
 }
 export function projectCards(variant) {
   const projects = variant === 'cases' ? siteData.projects : ['dolce-torte','dogan-septem','produkt-auto'].map(id=>siteData.projects.find(p=>p.id===id));
   return projects.map((p,i)=>{
     const wide = variant==='cases' && i===projects.length-1;
     const sizes = variant==='cases' ? '(min-width: 87rem) 616px, (min-width: 60rem) 44vw, 92vw' : undefined;
-    return `<article class="project-card${wide?' project-card--wide':''}">${picture(p,{sizes})}<div class="project-card__content"><span class="project-card__index">${e(p.industry)} · ${e(p.category)}</span><h3>${e(p.title)}</h3>${variant==='cases'?`<dl class="project-details"><div><dt>Potreba</dt><dd>${e(p.challenge)}</dd></div><div><dt>Naš doprinos</dt><dd>${e(p.role.join(', '))}.</dd></div><div><dt>Rješenje</dt><dd>${e(p.solution)}</dd></div></dl>`:`<p>${e(p.summary)}</p>`}<a class="text-link" href="${e(p.liveUrl)}" target="_blank" rel="noopener noreferrer">Pogledajte ${e(p.title)} ${arrow}<span class="sr-only"> (otvara se u novoj kartici)</span></a></div></article>`;
+    return `<article class="project-card${wide?' project-card--wide':''}" data-reveal>${frame(p.title,picture(p,{sizes}),'project-card__frame')}<div class="project-card__content"><span class="project-card__index">${e(p.industry)} · ${e(p.category)}</span><h3>${e(p.title)}</h3>${variant==='cases'?`<dl class="project-details"><div><dt>Potreba</dt><dd>${e(p.challenge)}</dd></div><div><dt>Naš doprinos</dt><dd>${e(p.role.join(', '))}.</dd></div><div><dt>Rješenje</dt><dd>${e(p.solution)}</dd></div></dl>`:`<p>${e(p.summary)}</p>`}<a class="text-link" href="${e(p.liveUrl)}" target="_blank" rel="noopener noreferrer">Pogledajte ${e(p.title)} ${arrow}<span class="sr-only"> (otvara se u novoj kartici)</span></a></div></article>`;
   }).join('');
 }
 export function services(variant) {
-  return siteData.serviceTracks.map((s,i)=>`<article class="card${variant==='offers'?' card--offer':''}"${variant==='offers'?` id="${s.id}"`:''}><span class="card__index">0${i+1}</span><h3>${e(s.title)}</h3><p>${e(s.description)}</p>${variant==='offers'?`<h4>Uključuje</h4><ul>${s.includes.map(x=>`<li>${e(x)}</li>`).join('')}</ul><a class="text-link" href="/kontakt/#analiza">Razgovarajmo o projektu ${arrow}</a>`:''}</article>`).join('') + (variant==='summary'?'<a class="text-link" href="/usluge/">Pogledajte usluge ↗</a>':'');
+  return siteData.serviceTracks.map((s,i)=>`<article class="card${variant==='offers'?' card--offer':''}"${variant==='offers'?` id="${s.id}"`:''} data-reveal><span class="card__index">0${i+1}</span><h3>${e(s.title)}</h3><p>${e(s.description)}</p>${variant==='offers'?`<h4>Uključuje</h4><ul>${s.includes.map(x=>`<li>${e(x)}</li>`).join('')}</ul><a class="text-link" href="/kontakt/#analiza">Razgovarajmo o projektu ${arrow}</a>`:''}</article>`).join('') + (variant==='summary'?'<a class="text-link" href="/usluge/">Pogledajte usluge ↗</a>':'');
 }
 export function form(prefix) {
   const input = (name,label,type,attrs='') => `<div class="field"><label for="${prefix}-${name}">${label}${['name','email'].includes(name)?' <span aria-hidden="true">*</span>':''}</label><input id="${prefix}-${name}" name="${name}" type="${type}" aria-describedby="${prefix}-${name}-error" ${attrs}><small id="${prefix}-${name}-error" class="field-error" data-error-for="${name}"></small></div>`;
@@ -133,6 +154,9 @@ export function renderPage(html, route='/') {
   return html.replace('<div data-site-header></div>',`<div data-site-header>${header(page)}</div>`)
     .replace('<div data-site-footer></div>',`<div data-site-footer>${footer(page)}</div>`)
     .replace(/<!-- projects:(previews|cases) -->/g,(_,v)=>projectCards(v))
+    .replace('<!-- hero:tiles -->',()=>heroTiles())
+    .replace('<!-- capability-panel -->',()=>capabilityPanel())
+    .replace('<!-- projects:proof -->',()=>proofStrip())
     .replace(/<!-- services:(summary|offers) -->/g,(_,v)=>services(v))
     .replace(/<!-- form:(contact|landing) -->/g,(_,v)=>form(v))
     .replace(/<!-- founders(?::(compact))? -->/g,(_,v)=>founders(v))
