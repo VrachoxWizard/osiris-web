@@ -1,0 +1,17 @@
+[
+  {
+    "date": "2026-09-11",
+    "scope": "app",
+    "macrostructure": "Route family: Marquee Hero / Conversational FAQ / Portfolio Grid / Long Document / Stat-Led / Narrative Workflow / Index-First",
+    "theme": "custom",
+    "theme_axes": "light / roman-serif / cool",
+    "vibe": "cool precision, warm paper, Zagreb editorial",
+    "navigation": "N6 Newspaper Masthead",
+    "footer": "Ft4 Dense Colophon",
+    "enrichment": "none — real project screenshots only",
+    "brief": "OSIRIS full-site anti-slop redesign for a Zagreb web studio",
+    "pre_emit_critique": "P5 H5 E5 S5 R5 V5",
+    "slop_test": "58/58",
+    "verification": "npm test — 59 passed, 1 intentionally skipped because Firefox does not support mobile device emulation"
+  }
+]

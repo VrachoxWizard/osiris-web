@@ -2,9 +2,10 @@ import { setupChatWidget } from './chat.js';
 import { siteData } from './content.js';
 
 const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+
 function preserveAttribution() {
   const params = new URLSearchParams(location.search);
-  document.querySelectorAll('a[href]').forEach(link => {
+  document.querySelectorAll('a[href]').forEach((link) => {
     const url = new URL(link.href, location.href);
     if (url.origin !== location.origin || !['http:', 'https:'].includes(url.protocol)) return;
     for (const key of attributionKeys) {
@@ -12,74 +13,107 @@ function preserveAttribution() {
     }
     link.href = url.href;
   });
-  document.querySelectorAll('[data-contact-form]').forEach(form => {
-    attributionKeys.forEach(key => { form.elements.namedItem(key).value = params.get(key) || ''; });
+
+  document.querySelectorAll('[data-contact-form]').forEach((form) => {
+    attributionKeys.forEach((key) => {
+      form.elements.namedItem(key).value = params.get(key) || '';
+    });
     form.elements.namedItem('pageUrl').value = location.href;
   });
 }
 
 function setupNavigation() {
   const disclosure = document.querySelector('[data-mobile-disclosure]');
-  const header = document.querySelector('[data-header]');
-  if (!disclosure || !header) return;
+  if (!disclosure) return;
   const summary = disclosure.querySelector('summary');
-  const regions = [document.querySelector('main'), document.querySelector('[data-site-footer]'), document.querySelector('[data-osiris-chat]')].filter(Boolean);
-  const desktop = matchMedia('(min-width: 60rem)');
-  const close = (focus = false) => {
+  const desktop = matchMedia('(min-width: 52rem)');
+  const regions = [
+    document.querySelector('main'),
+    document.querySelector('[data-site-footer]'),
+    document.querySelector('[data-osiris-chat]'),
+  ].filter(Boolean);
+
+  const close = ({ returnFocus = false } = {}) => {
     disclosure.open = false;
+    summary.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('menu-open');
-    regions.forEach(region => { region.inert = false; });
-    if (focus && !desktop.matches) summary.focus();
+    regions.forEach((region) => { region.inert = false; });
+    if (returnFocus && !desktop.matches) summary.focus();
   };
-  disclosure.addEventListener('toggle', () => {
+
+  const sync = () => {
     const open = disclosure.open && !desktop.matches;
+    summary.setAttribute('aria-expanded', String(open));
     document.body.classList.toggle('menu-open', open);
-    regions.forEach(region => { region.inert = open; });
+    regions.forEach((region) => { region.inert = open; });
+  };
+
+  disclosure.addEventListener('toggle', sync);
+  disclosure.querySelectorAll('a, [data-chat-open]').forEach((control) => {
+    control.addEventListener('click', () => close());
   });
-  disclosure.querySelectorAll('a').forEach(link => link.addEventListener('click', () => close()));
-  document.addEventListener('keydown', event => {
+
+  document.addEventListener('keydown', (event) => {
     if (!disclosure.open || desktop.matches) return;
-    if (event.key === 'Escape') { event.preventDefault(); close(true); return; }
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      close({ returnFocus: true });
+      return;
+    }
     if (event.key !== 'Tab') return;
-    const focusable = [summary, ...disclosure.querySelectorAll('a[href]')].filter(el => el.getClientRects().length);
-    const first = focusable[0], last = focusable.at(-1);
+    const focusable = [summary, ...disclosure.querySelectorAll('a[href], button:not(:disabled)')]
+      .filter((element) => element.getClientRects().length);
+    const first = focusable[0];
+    const last = focusable.at(-1);
     if (event.shiftKey && (document.activeElement === first || !disclosure.contains(document.activeElement))) {
-      event.preventDefault(); last.focus();
+      event.preventDefault();
+      last.focus();
     } else if (!event.shiftKey && (document.activeElement === last || !disclosure.contains(document.activeElement))) {
-      event.preventDefault(); first.focus();
+      event.preventDefault();
+      first.focus();
     }
   });
+
   desktop.addEventListener('change', () => { if (desktop.matches) close(); });
-  const updateHeader = () => header.classList.toggle('is-scrolled', scrollY > 12);
-  addEventListener('scroll', updateHeader, { passive: true });
-  addEventListener('pageshow', () => { close(); updateHeader(); });
-  updateHeader();
+  addEventListener('pageshow', () => close());
+  summary.setAttribute('aria-expanded', 'false');
 }
 
 const requiredMessages = {
-  name: 'Unesite ime i prezime.',
-  email: 'Unesite email adresu.',
-  websiteStatus: 'Odaberite trenutačno stanje.',
-  primaryGoal: 'Opišite što želite postići web stranicom.',
+  name: 'Nedostaje ime i prezime. Upišite osobu kojoj možemo odgovoriti.',
+  email: 'Nedostaje email adresa. Upišite adresu na koju možemo poslati analizu.',
+  websiteStatus: 'Nije odabrano trenutačno stanje. Odaberite jednu od ponuđenih mogućnosti.',
+  primaryGoal: 'Nedostaje poslovni cilj. Ukratko opišite što web treba postići.',
 };
-function normalizeWebsite(control) {
+
+function websiteError(control, { normalize = false } = {}) {
   if (control.name !== 'websiteUrl' || !control.value.trim()) return '';
   const value = control.value.trim();
   try {
     const url = new URL(/^[a-z][a-z\d+.-]*:/i.test(value) ? value : `https://${value}`);
     if (!['http:', 'https:'].includes(url.protocol) || !url.hostname.includes('.') || url.username || url.password) throw new Error();
-    control.value = url.href;
+    if (normalize) control.value = url.href;
     return '';
-  } catch { return 'Unesite web adresu, npr. primjer.hr ili https://primjer.hr.'; }
+  } catch {
+    return 'Web adresa nije prepoznata. Upišite je kao primjer.hr ili https://primjer.hr.';
+  }
 }
+
 function setupContactForms() {
-  document.querySelectorAll('[data-contact-form]').forEach(form => {
+  document.querySelectorAll('[data-contact-form]').forEach((form) => {
     const submit = form.querySelector('button[type="submit"]');
+    const submitLabel = submit.querySelector('[data-submit-label]');
     const status = form.querySelector('[data-form-status]');
     const fallback = form.querySelector('[data-form-fallback]');
-    const controls = [...form.elements].filter(el => ['INPUT','SELECT','TEXTAREA'].includes(el.tagName) && el.type !== 'hidden' && el.name !== '_gotcha');
-    const errors = new Map([...form.querySelectorAll('[data-error-for]')].map(el => [el.dataset.errorFor, el]));
+    const controls = [...form.elements].filter((element) => (
+      ['INPUT', 'SELECT', 'TEXTAREA'].includes(element.tagName)
+      && element.type !== 'hidden'
+      && element.name !== '_gotcha'
+    ));
+    const errors = new Map([...form.querySelectorAll('[data-error-for]')].map((element) => [element.dataset.errorFor, element]));
+    const touched = new Set();
     let submitting = false;
+
     const setState = (state, message = '', focus = false) => {
       form.dataset.state = state;
       status.dataset.state = state;
@@ -87,108 +121,109 @@ function setupContactForms() {
       if (fallback) fallback.hidden = state !== 'error';
       if (focus) status.focus();
     };
-    const clearError = control => {
+
+    const showValidation = (control, message) => {
+      const field = control.closest('.field');
+      if (message) {
+        control.setAttribute('aria-invalid', 'true');
+        field?.removeAttribute('data-valid');
+        if (errors.has(control.name)) errors.get(control.name).textContent = message;
+        return false;
+      }
       control.removeAttribute('aria-invalid');
       if (errors.has(control.name)) errors.get(control.name).textContent = '';
+      if (touched.has(control) && control.value.trim()) field?.setAttribute('data-valid', 'true');
+      else field?.removeAttribute('data-valid');
+      return true;
     };
-    controls.forEach(control => {
+
+    const validate = (control, { normalize = false } = {}) => {
+      let message = websiteError(control, { normalize });
+      if (!message && control.required && !control.value.trim()) message = requiredMessages[control.name];
+      else if (!message && control.type === 'email' && control.validity.typeMismatch) message = 'Email adresa nije ispravna. Upišite je kao ime@primjer.hr.';
+      else if (!message && !control.validity.valid) message = 'Vrijednost nije ispravna. Provjerite unos i pokušajte ponovno.';
+      return showValidation(control, message);
+    };
+
+    controls.forEach((control) => {
+      control.addEventListener('focus', () => { control.closest('.field')?.setAttribute('data-state', 'typing'); });
+      control.addEventListener('blur', () => {
+        control.closest('.field')?.removeAttribute('data-state');
+        touched.add(control);
+        validate(control, { normalize: control.name === 'websiteUrl' });
+      });
       control.addEventListener('input', () => {
-        clearError(control);
+        if (touched.has(control)) validate(control);
         if (!submitting && form.dataset.state === 'error') setState('idle');
       });
-      control.addEventListener('change', () => clearError(control));
-      if (control.name === 'websiteUrl') control.addEventListener('blur', () => normalizeWebsite(control));
+      control.addEventListener('change', () => {
+        if (touched.has(control)) validate(control);
+      });
     });
-    form.addEventListener('submit', async event => {
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (submitting) return;
+
       let firstInvalid;
-      controls.forEach(control => {
-        clearError(control);
-        let message = normalizeWebsite(control);
-        if (control.required && !control.value.trim()) message = requiredMessages[control.name];
-        else if (control.type === 'email' && control.validity.typeMismatch) message = 'Unesite ispravnu email adresu, npr. ime@primjer.hr.';
-        else if (!message && !control.validity.valid) message = 'Provjerite unesenu vrijednost.';
-        if (!message) return;
-        control.setAttribute('aria-invalid','true');
-        if (errors.has(control.name)) errors.get(control.name).textContent = message;
-        firstInvalid ||= control;
+      controls.forEach((control) => {
+        touched.add(control);
+        if (!validate(control, { normalize: control.name === 'websiteUrl' })) firstInvalid ||= control;
       });
+
       if (firstInvalid) {
-        setState('error','Provjerite označena polja.');
-        firstInvalid.focus(); return;
+        setState('error', 'Provjerite označena polja. Svaka poruka objašnjava što treba ispraviti.');
+        firstInvalid.focus();
+        return;
       }
+
       const data = new FormData(form);
       data.set('pageUrl', location.href);
       submitting = true;
-      form.setAttribute('aria-busy','true');
-      const disabled = controls.map(control => control.disabled);
-      controls.forEach(control => { control.disabled = true; });
+      form.setAttribute('aria-busy', 'true');
       submit.disabled = true;
-      const originalLabel = submit.textContent;
-      submit.textContent = 'Šaljemo…';
-      setState('pending','Šaljemo vaš zahtjev…');
+      submitLabel.textContent = 'Šaljemo';
+      setState('loading', 'Šaljemo vaš zahtjev…');
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 20000);
+
       try {
-        const response = await fetch(form.action, {method:'POST',headers:{Accept:'application/json'},body:data,signal:controller.signal});
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: data,
+          signal: controller.signal,
+        });
         if (!response.ok) throw new Error(response.status === 429 ? 'rate-limit' : 'service');
         form.reset();
+        touched.clear();
+        form.querySelectorAll('.field').forEach((field) => field.removeAttribute('data-valid'));
         preserveAttribution();
-        setState('success',siteData.contact.statusMessage,true);
+        setState('success', siteData.contact.statusMessage, true);
       } catch (error) {
-        const message = error.name === 'AbortError' ? 'Slanje traje predugo. Pokušajte ponovno za nekoliko trenutaka.' : error.message === 'rate-limit' ? 'Previše zahtjeva. Pričekajte nekoliko minuta pa pokušajte ponovno.' : error.message === 'service' ? 'Zahtjev nije poslan zbog pogreške servisa. Pokušajte ponovno.' : 'Zahtjev nije poslan. Provjerite vezu i pokušajte ponovno.';
-        setState('error',message,true);
+        const message = error.name === 'AbortError'
+          ? 'Slanje traje predugo. Pokušajte ponovno za nekoliko trenutaka.'
+          : error.message === 'rate-limit'
+            ? 'Previše zahtjeva. Pričekajte nekoliko minuta pa pokušajte ponovno.'
+            : error.message === 'service'
+              ? 'Zahtjev nije poslan zbog pogreške servisa. Pokušajte ponovno.'
+              : 'Zahtjev nije poslan. Provjerite vezu i pokušajte ponovno.';
+        setState('error', message, true);
       } finally {
         clearTimeout(timeout);
-        controls.forEach((control,i) => { control.disabled = disabled[i]; });
         submit.disabled = false;
-        submit.textContent = originalLabel;
+        submitLabel.textContent = 'Zatražite besplatnu analizu';
         form.removeAttribute('aria-busy');
         submitting = false;
       }
     });
+
     form.noValidate = true;
     form.dataset.state = 'idle';
   });
-}
-
-// The markup ships visible. Only this function arms the hidden start state, so a failed script,
-// a missing IntersectionObserver or a reduced-motion preference all leave the content on screen.
-function setupReveals() {
-  const targets = document.querySelectorAll('[data-reveal]');
-  if (!targets.length) return;
-  if (!('IntersectionObserver' in window)) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.documentElement.classList.add('js-reveal');
-  const observer = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      entry.target.classList.add('is-revealed');
-      observer.unobserve(entry.target);
-    }
-  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
-  targets.forEach((target, index) => {
-    target.style.setProperty('--reveal-index', index % 4);
-    observer.observe(target);
-  });
-}
-
-function setupScrollProgress() {
-  const bar = document.querySelector('[data-scroll-progress]');
-  if (!bar) return;
-  const update = () => {
-    const scrollable = document.documentElement.scrollHeight - innerHeight;
-    bar.style.setProperty('--progress', scrollable > 0 ? Math.min(scrollY / scrollable, 1) : 0);
-  };
-  addEventListener('scroll', update, { passive: true });
-  addEventListener('resize', update, { passive: true });
-  update();
 }
 
 setupNavigation();
 preserveAttribution();
 setupContactForms();
 setupChatWidget();
-setupReveals();
-setupScrollProgress();

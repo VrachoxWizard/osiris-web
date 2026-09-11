@@ -7,7 +7,7 @@ const output = resolve(root, 'dist');
 if (!output.startsWith(root + sep) || output === root) throw new Error('Unsafe output directory');
 await rm(output, {recursive:true,force:true});
 await mkdir(output,{recursive:true});
-for (const file of ['css/osiris-v2.css','js/app.js','js/chat.js','js/content.js','images/osiris-mark-128.png','images/osiris-mark-128.webp','images/osiris-social-preview.jpg']) {
+for (const file of ['tokens.css','css/osiris-v3.css','js/app.js','js/chat.js','js/content.js','images/osiris-mark-128.png','images/osiris-mark-128.webp','images/osiris-social-preview.jpg']) {
   await mkdir(dirname(join(output,file)),{recursive:true});
   await cp(join(root,file),join(output,file));
 }

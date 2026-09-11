@@ -1,0 +1,18 @@
+{
+  "scanned_at": "2026-09-11",
+  "scope": "app",
+  "framework": "Vanilla HTML with ES modules and a static Node renderer",
+  "design_authority": "design.md",
+  "font_stack": "Self-hosted Libre Baskerville, Instrument Sans, and IBM Plex Mono",
+  "palette": "Zagreb Dossier OKLCH tokens in tokens.css",
+  "motion": "No motion library; functional page, menu, and dialog transitions only",
+  "spacing": "Named 4-point scale in tokens.css",
+  "preserved_contracts": [
+    "Eight public routes",
+    "SEO and Open Graph fields",
+    "Formspree POST fallback and field names",
+    "UTM propagation",
+    "/api/chat response contract",
+    "Existing project data and screenshots"
+  ]
+}
