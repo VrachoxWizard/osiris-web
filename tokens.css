@@ -72,22 +72,43 @@
 }
 
 :root {
-  --color-paper: oklch(96.5% 0.012 90);
-  --color-paper-2: oklch(92.5% 0.018 90);
-  --color-ink: oklch(18% 0.025 255);
-  --color-ink-2: oklch(34% 0.035 255);
-  --color-muted: oklch(43% 0.025 255);
-  --color-rule: oklch(72% 0.018 255);
-  --color-accent: oklch(48% 0.18 258);
-  --color-accent-ink: oklch(96.5% 0.012 90);
-  --color-focus-paper: oklch(43% 0.2 258);
-  --color-focus-ink: oklch(86% 0.15 92);
-  --color-success: oklch(32% 0.09 150);
-  --color-success-surface: oklch(91% 0.03 150);
-  --color-error: oklch(38% 0.14 25);
-  --color-error-surface: oklch(91% 0.035 25);
-  --color-dialog-shadow: oklch(12% 0.02 255 / 24%);
-  --color-backdrop: oklch(12% 0.02 255 / 60%);
+  /* Dossier je taman, dokaz je na papiru. Tri dubine mraka nose stranicu kako nijedna
+     ploha ne bi sama držala cijeli ton; vellum se vraća ondje gdje su snimke i dugo štivo. */
+  --color-paper: oklch(20% 0.028 252);
+  --color-paper-2: oklch(26% 0.02 244);
+  --color-paper-3: oklch(13% 0.03 258);
+  --color-paper-3-ink: oklch(94% 0.014 88);
+  --color-ink: oklch(94% 0.014 88);
+  --color-ink-2: oklch(82% 0.016 88);
+  --color-muted: oklch(70% 0.014 88);
+  --color-rule: oklch(40% 0.02 248);
+
+  /* Topli jantar je protuteža hladnim plohama: napetost temperature drži paletu živom. */
+  --color-accent: oklch(80% 0.14 85);
+  --color-accent-ink: oklch(16% 0.028 252);
+  --color-focus-paper: oklch(86% 0.15 92);
+  --color-focus-ink: oklch(43% 0.2 258);
+
+  /* Vellum: kobalt preživljava na papiru, pa izvorni identitet seli, a ne nestaje. */
+  --color-vellum-paper: oklch(95.5% 0.013 88);
+  --color-vellum-paper-2: oklch(91% 0.018 88);
+  --color-vellum-ink: oklch(17% 0.028 252);
+  --color-vellum-ink-2: oklch(34% 0.03 252);
+  --color-vellum-muted: oklch(44% 0.024 252);
+  --color-vellum-rule: oklch(72% 0.018 250);
+  --color-vellum-accent: oklch(45% 0.18 258);
+  --color-vellum-accent-ink: oklch(95.5% 0.013 88);
+
+  /* Oznake nacrta: registarske kvačice i graduacije. Nisu tekst, nego mjerni trag.
+     Jedna srednja svjetlina čita se i na navy plohi i na vellumu: ista olovka na oba papira. */
+  --color-tick: oklch(58% 0.03 250);
+
+  --color-success: oklch(84% 0.13 150);
+  --color-success-surface: oklch(27% 0.055 150);
+  --color-error: oklch(82% 0.12 25);
+  --color-error-surface: oklch(29% 0.065 25);
+  --color-dialog-shadow: oklch(8% 0.02 255 / 50%);
+  --color-backdrop: oklch(8% 0.02 255 / 70%);
 
   --font-display: "Libre Baskerville", Georgia, serif;
   --font-body: "Instrument Sans", Arial, sans-serif;
@@ -99,13 +120,21 @@
   --text-lg: 1.25rem;
   --text-xl: clamp(1.75rem, 3vw, 2.75rem);
   --text-display-long: clamp(3.25rem, 8.2vw, 8.5rem);
-  --text-display-home: clamp(4rem, 10vw, 9rem);
+  --text-display-home: clamp(3.25rem, 10vw, 9rem);
   --text-display-stat: clamp(7rem, 22vw, 17rem);
   --leading-tight: 0.91;
   --leading-display: 0.96;
   --leading-body: 1.68;
   --tracking-mono: 0.08em;
   --tracking-display: -0.035em;
+
+  /* Optičko poravnanje prikaznog sloga. Vrijednosti su negirana lijeva bočnica slova,
+     izmjerena na 144px i izražena u em kako bi pratila clamp. Poravnava se rub slova,
+     a ne rub okvira, pa velika slova sjedaju na istu okomicu kao linije i tekst ispod. */
+  --optical-w: 0.014em;        /* W već prelazi 2px ulijevo: pomak udesno */
+  --optical-cap: -0.042em;     /* M, P, I i mono brojke: 6px uvučeno */
+  --optical-s-caron: -0.056em; /* Š: 8px uvučeno, najveće odstupanje u nizu */
+  --optical-figure: -0.014em;  /* brojka 4: 2px uvučeno */
 
   --space-0: 0px; /* jedinica je obavezna: 0 bez jedinice poništava min(), max() i clamp() */
   --space-1: 0.25rem;
@@ -131,6 +160,9 @@
   --measure-wide: 70ch;
   --control-height: 3rem;
   --rule-hair: 1px;
+  --tick-arm: 0.75rem;
+  --tick-gap: 0.5rem;
+  --tick-graduation: 0.5rem;
   --radius-0: 0;
   --radius-1: 2px;
   --radius-2: 4px;

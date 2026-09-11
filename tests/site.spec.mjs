@@ -355,13 +355,24 @@ test('chat exposes loading, failure, retry and success states', async ({ page })
   await expect(retry).toHaveCount(0);
 });
 
-test('reduced motion, controlled light surface and text enlargement stay stable', async ({ page }) => {
+test('reduced motion, controlled surface and text enlargement stay stable', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/');
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
+
+  // Ploha je odabrana, ne naslijeđena: dossier ostaje taman, a rute dokaza svijetle,
+  // bez obzira na to što sustav traži.
+  for (const scheme of ['dark', 'light']) {
+    await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: scheme });
+    await page.goto('/kontakt/');
+    expect(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)).toBe('dark');
+    // Shema se čita s korijena: o njoj ovise klizač i platno, ne samo ploha sekcije.
+    await page.goto('/projekti/');
+    expect(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)).toBe('light');
+    expect(await page.locator('.page--projects').evaluate((element) => getComputedStyle(element).colorScheme)).toBe('light');
+  }
   await page.goto('/kontakt/');
-  expect(await page.locator('input[name=name]').evaluate((element) => getComputedStyle(element).colorScheme)).toBe('light');
   await page.addStyleTag({ content: 'html {font-size:200%}' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.setViewportSize({ width: 320, height: 568 });

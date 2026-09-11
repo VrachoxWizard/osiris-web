@@ -1,5 +1,7 @@
 /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
-/* Hallmark · genre: editorial · theme: custom Zagreb Dossier · tone: cool precision, warm paper, Zagreb editorial · anchor: cobalt */
+/* Hallmark · genre: editorial · theme: custom Zagreb Dossier · Night · tone: cool precision, night dossier, paper evidence · anchor: amber on navy, cobalt on vellum */
+/* Hallmark · axes: dark paper / roman-serif / warm accent · values live in tokens.css */
+/* Hallmark · surfaces: 3 navy depths + 2 vellum depths · vellum carries evidence and long reading */
 /* Hallmark · macrostructure: route-specific editorial family · nav: N6 · footer: Ft4 · designed-as-app · scope: app */
 /* Hallmark · contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · responsive: pass (49) · icons: pass (30) · mobile: pass (34, 49, 50–57) */
 /* type: Libre Baskerville / Instrument Sans / IBM Plex Mono · enrichment: none, real project screenshots only */
@@ -10,7 +12,11 @@
 @layer reset {
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: var(--space-0); min-width: 20rem; overflow-x: clip; }
-  html { scroll-behavior: smooth; color-scheme: light; }
+  html { scroll-behavior: smooth; color-scheme: dark; }
+  /* Korijen nosi shemu jer o njoj ovise klizač i platno; klasa rute stoji na body-ju. */
+  html:has(.page--projects),
+  html:has(.page--about),
+  html:has(.page--privacy) { color-scheme: light; }
   body { min-height: 100%; }
   img, picture { display: block; max-width: 100%; }
   img { height: auto; }
@@ -24,6 +30,27 @@
 }
 
 @layer base {
+  /* Vellum preslikava semantičke tokene, pa svaka komponenta radi na obje plohe bez izmjene.
+     Rute dokaza i štiva su svijetle; ploha se vraća i unutar tamnih ruta gdje stoje snimke. */
+  .page--projects,
+  .page--about,
+  .page--privacy,
+  .home-work,
+  .proof-panorama {
+    --color-paper: var(--color-vellum-paper);
+    --color-paper-2: var(--color-vellum-paper-2);
+    --color-ink: var(--color-vellum-ink);
+    --color-ink-2: var(--color-vellum-ink-2);
+    --color-muted: var(--color-vellum-muted);
+    --color-rule: var(--color-vellum-rule);
+    --color-accent: var(--color-vellum-accent);
+    --color-accent-ink: var(--color-vellum-accent-ink);
+    --color-focus-paper: var(--color-focus-ink);
+    color-scheme: light;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
   body {
     background-color: var(--color-paper);
     color: var(--color-ink);
@@ -49,7 +76,25 @@
 
   h2 { font-size: var(--text-xl); }
   h3 { font-size: var(--text-lg); }
-  p, li, dd { text-wrap: pretty; }
+  /* Hrvatske složenice su duge; automatsko rastavljanje smiruje desni rub na uskim stupcima.
+     Granice drže rastavljanje na dugim riječima i sprječavaju patuljaste ostatke. */
+  p, li, dd {
+    text-wrap: pretty;
+    hyphens: auto;
+    hyphenate-limit-chars: 8 4 3;
+  }
+
+  /* Mono oznake su podaci, ne proza: one se ne rastavljaju. */
+  .masthead-issue,
+  .mast-menu__meta,
+  .service-code,
+  .project-meta,
+  .chat-dialog__meta,
+  .chat-status,
+  .legal-update,
+  .form-required,
+  .field-message,
+  .colophon-copy p { hyphens: manual; }
   main { min-width: var(--space-0); }
   main:focus { outline: none; }
   ::selection { background-color: var(--color-ink); color: var(--color-paper); }
@@ -60,7 +105,7 @@
   }
 
   .workflow-stage--ink :focus-visible {
-    outline-color: var(--color-focus-ink);
+    outline-color: var(--color-focus-paper);
   }
 
   .page-shell,
@@ -224,9 +269,10 @@
   .pre-footer-chat__inner { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-8); align-items: center; justify-content: space-between; padding-block: var(--space-6); }
   .pre-footer-chat p { max-width: var(--measure); }
 
+  /* Kolofon je najdublja ploha na svakoj ruti: isto sidro ispod svijetlih i tamnih stranica. */
   .site-colophon {
-    background-color: var(--color-ink);
-    color: var(--color-paper);
+    background-color: var(--color-paper-3);
+    color: var(--color-paper-3-ink);
   }
   .colophon-copy {
     display: grid;
@@ -240,7 +286,7 @@
   .colophon-copy p { max-width: var(--measure-wide); }
   .colophon-copy nav { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
   .colophon-link { min-height: 2.75rem; display: inline-flex; align-items: center; text-underline-offset: var(--space-1); white-space: nowrap; }
-  .colophon-link[aria-current="page"] { text-decoration-color: var(--color-focus-ink); text-decoration-thickness: 2px; }
+  .colophon-link[aria-current="page"] { text-decoration-color: var(--color-accent); text-decoration-thickness: 2px; }
 }
 
 @layer components {
@@ -466,7 +512,7 @@
   /* Hallmark · macrostructure: Marquee Hero · H1 knobs: xxl, left-bias, single rule below */
   .hero-marquee { border-block-end: var(--rule-hair) solid var(--color-ink); }
   .hero-marquee__inner { min-height: calc(100svh - 9.5rem); display: grid; align-content: end; padding-block: var(--space-8) var(--space-12); }
-  .hero-marquee h1 { max-width: 11ch; font-size: var(--text-display-home); line-height: var(--leading-tight); }
+  .hero-marquee h1 { max-width: 11ch; margin-inline-start: var(--optical-w); font-size: var(--text-display-home); line-height: var(--leading-tight); }
   .home-intro { padding-block: var(--space-16); }
   .home-intro__grid { display: grid; gap: var(--space-8); }
   .home-intro h2 { max-width: 20ch; }
@@ -484,11 +530,11 @@
   .home-reference { display: grid; gap: var(--space-3); min-width: var(--space-0); }
   .home-reference p { max-width: var(--measure-narrow); color: var(--color-ink-2); }
   .section-outro { margin-block-start: var(--space-12); }
-  .home-process { padding-block: var(--space-12); background-color: var(--color-ink); color: var(--color-paper); }
+  .home-process { padding-block: var(--space-12); background-color: var(--color-paper-3); color: var(--color-paper-3-ink); }
   .home-process h2 { margin-block-end: var(--space-8); }
   .linear-process { list-style: none; border-block-start: var(--rule-hair) solid var(--color-rule); }
   .linear-process li { display: grid; gap: var(--space-3); padding-block: var(--space-5); border-block-end: var(--rule-hair) solid var(--color-rule); }
-  .linear-process span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-focus-ink); }
+  .linear-process span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-accent); }
   .linear-process p { max-width: var(--measure-narrow); }
   .home-note { padding-block: var(--space-24); }
   .home-note__grid { display: grid; gap: var(--space-8); }
@@ -497,10 +543,77 @@
   .final-action h2 { max-width: 18ch; margin-block-end: var(--space-5); }
   .final-action p { max-width: var(--measure-narrow); margin-block-end: var(--space-5); }
 
+  /* Sloj nacrta. Svaka oznaka je rub ili kutija, nikad uzorak; ništa ne stoji preko snimke.
+     Potpis ploče čita se kao kotna linija: krajnje kvačice zatvaraju izmjereni raspon.
+     Kvačice su apsolutne, pa ne ulaze u flex tok potpisa niti prelaze okvir figure. */
+  .project-figure figcaption,
+  .document-figure figcaption { position: relative; }
+  .project-figure figcaption::before,
+  .project-figure figcaption::after,
+  .document-figure figcaption::before,
+  .document-figure figcaption::after {
+    content: "";
+    position: absolute;
+    inset-block-start: var(--space-0);
+    width: var(--rule-hair);
+    height: var(--tick-graduation);
+    background-color: var(--color-tick);
+    pointer-events: none;
+  }
+  .project-figure figcaption::before,
+  .document-figure figcaption::before { inset-inline-start: var(--space-0); }
+  .project-figure figcaption::after,
+  .document-figure figcaption::after { inset-inline-end: var(--space-0); }
+
+  /* Graduacija spušta se s linije retka na njezinu lijevom kraju: linija postaje mjerilo.
+     Retci ruleni na dnu nose kvačicu ispod, a retci ruleni na vrhu unutar sebe — gesta je
+     ista, kvačica uvijek visi s vlastite linije. Indeks ruta je izuzet: ondje ::after nosi
+     strelicu, a dvije oznake na istom mjestu bile bi buka. */
+  .service-row,
+  .linear-process li,
+  .proof-column div,
+  .service-answer__body li,
+  .project-ledger div,
+  .contact-ledger dl div { position: relative; }
+  .service-row::after,
+  .linear-process li::after,
+  .proof-column div::after,
+  .service-answer__body li::after,
+  .project-ledger div::after,
+  .contact-ledger dl div::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: var(--space-0);
+    width: var(--rule-hair);
+    height: var(--tick-graduation);
+    background-color: var(--color-tick);
+    pointer-events: none;
+  }
+  .service-row::after,
+  .linear-process li::after,
+  .proof-column div::after,
+  .service-answer__body li::after { inset-block-end: calc(var(--tick-graduation) * -1); }
+  .project-ledger div::after,
+  .contact-ledger dl div::after { inset-block-start: var(--space-0); }
+
+  /* Brojke se čitaju kao mjerenje: jednaka širina znamenki i u tekstualnom slogu. */
+  .service-code,
+  .linear-process span,
+  .project-figure figcaption,
+  .document-figure figcaption,
+  .project-ledger dd,
+  .contact-ledger dd,
+  .proof-column dd,
+  .legal-update,
+  .workflow-stage__heading > span,
+  .final-action p,
+  .home-intro p,
+  .hero-stat__qualifier { font-variant-numeric: tabular-nums; }
+
   /* Hallmark · macrostructure: Conversational FAQ · H2 knobs: ratio 7/5, proof column, vertical rule */
   .services-diptych { padding-block: var(--space-16); }
   .services-diptych__grid { display: grid; gap: var(--space-10); }
-  .services-diptych h1 { max-width: 12ch; font-size: var(--text-display-long); }
+  .services-diptych h1 { max-width: 12ch; margin-inline-start: var(--optical-s-caron); font-size: var(--text-display-long); }
   .services-diptych p { max-width: var(--measure-narrow); margin-block-start: var(--space-6); font-size: var(--text-lg); }
   .proof-column { display: grid; border-block-start: var(--rule-hair) solid var(--color-rule); }
   .proof-column div { padding-block: var(--space-4); border-block-end: var(--rule-hair) solid var(--color-rule); }
@@ -523,7 +636,7 @@
 
   /* Hallmark · macrostructure: Portfolio Grid · five projects, uneven spans, no filters */
   .portfolio-intro { padding-block: var(--space-12) var(--space-16); }
-  .portfolio-intro h1 { max-width: 11ch; font-size: var(--text-display-long); }
+  .portfolio-intro h1 { max-width: 11ch; margin-inline-start: var(--optical-cap); font-size: var(--text-display-long); }
   .portfolio-intro p { max-width: var(--measure-narrow); margin-block-start: var(--space-5); }
   .portfolio-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-24); padding-block-end: var(--space-24); }
   .portfolio-case { display: grid; gap: var(--space-6); min-width: var(--space-0); }
@@ -535,7 +648,7 @@
 
   /* Hallmark · macrostructure: Long Document · single measure, inline heads, no reveal */
   .long-document { padding-block: var(--space-16) var(--space-24); }
-  .long-document > h1 { max-width: 12ch; margin-block-end: var(--space-16); font-size: var(--text-display-long); }
+  .long-document > h1 { max-width: 12ch; margin-inline-start: var(--optical-cap); margin-block-end: var(--space-16); font-size: var(--text-display-long); }
   .long-document__body { max-width: var(--measure); margin-inline: auto; }
   .long-document__body > * + * { margin-block-start: var(--space-6); }
   .long-document__body h2 { margin-block-start: var(--space-12); font-size: var(--text-lg); }
@@ -550,7 +663,7 @@
   /* Hallmark · macrostructure: Stat-Led · H4 knobs: tabular display, qualifier below, secondary facts adjacent */
   .hero-stat { padding-block: var(--space-12) var(--space-20); }
   .hero-stat h1 { display: grid; }
-  .hero-stat__number { font-variant-numeric: tabular-nums; font-size: var(--text-display-stat); line-height: 0.82; white-space: nowrap; }
+  .hero-stat__number { margin-inline-start: var(--optical-cap); font-variant-numeric: tabular-nums; font-size: var(--text-display-stat); line-height: 0.82; white-space: nowrap; }
   .hero-stat__qualifier { max-width: 16ch; margin-block-start: var(--space-4); font-size: var(--text-xl); }
   .hero-stat > p { max-width: var(--measure-narrow); margin-block-start: var(--space-6); }
   .contact-analysis { padding-block: var(--space-12) var(--space-24); background-color: var(--color-paper-2); color: var(--color-ink); }
@@ -565,15 +678,15 @@
 
   /* Hallmark · macrostructure: Narrative Workflow · F4 knobs: 1.0 numbering, vertical stack, line connector */
   .workflow-opening { padding-block: var(--space-16) var(--space-20); }
-  .workflow-opening h1 { max-width: 13ch; font-size: var(--text-display-long); }
+  .workflow-opening h1 { max-width: 13ch; margin-inline-start: var(--optical-cap); font-size: var(--text-display-long); }
   .workflow-opening p { max-width: var(--measure-narrow); margin-block-start: var(--space-6); font-size: var(--text-lg); }
   .workflow { list-style: none; }
   .workflow-stage { padding-block: var(--space-16); border-block-start: var(--rule-hair) solid var(--color-ink); }
   .workflow-stage--form { background-color: var(--color-paper-2); color: var(--color-ink); }
-  .workflow-stage--ink { background-color: var(--color-ink); color: var(--color-paper); }
+  .workflow-stage--ink { background-color: var(--color-paper-3); color: var(--color-paper-3-ink); }
   .workflow-stage__grid { display: grid; gap: var(--space-10); }
   .workflow-stage__heading > span { display: block; margin-block-end: var(--space-4); color: var(--color-accent); font-family: var(--font-mono); font-size: var(--text-sm); font-weight: 500; }
-  .workflow-stage--ink .workflow-stage__heading > span { color: var(--color-focus-ink); }
+  .workflow-stage--ink .workflow-stage__heading > span { color: var(--color-accent); }
   .workflow-stage__heading h2 { max-width: 17ch; }
   .workflow-stage__heading p, .workflow-stage__content > p { max-width: var(--measure-narrow); margin-block-start: var(--space-4); }
   .proof-panorama { padding-block: var(--space-24); }
@@ -584,7 +697,7 @@
   /* Hallmark · macrostructure: Index-First · number plus ruled destination index */
   .not-found { padding-block: var(--space-12) var(--space-24); }
   .not-found h1 { display: grid; max-width: 16ch; }
-  .not-found h1 span:first-child { font-size: var(--text-display-stat); font-variant-numeric: tabular-nums; line-height: 0.82; }
+  .not-found h1 span:first-child { margin-inline-start: var(--optical-figure); font-size: var(--text-display-stat); font-variant-numeric: tabular-nums; line-height: 0.82; }
   .not-found h1 span:last-child { margin-block-start: var(--space-4); font-size: var(--text-xl); }
   .not-found > p { max-width: var(--measure-narrow); margin-block: var(--space-8); }
   .route-index { display: grid; max-width: 52rem; border-block-start: var(--rule-hair) solid var(--color-ink); }
@@ -595,7 +708,7 @@
 @layer responsive {
   @media (hover: hover) and (pointer: fine) {
     .action:not(:disabled):hover { background-color: var(--color-ink); color: var(--color-paper); }
-    .workflow-stage--ink .action:not(:disabled):hover { background-color: var(--color-paper); color: var(--color-ink); }
+    .workflow-stage--ink .action:not(:disabled):hover { background-color: var(--color-paper-3-ink); color: var(--color-paper-3); }
     .type-link:hover, .type-action:hover { color: var(--color-accent); text-decoration-thickness: 2px; }
     .mast-nav__link:hover, .colophon-link:hover { text-decoration-thickness: 2px; }
     input:hover:not(:focus), select:hover:not(:focus), textarea:hover:not(:focus) { background-color: var(--color-paper-2); }

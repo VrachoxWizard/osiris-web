@@ -1,6 +1,45 @@
 [
   {
     "date": "2026-09-11",
+    "scope": "detail layer — site-wide",
+    "macrostructure": "unchanged — design.md route family retained",
+    "theme": "custom",
+    "theme_axes": "dark / roman-serif / warm",
+    "vibe": "night dossier, paper evidence",
+    "enrichment": "none — every mark is a CSS border",
+    "brief": "Drafting and instrument character added through marks and numerics across all eight routes",
+    "changes": "Plate captions read as dimension lines with end ticks; graduations hang from the left end of ruled rows, below the rule where the row is ruled at its end and inside it where ruled at its start; tabular numerics on measured figures. No neon, glow, scanlines, circuit pattern or simulated chrome. Gradient guard left untouched, so all marks are borders and boxes rather than hatching. Legal and not-found routes carry no marks; the route index is exempt because ::after already carries its arrow",
+    "slop_test": "58/58",
+    "verification": "npm test — 59 passed, 1 skipped; zero per-element overflow across all 8 routes at 320 and 1280"
+  },
+  {
+    "date": "2026-09-11",
+    "scope": "palette re-tune",
+    "macrostructure": "unchanged — design.md route family retained",
+    "theme": "custom",
+    "theme_axes": "dark / roman-serif / warm",
+    "vibe": "night dossier, paper evidence",
+    "enrichment": "none",
+    "brief": "Dark-dominant navy re-tune with vellum interludes for evidence and long reading",
+    "changes": "Three navy depths plus two vellum depths; vellum is a token remap applied to projects/about/privacy routes and to the homepage work section and landing proof panorama; amber accent on navy, cobalt retained on vellum; colophon anchored to the deepest band on every route",
+    "slop_test": "58/58",
+    "verification": "npm test — 59 passed, 1 skipped; 15 contrast pairs enforced in validate-site.mjs"
+  },
+  {
+    "date": "2026-09-11",
+    "scope": "refinement",
+    "macrostructure": "unchanged — design.md route family retained",
+    "theme": "custom",
+    "theme_axes": "light / roman-serif / cool",
+    "vibe": "cool precision, warm paper, Zagreb editorial",
+    "enrichment": "none",
+    "brief": "Typographic craft pass: optical display alignment, Croatian hyphenation, mobile hero floor",
+    "changes": "Per-initial optical offsets cut display ink spread from 10px to 0.65px; hyphens auto on body copy with mono labels exempt; --text-display-home floor 4rem to 3.25rem (5 lines to 4 at 375px)",
+    "slop_test": "58/58",
+    "verification": "npm test — 59 passed, 1 skipped"
+  },
+  {
+    "date": "2026-09-11",
     "scope": "app",
     "macrostructure": "Route family: Marquee Hero / Conversational FAQ / Portfolio Grid / Long Document / Stat-Led / Narrative Workflow / Index-First",
     "theme": "custom",

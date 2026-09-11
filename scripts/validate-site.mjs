@@ -186,6 +186,13 @@ const contrastPairs = [
   ['accent ink / accent', '--color-accent-ink', '--color-accent', 4.5],
   ['focus / paper', '--color-focus-paper', '--color-paper', 3],
   ['focus / ink', '--color-focus-ink', '--color-ink', 3],
+  ['deepest band ink / paper-3', '--color-paper-3-ink', '--color-paper-3', 4.5],
+  ['accent / paper-3', '--color-accent', '--color-paper-3', 3],
+  ['vellum ink / vellum paper', '--color-vellum-ink', '--color-vellum-paper', 4.5],
+  ['vellum secondary / vellum paper', '--color-vellum-ink-2', '--color-vellum-paper', 4.5],
+  ['vellum muted / vellum paper', '--color-vellum-muted', '--color-vellum-paper', 4.5],
+  ['vellum accent ink / vellum accent', '--color-vellum-accent-ink', '--color-vellum-accent', 4.5],
+  ['vellum ink / vellum paper-2', '--color-vellum-ink', '--color-vellum-paper-2', 4.5],
   ['success / success surface', '--color-success', '--color-success-surface', 4.5],
   ['error / error surface', '--color-error', '--color-error-surface', 4.5],
 ];
