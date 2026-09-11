@@ -74,6 +74,9 @@ for (const page of pages) {
   report(html.includes('data-site-footer'), `${page}: nedostaje footer mount`);
   report(html.includes('/css/osiris-v3.css'), `${page}: nije učitan osiris-v3.css`);
   report(!html.includes('/css/osiris-v2.css'), `${page}: osiris-v2.css mora ostati samo rollback asset`);
+  for (const removed of ['osiris', 'osiris-about', 'osiris-brutal', 'osiris-enhanced', 'osiris-media', 'osiris-polish', 'osiris-services']) {
+    report(!html.includes(`/css/${removed}.css`), `${page}: ${removed}.css je uklonjen i ne smije se učitavati`);
+  }
   report(!/\beyebrow\b/i.test(html), `${page}: dekorativni eyebrow nije dopušten`);
   report(!/data-reveal/i.test(html), `${page}: univerzalni reveal markup nije dopušten`);
   report(!/(frame__dots|traffic-light|browser-chrome|window-dots)/i.test(html), `${page}: lažni browser chrome nije dopušten`);
@@ -162,6 +165,17 @@ report(braceDepth === 0, 'CSS: vitičaste zagrade nisu uravnotežene');
 
 const declared = new Set([...`${tokens}\n${css}`.matchAll(/(--[a-z0-9-]+)\s*:/gi)].map((match) => match[1]));
 for (const match of css.matchAll(/var\(\s*(--[a-z0-9-]+)/gi)) report(declared.has(match[1]), `osiris-v3.css: nedefinirana varijabla ${match[1]}`);
+
+// Nula bez jedinice je nevaljana u min(), max() i clamp(): deklaracija tiho otpada.
+const unitlessTokens = [...tokens.matchAll(/(--[a-z0-9-]+)\s*:\s*0\s*(?:;|\/\*)/gi)].map((match) => match[1]);
+for (const mathFunction of css.matchAll(/\b(?:min|max|clamp)\([^;]*\)/gi)) {
+  for (const token of unitlessTokens) {
+    report(
+      !mathFunction[0].includes(`var(${token})`),
+      `osiris-v3.css: ${token} je bez jedinice i poništava "${mathFunction[0].slice(0, 72)}"`,
+    );
+  }
+}
 
 const colorTokens = new Map([...tokens.matchAll(/(--color-[a-z0-9-]+)\s*:\s*(oklch\([^;\/]+\))\s*;/gi)].map((match) => [match[1], match[2]]));
 const contrastPairs = [

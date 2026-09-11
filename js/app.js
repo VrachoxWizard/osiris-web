@@ -212,7 +212,7 @@ function setupContactForms() {
       } finally {
         clearTimeout(timeout);
         submit.disabled = false;
-        submitLabel.textContent = 'Zatražite besplatnu analizu';
+        submitLabel.textContent = 'Pošaljite zahtjev';
         form.removeAttribute('aria-busy');
         submitting = false;
       }

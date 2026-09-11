@@ -55,6 +55,27 @@ async function visualErrors(page) {
 }
 
 async function assertChatDoesNotCollide(page, route, width, height) {
+  // Rub na kojem tab stoji je dio dizajna: max() s nulom bez jedinice ga je znao odbaciti ulijevo.
+  // Tab stoji tik izvan stupca sadržaja, nikad u lijevom žlijebu.
+  const edge = await page.evaluate(() => {
+    const tab = document.querySelector('.chat-edge-tab');
+    if (!tab || !tab.getClientRects().length) return null;
+    const shell = document.querySelector('.page-shell');
+    return {
+      tabRight: tab.getBoundingClientRect().right,
+      shellRight: shell ? shell.getBoundingClientRect().right : 0,
+      viewport: innerWidth,
+    };
+  });
+  if (edge) {
+    // Tolerancija od 1px: preglednici zaokružuju subpiksele različito.
+    const where = `${route} at ${width}×${height}`;
+    expect(edge.tabRight, `${where}: chat tab mora stajati desno od stupca sadržaja`)
+      .toBeGreaterThanOrEqual(edge.shellRight - 1);
+    expect(edge.tabRight, `${where}: chat tab ne smije izaći iz viewporta`)
+      .toBeLessThanOrEqual(edge.viewport + 1);
+  }
+
   const collisions = await page.evaluate(() => {
     const tab = document.querySelector('.chat-edge-tab');
     if (!tab || !tab.getClientRects().length) return [];

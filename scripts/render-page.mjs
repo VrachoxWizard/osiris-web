@@ -79,7 +79,7 @@ export function footer(page) {
   return `${preFooter}<footer class="site-colophon">
     <div class="page-shell colophon-copy">
       <p><strong>OSIRIS.</strong> ${e(siteData.brand.description)} <span>${e(siteData.brand.location)}.</span></p>
-      <nav aria-label="Navigacija u podnožju">${navLinks(page, 'colophon-link')}<a class="colophon-link" href="/privatnost/">Privatnost</a><a class="colophon-link" href="${analysisHref(page)}">Besplatna analiza</a></nav>
+      <nav aria-label="Navigacija u podnožju">${navLinks(page, 'colophon-link')}<a class="colophon-link" href="/privatnost/">Privatnost</a><a class="colophon-link" href="${analysisHref(page)}">Analiza weba</a></nav>
       <p>© ${currentYear} ${e(siteData.brand.businessName || 'OSIRIS')}. Sva prava pridržana.</p>
     </div>
   </footer>`;
@@ -165,7 +165,7 @@ export function form(prefix) {
       <div class="field--hidden" aria-hidden="true"><label for="${prefix}-fax">Ne ispunjavajte ovo polje</label><input id="${prefix}-fax" name="_gotcha" type="text" tabindex="-1" autocomplete="off"></div>
     </div>
     ${['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'pageUrl'].map((name) => `<input type="hidden" name="${name}">`).join('')}
-    <div class="form-submit"><p class="privacy-note">Podatke koristimo samo za pripremu analize i odgovor. <a href="/privatnost/">Privatnost</a></p><button class="action" type="submit"><span data-submit-label>Zatražite besplatnu analizu</span><span class="button-state" aria-hidden="true"></span></button></div>
+    <div class="form-submit"><p class="privacy-note">Podatke koristimo samo za pripremu analize i odgovor. <a href="/privatnost/">Privatnost</a></p><button class="action" type="submit"><span data-submit-label>Pošaljite zahtjev</span><span class="button-state" aria-hidden="true"></span></button></div>
     <p class="form-status" data-form-status tabindex="-1" role="status" aria-live="polite" aria-atomic="true"></p>
     ${siteData.contact.email ? `<p class="form-fallback" data-form-fallback hidden>Možete nam pisati i na <a href="mailto:${e(siteData.contact.email)}">${e(siteData.contact.email)}</a>.</p>` : '<p class="form-fallback" data-form-fallback hidden>Ako slanje ne uspije, pokušajte ponovno za nekoliko minuta.</p>'}
   </form>`;
@@ -188,7 +188,7 @@ export function chatWidget(page = 'default') {
       <div class="chat-suggestions" data-chat-suggestions>${suggestions.map(([label, prompt]) => `<button type="button" class="chat-suggestion" data-chat-suggestion="${e(prompt)}">${e(label)}</button>`).join('')}</div>
       <p class="chat-status" data-chat-status role="status" aria-live="polite"></p>
       <form class="chat-form" data-chat-form><label for="osiris-chat-input">Vaša poruka</label><textarea id="osiris-chat-input" data-chat-input rows="3" maxlength="2000" placeholder="Napišite pitanje…" required></textarea><button type="submit" class="action chat-send" data-chat-send>Pošalji</button></form>
-      <div class="chat-dialog__foot"><p id="osiris-chat-disclosure">Odgovori su automatski. Cijene i rokove potvrđujemo nakon obrasca.</p><a class="type-link" href="${analysisHref(page)}">Besplatna analiza</a></div>
+      <div class="chat-dialog__foot"><p id="osiris-chat-disclosure">Odgovori su automatski. Cijene i rokove potvrđujemo nakon obrasca.</p><a class="type-link" href="${analysisHref(page)}">Zatražite preporuke</a></div>
     </dialog>
   </div>`;
 }

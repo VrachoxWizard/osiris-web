@@ -112,14 +112,19 @@
 
   .masthead-shell { padding-block-start: var(--space-4); }
 
+  /* Mono koordinate ostaju na svakoj širini: one su druga polovica potpisa uz serifni wordmark. */
   .masthead-issue {
-    display: none;
+    display: flex;
+    gap: var(--space-4);
+    justify-content: space-between;
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     letter-spacing: var(--tracking-mono);
     line-height: 1.4;
     text-transform: uppercase;
   }
+
+  .masthead-issue span:nth-child(n + 2) { display: none; }
 
   .masthead-wordmark {
     position: relative;
@@ -177,7 +182,7 @@
     transition: transform var(--duration-menu) var(--ease-out);
   }
   .menu-toggle__mark::after { transform: rotate(90deg); }
-  .mast-disclosure[open] .menu-toggle__mark::after { transform: rotate(var(--space-0)); }
+  .mast-disclosure[open] .menu-toggle__mark::after { transform: rotate(0deg); }
 
   .mast-menu {
     position: fixed;
@@ -603,7 +608,7 @@
   }
 
   @media (min-width: 40rem) {
-    .masthead-issue { display: flex; justify-content: space-between; gap: var(--space-4); }
+    .masthead-issue span:nth-child(n + 2) { display: inline; }
     .masthead-wordmark { font-size: clamp(5rem, 12vw, 7.5rem); padding-block: var(--space-4) var(--space-5); }
     .section-intro { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); align-items: end; }
     .home-intro__grid, .home-note__grid { grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr); }
