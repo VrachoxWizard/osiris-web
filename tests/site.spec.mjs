@@ -167,6 +167,28 @@ test('homepage service map, active navigation and primary action follow the blue
   await hero.screenshot({ path: info.outputPath('service-map-1280x800.png') });
 });
 
+test('mobile homepage action and short-laptop 404 index stay in the first viewport', async ({ page }) => {
+  for (const [width, height] of [[320, 812], [375, 812], [414, 896], [768, 900]]) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    const fold = await page.evaluate(() => {
+      const action = document.querySelector('.hero-map__result .action').getBoundingClientRect();
+      const nodes = document.querySelector('.hero-map__nodes').getBoundingClientRect();
+      return { actionBottom: action.bottom, nodesTop: nodes.top, viewportBottom: innerHeight };
+    });
+    expect(fold.actionBottom, `homepage action at ${width}×${height}`).toBeLessThanOrEqual(fold.viewportBottom);
+    expect(fold.actionBottom, `homepage action precedes the mobile process at ${width}×${height}`).toBeLessThan(fold.nodesTop);
+  }
+
+  await page.setViewportSize({ width: 1280, height: 800 });
+  const response = await page.goto('/missing-page/');
+  expect(response.status()).toBe(404);
+  await page.evaluate(() => document.fonts.ready);
+  const finalDestinationBottom = await page.locator('.route-index a').last().evaluate((element) => element.getBoundingClientRect().bottom);
+  expect(finalDestinationBottom, 'final 404 destination at 1280×800').toBeLessThanOrEqual(800);
+});
+
 test('skip link and attribution retain native fragment navigation', async ({ page, browserName }) => {
   await page.goto('/?utm_source=email&utm_medium=outreach&utm_campaign=test&utm_content=one');
   if (browserName === 'webkit') await page.locator('.skip-link').focus();
