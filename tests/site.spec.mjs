@@ -153,16 +153,18 @@ test('masthead menu handles short screens, focus loop, Escape and resize', async
   await expect(page.locator('main')).not.toHaveAttribute('inert', '');
 });
 
-test('homepage fold, active navigation and hero crop follow the blueprint', async ({ page }, info) => {
+test('homepage service map, active navigation and primary action follow the blueprint', async ({ page }, info) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/');
   await page.evaluate(() => document.fonts.ready);
-  const hero = page.locator('.hero-marquee');
-  await expect(hero.locator('a,button,img')).toHaveCount(0);
-  expect(await page.locator('.hero-marquee h1').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(120);
+  const hero = page.locator('.hero-map');
+  await expect(hero.locator('.hero-map__nodes li')).toHaveCount(4);
+  await expect(hero.locator('.hero-map__result .action')).toHaveCount(1);
+  expect(await page.locator('.hero-map h1').evaluate((element) => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(68);
+  expect(await hero.evaluate((element) => element.getBoundingClientRect().bottom)).toBeLessThanOrEqual(800);
   await expect(page.locator('.home-intro .action')).toHaveCount(1);
   expect(await page.locator('.mast-nav__link[aria-current="page"]').textContent()).toBe('Početna');
-  await hero.screenshot({ path: info.outputPath('hero-1280x800.png') });
+  await hero.screenshot({ path: info.outputPath('service-map-1280x800.png') });
 });
 
 test('skip link and attribution retain native fragment navigation', async ({ page, browserName }) => {
@@ -361,16 +363,15 @@ test('reduced motion, controlled surface and text enlargement stay stable', asyn
   await page.goto('/');
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
 
-  // Ploha je odabrana, ne naslijeđena: dossier ostaje taman, a rute dokaza svijetle,
+  // Ploha je odabrana, ne naslijeđena: cijeli Night Workshop ostaje taman,
   // bez obzira na to što sustav traži.
   for (const scheme of ['dark', 'light']) {
     await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: scheme });
     await page.goto('/kontakt/');
     expect(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)).toBe('dark');
-    // Shema se čita s korijena: o njoj ovise klizač i platno, ne samo ploha sekcije.
     await page.goto('/projekti/');
-    expect(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)).toBe('light');
-    expect(await page.locator('.page--projects').evaluate((element) => getComputedStyle(element).colorScheme)).toBe('light');
+    expect(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)).toBe('dark');
+    expect(await page.locator('.page--projects').evaluate((element) => getComputedStyle(element).colorScheme)).toBe('dark');
   }
   await page.goto('/kontakt/');
   await page.addStyleTag({ content: 'html {font-size:200%}' });

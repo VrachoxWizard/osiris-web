@@ -137,31 +137,31 @@ A page or feature is complete only when:
 ### Genre and theme
 
 - Genre: editorial.
-- Internal theme name: Zagreb Dossier · Night.
-- Vibe: night dossier, paper evidence, Zagreb editorial.
-- Theme axes: dark paper / roman serif / warm amber accent.
+- Internal theme name: Night Workshop.
+- Vibe: dark mineral surfaces, precise workshop, Zagreb editorial.
+- Theme axes: dark paper / roman serif with working sans / signal-orange accent.
 - The surface is chosen, never inherited. The site does not follow the operating system's
   light or dark preference; each route declares its own `color-scheme`.
 
 ### Surface rule
 
-The dossier is dark; the evidence is on paper. Wherever real project screenshots or
-long-form reading occur, the surface returns to warm vellum. This is functional before it is
-decorative: light-interface screenshots read as damage when they float on a dark field.
+The whole site belongs to one night palette. Real project screenshots and long-form reading
+sit on a slightly lighter mineral plate, rather than switching the visitor into a separate
+light theme. The screenshots provide the bright evidence; the site around them stays composed.
 
-- Dark routes: home, services, contact, business landing, not found.
-- Vellum routes: projects, about, privacy.
-- Vellum interludes inside dark routes: the homepage work section and the landing proof panorama.
-- Three dark depths carry the page so no single navy does all the work: base, raised band,
-  and a deepest band reserved for emphasis and the colophon.
-- Accent splits by surface. Amber signals on navy; cobalt survives on vellum. The original
-  cobalt identity relocates rather than disappears, and the warm-against-cool tension is what
-  keeps the dark from going flat.
-- Vellum is a token remap, not a second stylesheet. Components inherit the surface they sit on.
+- Every route declares a dark colour scheme.
+- Three ink depths carry the main interface: base, raised band, and a deepest colophon band.
+- Two mineral evidence depths support projects, long reading, the homepage work section, and
+  the landing proof panorama without producing a white-page interruption.
+- Signal orange is the single chromatic anchor on every surface. It marks actions, focus,
+  active navigation, measurement codes, and the first edge of project media.
+- The existing vellum token names remain as compatibility aliases for the evidence surface;
+  their rendered values are dark.
 
 ### Macrostructure family
 
-- Homepage: Marquee Hero with an H1 `xxl`, left-biased, and one rule below.
+- Homepage: Map / Diagram with a left-biased display statement and four real project stages.
+  The diagram ends with one direct site-review action and collapses to a vertical path on mobile.
 - Services: Conversational FAQ with an H2 Split Diptych opener at a 7/5 ratio and a proof column.
 - Projects: Portfolio Grid with five deliberately uneven placements and no filters.
 - About and privacy: Long Document with a narrow reading measure and inline headings.
@@ -173,7 +173,7 @@ decorative: light-interface screenshots read as damage when they float on a dark
 
 - Navigation: N6 Newspaper Masthead. Issue line above a large centred wordmark, ruled route row below, document-flow positioning, and a mobile disclosure labelled `Izbornik`.
 - Footer: Ft4 Dense Colophon. One compact monospace information block; no category columns or social icon strip.
-- Calls to action: rectangular outline for primary actions; underlined typographic links for secondary actions.
+- Calls to action: compact signal-orange rectangles for primary actions; underlined typographic links for secondary actions.
 - Project media: semantic figures with real screenshots, one hairline image boundary, and external captions. No simulated browser or device chrome.
 - Chat: a vertical edge tab at `75rem` and wider; mobile-menu and pre-footer entry points below that width; native dialog at every size.
 
@@ -190,8 +190,8 @@ image, and none is placed over a screenshot.
   divider. The tick always hangs from the row's own rule: below it when the row is ruled at
   its end, inside it when the row is ruled at its start.
 - Numbers that report a measurement use `font-variant-numeric: tabular-nums`.
-- `--color-tick` is a single mid lightness that reads on both navy and vellum. One pencil,
-  both papers.
+- `--color-tick` is a single mid lightness that reads on both dark surface depths. One pencil,
+  two mineral plates.
 - Marks are earned, not sprinkled. Routes without figures or specification rows carry none;
   the route index is exempt because its `::after` already carries a direction arrow, and two
   marks in one place would be noise.
@@ -203,8 +203,10 @@ image, and none is placed over a screenshot.
 - Display: Libre Baskerville 400, roman.
 - Body: Instrument Sans 400–700.
 - Mono: IBM Plex Mono 400–500.
-- Homepage display: `clamp(3.25rem, 10vw, 9rem)`.
-- Long display: `clamp(3.25rem, 8.2vw, 8.5rem)`.
+- Homepage display: `clamp(3.5rem, 5.6vw, 5.5rem)`.
+- Long display: `clamp(3.25rem, 7vw, 5.5rem)`.
+- Major display statements use Libre Baskerville; working section headings use Instrument Sans
+  700 so the page alternates editorial gravity with technical clarity.
 - Body measure: 45–70 characters, anchored at `65ch`; body text never below `16px`.
 - Display type is optically aligned, not box-aligned. Each large display heading carries a
   left offset equal to the negated left sidebearing of its opening letter, measured at
@@ -233,9 +235,9 @@ image, and none is placed over a screenshot.
 ### Page allowances
 
 - Real project screenshots may appear only where they prove a claim or show published work.
-- The homepage fold is typography-only and contains no call to action.
+- The homepage fold contains one semantic service-path diagram and one direct site-review action.
 - Legal content receives no promotional section.
-- The accent stays a small signal for focus, active navigation, rules, and link underlines; it never becomes a large page surface. Amber holds that role on navy, cobalt on vellum.
+- The accent stays a small signal for focus, active navigation, rules, controls, and link underlines; it never becomes a large page surface.
 
 ## Exports
 
@@ -245,26 +247,26 @@ image, and none is placed over a screenshot.
 
 ```css
 :root {
-  --color-paper: oklch(20% 0.028 252);
-  --color-paper-2: oklch(26% 0.02 244);
-  --color-paper-3: oklch(13% 0.03 258);
-  --color-paper-3-ink: oklch(94% 0.014 88);
-  --color-ink: oklch(94% 0.014 88);
-  --color-ink-2: oklch(82% 0.016 88);
-  --color-muted: oklch(70% 0.014 88);
-  --color-rule: oklch(40% 0.02 248);
-  --color-accent: oklch(80% 0.14 85);
-  --color-accent-ink: oklch(16% 0.028 252);
-  --color-focus-paper: oklch(86% 0.15 92);
-  --color-focus-ink: oklch(43% 0.2 258);
-  --color-vellum-paper: oklch(95.5% 0.013 88);
-  --color-vellum-paper-2: oklch(91% 0.018 88);
-  --color-vellum-ink: oklch(17% 0.028 252);
-  --color-vellum-ink-2: oklch(34% 0.03 252);
-  --color-vellum-muted: oklch(44% 0.024 252);
-  --color-vellum-rule: oklch(72% 0.018 250);
-  --color-vellum-accent: oklch(45% 0.18 258);
-  --color-vellum-accent-ink: oklch(95.5% 0.013 88);
+  --color-paper: oklch(13.5% 0.024 248);
+  --color-paper-2: oklch(18.5% 0.024 244);
+  --color-paper-3: oklch(9.5% 0.024 255);
+  --color-paper-3-ink: oklch(94% 0.012 86);
+  --color-ink: oklch(94% 0.012 86);
+  --color-ink-2: oklch(80% 0.014 86);
+  --color-muted: oklch(67% 0.014 86);
+  --color-rule: oklch(36% 0.02 246);
+  --color-accent: oklch(76% 0.17 52);
+  --color-accent-ink: oklch(12% 0.024 248);
+  --color-focus-paper: oklch(86% 0.16 88);
+  --color-focus-ink: oklch(86% 0.16 88);
+  --color-vellum-paper: oklch(17.5% 0.018 236);
+  --color-vellum-paper-2: oklch(22.5% 0.018 232);
+  --color-vellum-ink: oklch(93.5% 0.012 86);
+  --color-vellum-ink-2: oklch(79% 0.014 86);
+  --color-vellum-muted: oklch(66% 0.014 86);
+  --color-vellum-rule: oklch(39% 0.018 236);
+  --color-vellum-accent: oklch(76% 0.17 52);
+  --color-vellum-accent-ink: oklch(12% 0.024 248);
   --font-display: "Libre Baskerville", Georgia, serif;
   --font-body: "Instrument Sans", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", "Courier New", monospace;
@@ -288,17 +290,17 @@ image, and none is placed over a screenshot.
 
 ```css
 @theme {
-  --color-paper: oklch(20% 0.028 252);
-  --color-paper-2: oklch(26% 0.02 244);
-  --color-paper-3: oklch(13% 0.03 258);
-  --color-ink: oklch(94% 0.014 88);
-  --color-ink-2: oklch(82% 0.016 88);
-  --color-muted: oklch(70% 0.014 88);
-  --color-rule: oklch(40% 0.02 248);
-  --color-accent: oklch(80% 0.14 85);
-  --color-vellum-paper: oklch(95.5% 0.013 88);
-  --color-vellum-ink: oklch(17% 0.028 252);
-  --color-vellum-accent: oklch(45% 0.18 258);
+  --color-paper: oklch(13.5% 0.024 248);
+  --color-paper-2: oklch(18.5% 0.024 244);
+  --color-paper-3: oklch(9.5% 0.024 255);
+  --color-ink: oklch(94% 0.012 86);
+  --color-ink-2: oklch(80% 0.014 86);
+  --color-muted: oklch(67% 0.014 86);
+  --color-rule: oklch(36% 0.02 246);
+  --color-accent: oklch(76% 0.17 52);
+  --color-vellum-paper: oklch(17.5% 0.018 236);
+  --color-vellum-ink: oklch(93.5% 0.012 86);
+  --color-vellum-accent: oklch(76% 0.17 52);
   --font-display: "Libre Baskerville", Georgia, serif;
   --font-body: "Instrument Sans", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", "Courier New", monospace;
@@ -324,25 +326,25 @@ image, and none is placed over a screenshot.
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
-    "paper": { "$value": "oklch(20% 0.028 252)", "$type": "color" },
-    "paper-2": { "$value": "oklch(26% 0.02 244)", "$type": "color" },
-    "paper-3": { "$value": "oklch(13% 0.03 258)", "$type": "color" },
-    "paper-3-ink": { "$value": "oklch(94% 0.014 88)", "$type": "color" },
-    "ink": { "$value": "oklch(94% 0.014 88)", "$type": "color" },
-    "ink-2": { "$value": "oklch(82% 0.016 88)", "$type": "color" },
-    "muted": { "$value": "oklch(70% 0.014 88)", "$type": "color" },
-    "rule": { "$value": "oklch(40% 0.02 248)", "$type": "color" },
-    "accent": { "$value": "oklch(80% 0.14 85)", "$type": "color" },
-    "accent-ink": { "$value": "oklch(16% 0.028 252)", "$type": "color" },
-    "focus-paper": { "$value": "oklch(86% 0.15 92)", "$type": "color" },
-    "focus-ink": { "$value": "oklch(43% 0.2 258)", "$type": "color" },
-    "vellum-paper": { "$value": "oklch(95.5% 0.013 88)", "$type": "color" },
-    "vellum-paper-2": { "$value": "oklch(91% 0.018 88)", "$type": "color" },
-    "vellum-ink": { "$value": "oklch(17% 0.028 252)", "$type": "color" },
-    "vellum-ink-2": { "$value": "oklch(34% 0.03 252)", "$type": "color" },
-    "vellum-muted": { "$value": "oklch(44% 0.024 252)", "$type": "color" },
-    "vellum-rule": { "$value": "oklch(72% 0.018 250)", "$type": "color" },
-    "vellum-accent": { "$value": "oklch(45% 0.18 258)", "$type": "color" }
+    "paper": { "$value": "oklch(13.5% 0.024 248)", "$type": "color" },
+    "paper-2": { "$value": "oklch(18.5% 0.024 244)", "$type": "color" },
+    "paper-3": { "$value": "oklch(9.5% 0.024 255)", "$type": "color" },
+    "paper-3-ink": { "$value": "oklch(94% 0.012 86)", "$type": "color" },
+    "ink": { "$value": "oklch(94% 0.012 86)", "$type": "color" },
+    "ink-2": { "$value": "oklch(80% 0.014 86)", "$type": "color" },
+    "muted": { "$value": "oklch(67% 0.014 86)", "$type": "color" },
+    "rule": { "$value": "oklch(36% 0.02 246)", "$type": "color" },
+    "accent": { "$value": "oklch(76% 0.17 52)", "$type": "color" },
+    "accent-ink": { "$value": "oklch(12% 0.024 248)", "$type": "color" },
+    "focus-paper": { "$value": "oklch(86% 0.16 88)", "$type": "color" },
+    "focus-ink": { "$value": "oklch(86% 0.16 88)", "$type": "color" },
+    "vellum-paper": { "$value": "oklch(17.5% 0.018 236)", "$type": "color" },
+    "vellum-paper-2": { "$value": "oklch(22.5% 0.018 232)", "$type": "color" },
+    "vellum-ink": { "$value": "oklch(93.5% 0.012 86)", "$type": "color" },
+    "vellum-ink-2": { "$value": "oklch(79% 0.014 86)", "$type": "color" },
+    "vellum-muted": { "$value": "oklch(66% 0.014 86)", "$type": "color" },
+    "vellum-rule": { "$value": "oklch(39% 0.018 236)", "$type": "color" },
+    "vellum-accent": { "$value": "oklch(76% 0.17 52)", "$type": "color" }
   },
   "font": {
     "display": { "$value": "Libre Baskerville, Georgia, serif", "$type": "fontFamily" },
@@ -368,25 +370,25 @@ image, and none is placed over a screenshot.
 
 ```css
 :root {
-  --background: 20% 0.028 252;
-  --foreground: 94% 0.014 88;
-  --card: 26% 0.02 244;
-  --card-foreground: 94% 0.014 88;
-  --popover: 26% 0.02 244;
-  --popover-foreground: 94% 0.014 88;
-  --primary: 80% 0.14 85;
-  --primary-foreground: 16% 0.028 252;
-  --secondary: 26% 0.02 244;
-  --secondary-foreground: 82% 0.016 88;
-  --muted: 40% 0.02 248;
-  --muted-foreground: 70% 0.014 88;
-  --accent: 80% 0.14 85;
-  --accent-foreground: 16% 0.028 252;
+  --background: 13.5% 0.024 248;
+  --foreground: 94% 0.012 86;
+  --card: 18.5% 0.024 244;
+  --card-foreground: 94% 0.012 86;
+  --popover: 18.5% 0.024 244;
+  --popover-foreground: 94% 0.012 86;
+  --primary: 76% 0.17 52;
+  --primary-foreground: 12% 0.024 248;
+  --secondary: 18.5% 0.024 244;
+  --secondary-foreground: 80% 0.014 86;
+  --muted: 36% 0.02 246;
+  --muted-foreground: 67% 0.014 86;
+  --accent: 76% 0.17 52;
+  --accent-foreground: 12% 0.024 248;
   --destructive: 82% 0.12 25;
   --destructive-foreground: 29% 0.065 25;
-  --border: 40% 0.02 248;
-  --input: 40% 0.02 248;
-  --ring: 86% 0.15 92;
+  --border: 36% 0.02 246;
+  --input: 36% 0.02 246;
+  --ring: 86% 0.16 88;
   --radius: 2px;
 }
 ```

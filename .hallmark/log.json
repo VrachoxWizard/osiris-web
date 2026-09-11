@@ -1,6 +1,22 @@
 [
   {
     "date": "2026-09-11",
+    "scope": "full-site polish",
+    "macrostructure": "Map / Diagram homepage + retained route-specific editorial family",
+    "theme": "custom",
+    "theme_axes": "dark / roman-serif with working sans / warm",
+    "vibe": "dark mineral workshop, signal-orange, Zagreb editorial",
+    "navigation": "N6 Newspaper Masthead",
+    "footer": "Ft4 Dense Colophon",
+    "enrichment": "Tier-A semantic CSS service map",
+    "brief": "Darker, more technical OSIRIS site for Croatian micro and small business owners",
+    "changes": "Unified every route on one dark surface family; added a four-stage homepage project map; limited serif display to major statements; promoted Instrument Sans for working headings; introduced signal-orange primary actions and evidence edges; added a dedicated 960px two-column diagram composition",
+    "pre_emit_critique": "P5 H5 E5 S5 R5 V5",
+    "slop_test": "58/58",
+    "verification": "npm test — 59 passed, 1 intentionally skipped because Firefox does not support mobile device emulation"
+  },
+  {
+    "date": "2026-09-11",
     "scope": "detail layer — site-wide",
     "macrostructure": "unchanged — design.md route family retained",
     "theme": "custom",

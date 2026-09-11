@@ -1,4 +1,4 @@
-/* Hallmark · theme: Zagreb Dossier · cool precision, warm paper, Zagreb editorial */
+/* Hallmark · theme: Night Workshop · dark mineral surfaces, signal-orange, Zagreb editorial */
 @font-face {
   font-family: "Instrument Sans";
   font-style: normal;
@@ -72,43 +72,43 @@
 }
 
 :root {
-  /* Dossier je taman, dokaz je na papiru. Tri dubine mraka nose stranicu kako nijedna
-     ploha ne bi sama držala cijeli ton; vellum se vraća ondje gdje su snimke i dugo štivo. */
-  --color-paper: oklch(20% 0.028 252);
-  --color-paper-2: oklch(26% 0.02 244);
-  --color-paper-3: oklch(13% 0.03 258);
-  --color-paper-3-ink: oklch(94% 0.014 88);
-  --color-ink: oklch(94% 0.014 88);
-  --color-ink-2: oklch(82% 0.016 88);
-  --color-muted: oklch(70% 0.014 88);
-  --color-rule: oklch(40% 0.02 248);
+  /* Jedna noćna obitelj nosi sve rute. Razlika nastaje svjetlinom i temperaturom plohe,
+     ne izmjenom između "tamne stranice" i "svijetlog predloška". */
+  --color-paper: oklch(13.5% 0.024 248);
+  --color-paper-2: oklch(18.5% 0.024 244);
+  --color-paper-3: oklch(9.5% 0.024 255);
+  --color-paper-3-ink: oklch(94% 0.012 86);
+  --color-ink: oklch(94% 0.012 86);
+  --color-ink-2: oklch(80% 0.014 86);
+  --color-muted: oklch(67% 0.014 86);
+  --color-rule: oklch(36% 0.02 246);
 
-  /* Topli jantar je protuteža hladnim plohama: napetost temperature drži paletu živom. */
-  --color-accent: oklch(80% 0.14 85);
-  --color-accent-ink: oklch(16% 0.028 252);
-  --color-focus-paper: oklch(86% 0.15 92);
-  --color-focus-ink: oklch(43% 0.2 258);
+  /* Signalna narančasta radi kao registracijska oznaka: malena, topla i odmah čitljiva. */
+  --color-accent: oklch(76% 0.17 52);
+  --color-accent-ink: oklch(12% 0.024 248);
+  --color-focus-paper: oklch(86% 0.16 88);
+  --color-focus-ink: oklch(86% 0.16 88);
 
-  /* Vellum: kobalt preživljava na papiru, pa izvorni identitet seli, a ne nestaje. */
-  --color-vellum-paper: oklch(95.5% 0.013 88);
-  --color-vellum-paper-2: oklch(91% 0.018 88);
-  --color-vellum-ink: oklch(17% 0.028 252);
-  --color-vellum-ink-2: oklch(34% 0.03 252);
-  --color-vellum-muted: oklch(44% 0.024 252);
-  --color-vellum-rule: oklch(72% 0.018 250);
-  --color-vellum-accent: oklch(45% 0.18 258);
-  --color-vellum-accent-ink: oklch(95.5% 0.013 88);
+  /* Zadržana imena vellum tokena radi kompatibilnosti, ali ploha je sada tamna mineralna
+     ploča za projekte i dugo čitanje — fotografije ostaju dokaz, bez bijelog reza stranice. */
+  --color-vellum-paper: oklch(17.5% 0.018 236);
+  --color-vellum-paper-2: oklch(22.5% 0.018 232);
+  --color-vellum-ink: oklch(93.5% 0.012 86);
+  --color-vellum-ink-2: oklch(79% 0.014 86);
+  --color-vellum-muted: oklch(66% 0.014 86);
+  --color-vellum-rule: oklch(39% 0.018 236);
+  --color-vellum-accent: oklch(76% 0.17 52);
+  --color-vellum-accent-ink: oklch(12% 0.024 248);
 
-  /* Oznake nacrta: registarske kvačice i graduacije. Nisu tekst, nego mjerni trag.
-     Jedna srednja svjetlina čita se i na navy plohi i na vellumu: ista olovka na oba papira. */
-  --color-tick: oklch(58% 0.03 250);
+  /* Oznake nacrta: registarske kvačice i graduacije. Jedna hladna olovka na obje plohe. */
+  --color-tick: oklch(58% 0.028 238);
 
   --color-success: oklch(84% 0.13 150);
   --color-success-surface: oklch(27% 0.055 150);
   --color-error: oklch(82% 0.12 25);
   --color-error-surface: oklch(29% 0.065 25);
-  --color-dialog-shadow: oklch(8% 0.02 255 / 50%);
-  --color-backdrop: oklch(8% 0.02 255 / 70%);
+  --color-dialog-shadow: oklch(6% 0.02 255 / 55%);
+  --color-backdrop: oklch(6% 0.02 255 / 76%);
 
   --font-display: "Libre Baskerville", Georgia, serif;
   --font-body: "Instrument Sans", Arial, sans-serif;
@@ -116,14 +116,14 @@
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-body: 1rem;
+  --text-body: 1.0625rem;
   --text-lg: 1.25rem;
-  --text-xl: clamp(1.75rem, 3vw, 2.75rem);
-  --text-display-long: clamp(3.25rem, 8.2vw, 8.5rem);
-  --text-display-home: clamp(3.25rem, 10vw, 9rem);
-  --text-display-stat: clamp(7rem, 22vw, 17rem);
-  --leading-tight: 0.91;
-  --leading-display: 0.96;
+  --text-xl: clamp(1.875rem, 3vw, 3rem);
+  --text-display-long: clamp(3.25rem, 7vw, 5.5rem);
+  --text-display-home: clamp(3.5rem, 5.6vw, 5.5rem);
+  --text-display-stat: clamp(6.5rem, 18vw, 12rem);
+  --leading-tight: 0.94;
+  --leading-display: 0.98;
   --leading-body: 1.68;
   --tracking-mono: 0.08em;
   --tracking-display: -0.035em;
@@ -177,6 +177,7 @@
   --duration-menu: 180ms;
   --duration-dialog: 280ms;
 
+  --z-base: 1;
   --z-skip: 60;
   --z-dialog: 50;
   --z-menu: 40;

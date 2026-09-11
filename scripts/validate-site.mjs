@@ -185,7 +185,7 @@ const contrastPairs = [
   ['paper / ink', '--color-paper', '--color-ink', 4.5],
   ['accent ink / accent', '--color-accent-ink', '--color-accent', 4.5],
   ['focus / paper', '--color-focus-paper', '--color-paper', 3],
-  ['focus / ink', '--color-focus-ink', '--color-ink', 3],
+  ['focus / evidence paper', '--color-focus-ink', '--color-vellum-paper', 3],
   ['deepest band ink / paper-3', '--color-paper-3-ink', '--color-paper-3', 4.5],
   ['accent / paper-3', '--color-accent', '--color-paper-3', 3],
   ['vellum ink / vellum paper', '--color-vellum-ink', '--color-vellum-paper', 4.5],
@@ -216,4 +216,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Provjera prošla: ${pages.length} ruta, Zagreb Dossier tokeni, obrasci, chat i anti-slop ugovor.`);
+console.log(`Provjera prošla: ${pages.length} ruta, Night Workshop tokeni, obrasci, chat i anti-slop ugovor.`);

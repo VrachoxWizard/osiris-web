@@ -1,8 +1,8 @@
 /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
-/* Hallmark · genre: editorial · theme: custom Zagreb Dossier · Night · tone: cool precision, night dossier, paper evidence · anchor: amber on navy, cobalt on vellum */
-/* Hallmark · axes: dark paper / roman-serif / warm accent · values live in tokens.css */
-/* Hallmark · surfaces: 3 navy depths + 2 vellum depths · vellum carries evidence and long reading */
-/* Hallmark · macrostructure: route-specific editorial family · nav: N6 · footer: Ft4 · designed-as-app · scope: app */
+/* Hallmark · genre: editorial · theme: custom Night Workshop · tone: dark technical, tactile, exact · anchor: signal-orange on mineral blue */
+/* Hallmark · axes: dark paper / roman-serif + working sans / warm accent · values live in tokens.css */
+/* Hallmark · surfaces: 3 ink depths + 2 dark evidence depths · one night palette across every route */
+/* Hallmark · macrostructure: Map / Diagram home + route-specific editorial family · nav: N6 · footer: Ft4 · designed-as-app · scope: app */
 /* Hallmark · contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46) · chrome: pass (47) · tokens: pass (48) · responsive: pass (49) · icons: pass (30) · mobile: pass (34, 49, 50–57) */
 /* type: Libre Baskerville / Instrument Sans / IBM Plex Mono · enrichment: none, real project screenshots only */
 @import url("/tokens.css");
@@ -13,10 +13,6 @@
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: var(--space-0); min-width: 20rem; overflow-x: clip; }
   html { scroll-behavior: smooth; color-scheme: dark; }
-  /* Korijen nosi shemu jer o njoj ovise klizač i platno; klasa rute stoji na body-ju. */
-  html:has(.page--projects),
-  html:has(.page--about),
-  html:has(.page--privacy) { color-scheme: light; }
   body { min-height: 100%; }
   img, picture { display: block; max-width: 100%; }
   img { height: auto; }
@@ -30,8 +26,8 @@
 }
 
 @layer base {
-  /* Vellum preslikava semantičke tokene, pa svaka komponenta radi na obje plohe bez izmjene.
-     Rute dokaza i štiva su svijetle; ploha se vraća i unutar tamnih ruta gdje stoje snimke. */
+  /* Dokazne rute preslikavaju iste semantičke tokene na nešto svjetliju mineralnu ploču.
+     Cijeli sustav ostaje taman; screenshotovi stvaraju kontrast, ne bijela podloga stranice. */
   .page--projects,
   .page--about,
   .page--privacy,
@@ -46,7 +42,7 @@
     --color-accent: var(--color-vellum-accent);
     --color-accent-ink: var(--color-vellum-accent-ink);
     --color-focus-paper: var(--color-focus-ink);
-    color-scheme: light;
+    color-scheme: dark;
     background-color: var(--color-paper);
     color: var(--color-ink);
   }
@@ -64,16 +60,24 @@
 
   h1, h2, h3 {
     color: inherit;
-    font-family: var(--font-display);
     font-style: normal;
-    font-weight: 400;
-    letter-spacing: var(--tracking-display);
-    line-height: var(--leading-display);
     overflow-wrap: anywhere;
     min-width: var(--space-0);
     text-wrap: balance;
   }
 
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+  }
+  h2, h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
   h2 { font-size: var(--text-xl); }
   h3 { font-size: var(--text-lg); }
   /* Hrvatske složenice su duge; automatsko rastavljanje smiruje desni rub na uskim stupcima.
@@ -167,6 +171,7 @@
     letter-spacing: var(--tracking-mono);
     line-height: 1.4;
     text-transform: uppercase;
+    color: var(--color-muted);
   }
 
   .masthead-issue span:nth-child(n + 2) { display: none; }
@@ -191,7 +196,7 @@
     min-height: var(--control-height);
     align-items: center;
     justify-content: flex-end;
-    border-block: var(--rule-hair) solid var(--color-ink);
+    border-block: var(--rule-hair) solid var(--color-rule);
   }
 
   .mast-nav,
@@ -273,6 +278,7 @@
   .site-colophon {
     background-color: var(--color-paper-3);
     color: var(--color-paper-3-ink);
+    border-block-start: var(--rule-hair) solid var(--color-accent);
   }
   .colophon-copy {
     display: grid;
@@ -297,10 +303,10 @@
     align-items: center;
     justify-content: center;
     padding-inline: var(--space-5);
-    border: var(--rule-hair) solid currentColor;
+    border: var(--rule-hair) solid var(--color-accent);
     border-radius: var(--radius-1);
-    background-color: transparent;
-    color: inherit;
+    background-color: var(--color-accent);
+    color: var(--color-accent-ink);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     font-weight: 500;
@@ -309,10 +315,15 @@
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
-    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-press) var(--ease-out);
+    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-press) var(--ease-out);
   }
   .action--compact { min-height: 2.75rem; padding-inline: var(--space-4); }
   .masthead-action { display: none; }
+  .action:focus-visible {
+    outline-width: 3px;
+    outline-color: var(--color-paper-3);
+    outline-offset: calc(var(--space-1) * -1);
+  }
   .action:active { transform: translateY(1px); }
   .type-link:active,
   .type-action:active,
@@ -354,7 +365,7 @@
   .section-intro p { max-width: var(--measure-narrow); color: var(--color-ink-2); }
 
   .project-figure { min-width: var(--space-0); }
-  .project-figure__media { border: var(--rule-hair) solid var(--color-rule); background-color: var(--color-paper-2); overflow: clip; }
+  .project-figure__media { border: var(--rule-hair) solid var(--color-rule); border-block-start-color: var(--color-accent); background-color: var(--color-paper-2); overflow: clip; }
   .project-figure__media img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center top; }
   .project-figure figcaption,
   .document-figure figcaption {
@@ -509,10 +520,66 @@
 }
 
 @layer routes {
-  /* Hallmark · macrostructure: Marquee Hero · H1 knobs: xxl, left-bias, single rule below */
-  .hero-marquee { border-block-end: var(--rule-hair) solid var(--color-ink); }
-  .hero-marquee__inner { min-height: calc(100svh - 9.5rem); display: grid; align-content: end; padding-block: var(--space-8) var(--space-12); }
-  .hero-marquee h1 { max-width: 11ch; margin-inline-start: var(--optical-w); font-size: var(--text-display-home); line-height: var(--leading-tight); }
+  /* Hallmark · macrostructure: Map / Diagram · four real project stages, one result CTA */
+  .hero-map { border-block-end: var(--rule-hair) solid var(--color-rule); }
+  .hero-map__inner { display: grid; gap: var(--space-12); padding-block: var(--space-12) var(--space-16); }
+  .hero-map__statement { align-self: end; }
+  .hero-map__orientation,
+  .hero-map__legend,
+  .hero-map__nodes span,
+  .hero-map__nodes small,
+  .hero-map__result p {
+    font-family: var(--font-mono);
+  }
+  .hero-map__orientation {
+    margin-block-end: var(--space-6);
+    color: var(--color-accent);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-mono);
+    text-transform: uppercase;
+  }
+  .hero-map h1 { max-width: 13ch; margin-inline-start: var(--optical-w); font-size: var(--text-display-home); line-height: var(--leading-tight); }
+  .hero-map__lede { max-width: var(--measure-compact); margin-block-start: var(--space-6); color: var(--color-ink-2); font-size: var(--text-lg); }
+  .hero-map__field { min-width: var(--space-0); border-block: var(--rule-hair) solid var(--color-rule); }
+  .hero-map__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    justify-content: space-between;
+    padding-block: var(--space-3);
+    border-block-end: var(--rule-hair) solid var(--color-rule);
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero-map__nodes {
+    display: grid;
+    list-style: none;
+    border-inline-start: var(--rule-hair) solid var(--color-rule);
+  }
+  .hero-map__nodes li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-1) var(--space-3);
+    margin-inline-start: var(--space-4);
+    padding-block: var(--space-5);
+    border-block-end: var(--rule-hair) solid var(--color-rule);
+  }
+  .hero-map__nodes li:last-child { border-block-end: var(--space-0); }
+  .hero-map__nodes span {
+    grid-row: 1 / span 2;
+    color: var(--color-accent);
+    font-size: var(--text-xs);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--tracking-mono);
+  }
+  .hero-map__nodes strong { font-size: var(--text-body); line-height: 1.2; }
+  .hero-map__nodes small { color: var(--color-muted); font-size: var(--text-xs); line-height: 1.5; }
+  .hero-map__result { display: grid; gap: var(--space-4); align-items: center; padding-block: var(--space-5); }
+  .hero-map__result p { max-width: 32ch; color: var(--color-ink-2); font-size: var(--text-sm); }
+  .hero-map__result p strong { margin-inline-end: var(--space-2); color: var(--color-ink); font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400; line-height: 1; }
   .home-intro { padding-block: var(--space-16); }
   .home-intro__grid { display: grid; gap: var(--space-8); }
   .home-intro h2 { max-width: 20ch; }
@@ -542,6 +609,21 @@
   .final-action { padding-block: var(--space-16) var(--space-24); border-block-start: var(--rule-hair) solid var(--color-ink); }
   .final-action h2 { max-width: 18ch; margin-block-end: var(--space-5); }
   .final-action p { max-width: var(--measure-narrow); margin-block-end: var(--space-5); }
+
+  /* Serif ostaje za ključne izjave; radni naslovi prelaze u oštriji sans kako bi se
+     urednički karakter i tehnička izvedba izmjenjivali umjesto da svaki odjeljak zvuči isto. */
+  .home-intro h2,
+  .home-work .section-intro h2,
+  .home-note h2,
+  .final-action h2,
+  .secondary-questions h2,
+  .services-action h2,
+  .contact-analysis__form > h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+  }
 
   /* Sloj nacrta. Svaka oznaka je rub ili kutija, nikad uzorak; ništa ne stoji preko snimke.
      Potpis ploče čita se kao kotna linija: krajnje kvačice zatvaraju izmjereni raspon.
@@ -734,6 +816,7 @@
     .form-submit { grid-template-columns: minmax(0, 1fr) auto; }
     .services-action__inner { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; align-items: end; }
     .chat-dialog { width: min(calc(100% - var(--space-16)), 34rem); }
+    .hero-map__result { grid-template-columns: minmax(0, 1fr) auto; }
   }
 
   @media (min-width: 52rem) {
@@ -743,11 +826,47 @@
     .mast-nav__link { position: relative; display: inline-flex; min-height: var(--control-height); align-items: center; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.04em; text-decoration: none; white-space: nowrap; }
     .mast-nav__link[aria-current="page"]::after { content: ""; position: absolute; inset-inline: var(--space-0); inset-block-end: -1px; height: 3px; background-color: var(--color-accent); }
     .masthead-action { display: inline-flex; }
-    .hero-marquee__inner { min-height: calc(100svh - 14rem); padding-block-end: var(--space-12); }
-    .hero-marquee h1 { font-size: var(--text-display-home); }
+    .hero-map__inner {
+      min-height: calc(100svh - 14rem);
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      align-items: center;
+      gap: var(--space-12);
+      padding-block: var(--space-3) var(--space-4);
+    }
+    .hero-map__field { align-self: stretch; display: grid; align-content: center; }
+    .hero-map__legend { padding-block: var(--space-2); }
+    .hero-map__nodes {
+      position: relative;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, auto);
+      gap: var(--space-3);
+      padding-block: var(--space-4);
+      border-inline-start: var(--space-0);
+    }
+    .hero-map__nodes::before { content: none; }
+    .hero-map__nodes li {
+      z-index: var(--z-base);
+      display: block;
+      margin-inline-start: var(--space-0);
+      padding: var(--space-4);
+      border: var(--rule-hair) solid var(--color-rule);
+      background-color: var(--color-paper);
+    }
+    .hero-map__nodes li:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .hero-map__nodes li:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .hero-map__nodes li:nth-child(3) { grid-column: 1; grid-row: 2; }
+    .hero-map__nodes li:nth-child(4) { grid-column: 2; grid-row: 2; }
+    .hero-map__nodes li::after { content: none; }
+    .hero-map__nodes span,
+    .hero-map__nodes strong,
+    .hero-map__nodes small { display: block; }
+    .hero-map__nodes span { margin-block-end: var(--space-5); }
+    .hero-map__nodes small { margin-block-start: var(--space-3); }
+    .hero-map__result { padding-block: var(--space-3); }
   }
 
   @media (min-width: 60rem) {
+    .hero-map__inner { gap: var(--space-16); }
     .section-intro--wide { grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.4fr); }
     .home-work__lead { grid-template-columns: minmax(0, 1.75fr) minmax(16rem, 0.55fr); align-items: end; }
     .services-diptych__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: end; }
@@ -778,6 +897,33 @@
   }
 
   @media (min-width: 75rem) {
+    .hero-map__nodes {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: auto var(--space-10) auto;
+      gap: var(--space-0) var(--space-3);
+    }
+    .hero-map__nodes::before {
+      content: "";
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline: 12.5%;
+      height: var(--rule-hair);
+      background-color: var(--color-rule);
+    }
+    .hero-map__nodes li:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .hero-map__nodes li:nth-child(2) { grid-column: 2; grid-row: 3; }
+    .hero-map__nodes li:nth-child(3) { grid-column: 3; grid-row: 1; }
+    .hero-map__nodes li:nth-child(4) { grid-column: 4; grid-row: 3; }
+    .hero-map__nodes li::after {
+      content: "";
+      position: absolute;
+      inset-inline-start: 50%;
+      width: var(--rule-hair);
+      height: var(--space-10);
+      background-color: var(--color-rule);
+    }
+    .hero-map__nodes li:nth-child(odd)::after { inset-block-start: 100%; }
+    .hero-map__nodes li:nth-child(even)::after { inset-block-end: 100%; }
     .pre-footer-chat { display: none; }
     .chat-edge-tab {
       position: fixed;
@@ -806,7 +952,6 @@
 
   @media (min-width: 90rem) {
     .masthead-wordmark { font-size: 8rem; }
-    .hero-marquee h1 { font-size: var(--text-display-home); }
     .home-work, .home-note, .proof-panorama { padding-block: var(--space-32); }
   }
 
